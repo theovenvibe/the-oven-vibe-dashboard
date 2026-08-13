@@ -52,8 +52,12 @@ in the markup.
    no distance band captures. Handled by the campus batch rate below.
 
 ### Time
-4. **After-hours reopen (23:00–01:00)** — oven relight, gas, and the owner's
-   night. Costs ~₹100 above a normal run.
+4. **After-hours reopen (23:30–02:00)** — oven relight, gas, and the owner's
+   night. Costs ~₹100 above a normal run. Only the oven and fryer run: pasta
+   and maggi are off, and any combo containing them goes with them.
+4b. **Kitchen closed (02:00–11:30)** — ten and a half hours a day when a price
+   checker must say "closed" rather than quote an order nobody can cook. The
+   calculator greys out every item and names the opening time.
 5. **Peak-hour delivery (19:00–21:00)** — 52 orders land at 7pm alone. Leaving
    the kitchen then does not cost ₹48 of time; it costs the orders not cooked,
    and it makes the rest late. Orders over 25 minutes of prep average **2.17★
@@ -110,7 +114,7 @@ in the markup.
 
 | Case | Charge | Rule |
 |---|---:|---|
-| After-hours kitchen (23:00–01:00) | +₹79 | Minimum order ₹399, prepaid only |
+| After-hours kitchen (23:30–02:00) | +₹79 | Minimum order ₹399, prepaid only, **no pasta or maggi** — the boiling stations are shut |
 | Rain | +₹29 | Only while declared on the site; never applied retroactively |
 | Quiet hours (12:00–16:00, Mon–Fri) | **₹19** | Free above ₹349 |
 | Pre-ordered 3+ hours ahead | **−₹10** | Lets the kitchen batch |
