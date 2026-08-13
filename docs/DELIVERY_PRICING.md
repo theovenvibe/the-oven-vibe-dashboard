@@ -4,6 +4,14 @@ One person cooks and delivers. Every delivery therefore costs fuel, wear **and
 kitchen downtime**, and the pricing has to hold up in the awkward cases, not
 just the average one.
 
+> **Read this before trusting a number here.** Everything computed from the
+> warehouse is **Zomato orders only**. Direct WhatsApp and phone orders are not
+> logged anywhere, and Zomato's listing closes with the kitchen — so the entire
+> late-night and pickup trade is invisible. A late-night recommendation in an
+> earlier draft was withdrawn for exactly this reason: the Zomato tail suggested
+> ₹232 baskets, while real direct late orders run ₹400–500. Logging direct
+> orders is the highest-value data fix available.
+
 ## Cost basis
 
 - Petrol ₹109.55/l in Sundargarh (₹101.20 in January — up 8.25%).
@@ -114,7 +122,9 @@ in the markup.
 
 | Case | Charge | Rule |
 |---|---:|---|
-| After-hours kitchen (23:30–02:00) | +₹79 | Minimum order ₹399, prepaid only, **no pasta or maggi** — the boiling stations are shut |
+| After-hours kitchen (23:30–02:00) | +₹49 | Every late order, **pickup included** — the oven is fired either way. Minimum ₹399, prepaid, **no pasta or maggi** |
+| After-hours delivery (23:30–02:00) | +₹30 | On top of the normal distance fee. Free delivery is switched off in this window |
+| Pickup during the late window | discount withdrawn | The ₹30 pickup discount does not apply — collecting saves the ride, not the reopen |
 | Rain | +₹29 | Only while declared on the site; never applied retroactively |
 | Quiet hours (12:00–16:00, Mon–Fri) | **₹19** | Free above ₹349 |
 | Pre-ordered 3+ hours ahead | **−₹10** | Lets the kitchen batch |
@@ -148,7 +158,10 @@ Contribution = 15% of basket + ₹24 markup.
 | 0–2 km, ₹499 (free delivery) | ₹0 | ₹99 | ₹99 | ₹78 | **+₹21** |
 | 2–4 km, ₹399 minimum | ₹69 | ₹84 | ₹153 | ₹148 | **+₹5** |
 | 2–4 km, NTPC regular at ₹413 | ₹69 | ₹86 | ₹155 | ₹148 | **+₹7** |
-| After hours, ₹399 minimum | ₹108 | ₹84 | ₹192 | ₹178 | **+₹14** |
+| After hours delivery, ₹400 | ₹108 | ₹84 | ₹192 | ₹178 | **+₹14** |
+| After hours pickup, ₹400 | ₹49 | ₹84 | ₹133 | ₹100 | **+₹33** |
+| After hours delivery, ₹500 | ₹108 | ₹105 | ₹213 | ₹178 | **+₹35** |
+| After hours pickup, ₹500 | ₹49 | ₹105 | ₹154 | ₹100 | **+₹54** |
 | Quiet hours, ₹314 basket | ₹19 | ₹71 | ₹90 | ₹25 | **+₹65** |
 | Pickup, ₹314 basket | −₹30 | ₹71 | ₹41 | ₹0 | **+₹41** |
 
