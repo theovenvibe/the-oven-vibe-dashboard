@@ -82,15 +82,22 @@ The gas price rise and shortage forced the wok station out, which the demand dat
 supports independently: the five fried-rice SKUs together sold 11 units in five
 months, on the most fuel-hungry station in the kitchen.
 
-Dropped from `menu.json` (11 SKUs): all five fried rice items, both rice
-meal-box combos, Creamy Cheese Maggi (2 units — Korean Spicy Maggi at 15 units
-stays), Tangy Masala Corn and Cheesy Corn Mix (3 units combined, no basket
-role), Motu Burger (never ordered, never on the printed menu).
+Dropped from `menu.json` — **32 SKUs down to 18**: all five fried rice items,
+both rice meal-box combos, Creamy Cheese Maggi (2 units — Korean Spicy Maggi at
+15 units stays), Tangy Masala Corn and Cheesy Corn Mix (3 units combined, no
+basket role), Motu Burger (never ordered, never on the printed menu), the three
+grilled-sandwich experiments that did not take (Dahi Tadka, Khatti Meethi Imli
+Khajoor, Chilli Peanut Thecha), Chilli Garlic Potato Pops and Cheese Onion
+Crispy Pocket Bombs.
 
 Kept deliberately: Classic Red Sauce Pasta (owner's call), Tangy Green Chutney
 Sandwich (₹89 price anchor), Vegie Onion Capsicum Pizza (same oven line, so the
-marginal cost of carrying it is near zero), Chilli Garlic Potato Pops (shares
-the fryer with fries).
+marginal cost of carrying it is near zero).
+
+What survives is 8 pizzas, 2 pastas, 3 sandwiches, 1 maggi, 4 sides, 3 combos
+and 6 add-ons. Sides are down to fries, garlic bread and makhana, and fries are
+what actually attach — so the attach opportunity now rests entirely on two SKUs.
+Neither should be dropped without a replacement side at a lower price point.
 
 Any new SKU must be oven, griddle or fryer — no wok, no long boil — until gas
 economics change. A shorter menu also shortens prep, and prep time is the
