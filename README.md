@@ -68,6 +68,16 @@ columns and the current 28 item names) to upgrade the menu matrix from unit
 price to contribution margin; its absence is reported honestly in the
 dashboard and the brief rather than silently assumed.
 
+## Reading the brief after a menu change
+
+`build.py` sees the warehouse only. It does not read the website's `menu.json`,
+so after a menu or price change its ranked actions can name items that are no
+longer sold and prices that no longer exist — the August 2026 relaunch produced
+exactly that. Treat `Appendix: menu` as a record of what was charged then;
+`../theovenvibe.github.io/menu.json` and `docs/AGGREGATOR_PRICING.md` are what is
+charged now. Actions about operations (prep time) and customers (win-back)
+survive a menu change; actions about prices, drops and combos do not.
+
 ## Notes
 
 - Revenue counts `Delivered` orders only; order counts include rejections and

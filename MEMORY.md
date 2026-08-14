@@ -164,3 +164,34 @@ Memory index for this project.
   contract with the pipeline repo — changing it means changing both repos.
 - Docs (`CLAUDE.md`, `AGENT.md`, `README.md`, this file) get updated at the end
   of every task.
+
+## The brief goes stale against the live menu (14 Aug 2026)
+
+`build.py` reads the warehouse and nothing else. It has no knowledge of
+`../theovenvibe.github.io/menu.json`, so after the August relaunch its ranked
+actions still reasoned about items that had been dropped and prices that had
+been replaced:
+
+- "Raise Street Style Korean Maggi by ~₹20" from ₹199 — it is ₹349 now.
+- "Raise Fiery Cheese Chilli Sandwich by ~₹20" from ₹169 — it is ₹289 now.
+- "Consider dropping Garlic Fried Rice" — dropped a week earlier.
+
+**Every price in the `Appendix: menu` table is a pre-relaunch Zomato price.**
+Read that table as history. `menu.json` and `docs/AGGREGATOR_PRICING.md` are the
+current list.
+
+The fix, not yet built: pass `menu.json` into `build.py`, suppress actions for
+items no longer sold, and print "priced at ₹289 then, ₹459 now" instead of
+recommending a rise on top of a rise.
+
+Still valid after the relaunch: the prep-time action (2.17★ vs 4.16★) and the
+win-back list. Those are about operations and customers, not about the menu.
+
+## Where the marketing analysis lives
+
+`../marketing/findings/` is the written record of every analysis run against
+this data — dated, with sample sizes and stated limits. Anything concluded here
+gets written there the same day; that folder is what a future session or a
+marketing agent reads. As of 15 Aug 2026 it holds menu demand and quality,
+platform economics from a real settlement, the repricing break-even, and
+discount behaviour.

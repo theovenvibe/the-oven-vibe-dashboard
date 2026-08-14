@@ -71,5 +71,12 @@ uv run build.py
   `textContent`, never `innerHTML`.
 - Revenue means `order_status = 'Delivered'`. Keep that consistent with
   `pipeline/gold.py`.
+- The brief has no knowledge of the live menu. `build.py` reads the warehouse
+  only, so its price and drop recommendations go stale the moment
+  `../theovenvibe.github.io/menu.json` changes. Check any action against the
+  current menu before acting on it, and say so when reporting one.
+- Analysis is written down, not just reported. Anything concluded from this data
+  gets a dated file in `../marketing/findings/` the same day, with sample sizes
+  and stated limits — that folder is the brief a future session inherits.
 - Update this file, `AGENT.md`, `README.md`, and memory after completing each
   task — keep docs in sync with the current state, not just the code.

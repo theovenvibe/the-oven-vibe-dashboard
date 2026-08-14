@@ -64,8 +64,7 @@ decision and every rung after it feels like small change:
 | Crunchy Capsicum | 189 | **419** | +40 |
 | Herb Paneer Delight | 209 | **459** | +40 |
 | Vegie Onion Capsicum | 219 | **479** | +20 |
-| Mushroom Supreme | 229 | **499** | +20 |
-| Paneer Makhni Royale | 229 | **519** | +20 |
+| Paneer Makhni Royale | 229 | **519** | +40 |
 
 Paneer Makhni at ₹519 is the anchor: it exists to make ₹459 read as mid-range.
 
@@ -77,17 +76,21 @@ Paneer Makhni at ₹519 is the anchor: it exists to make ₹459 read as mid-rang
 | Paneer Tikka Sandwich | 169 | **379** |
 | Classic Red Sauce Pasta | 189 | **419** |
 | Creamy Alfredo Pasta | 209 | **459** |
-| Classic French Fries | 99 | **219** |
-| Crunchy Peri Makhana | 129 | **279** |
 | Cheesy Garlic Bread Toast | 129 | **289** |
-| Spicy Peri Peri Fries | 129 | **299** |
+| Classic French Fries [Small] | 59 | **129** ¹ |
+| Classic French Fries [Large] | 99 | **219** |
+| Spicy Peri Peri Fries [Small] | 79 | **179** ¹ |
+| Spicy Peri Peri Fries [Large] | 129 | **299** |
 | Garlic Butter / Sweet Corn | 25 | **59** |
 | Cheese Dip / Peri Peri Dip | 29 | **69** |
 | Extra Cheese | 39 | **89** |
 | Extra Paneer | 59 | **139** |
-| Sandwich Meal Box Combo | 269 | **599** |
-| Pasta Treat Combo | 299 | **659** |
-| Fiesta Pizza Combo | 319 | **709** |
+| Midnight Pizza Box Combo | 179 | **399** ¹ |
+| Fiesta Pizza Combo | 339 | **709** |
+
+¹ **Proposed, not yet live on Zomato.** These three did not exist when the list
+was first set: the fries were one SKU, and the Midnight combo was added later.
+All three sit at 2.2×. Confirm before entering them.
 
 ### What the ladder does to a cart
 
@@ -104,10 +107,15 @@ Combos beat their own parts by **9–13%**, so the upsell reads as a saving rath
 than a spend. Add-ons sit at 13–30% of a pizza — small enough to say yes to
 without thinking, which is exactly where cart growth comes from.
 
-**The missing rung is a cheap side.** The lowest side on the platform is ₹219,
-which is a real decision. A small fries at ₹59 local → **₹129** on the platform
-would be the single best cart-builder on this menu: low enough to be an impulse,
-high enough to clear the floor.
+**The missing rung was a cheap side**, and it now exists: fries were split into
+Small and Large in August, putting a **₹129** side on the platform under the
+₹219 one. Low enough to be an impulse, high enough to clear the floor.
+
+Whether it actually builds carts is unproven. The order history says discounts
+do not lift basket size at all (1.24 items per order against 1.21) — see
+`../../marketing/findings/2026-08-14-discount-behaviour.md`. A cheap rung is a
+better bet than a discount for the same purpose, but treat it as a hypothesis
+until post-relaunch orders can test it.
 
 ## Edge cases
 
