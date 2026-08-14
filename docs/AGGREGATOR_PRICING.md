@@ -35,49 +35,79 @@ of commission, and it is entirely self-inflicted.
 At 27% commission the platform is workable. At 27% plus a 27% rejection rate it
 is not. Fixing rejections is worth more than every price change in this document.
 
-## The price list
+## The price list — one list, both platforms
 
-Set from the penalty-inclusive rate (1.68×), which leaves headroom rather than
-pricing at the exact floor. **The same prices go on Swiggy**, whose rate is not
-yet known — this buffer absorbs a commission up to about 34% before the floor is
-breached, so parity is safe until a Swiggy statement says otherwise.
+Priced so it never has to change again: it carries the commission, a **20%
+discount allowance** and a **10% ads allowance** simultaneously, and still clears
+the local floor. Every rung is at least **2.04×** local, which is the point where
+those three costs together stop eating the margin.
 
-| Item | Local | Now | **Set to** | Then pays |
-|---|---:|---:|---:|---:|
-| Zesty Onion Feast Pizza | 129 | 189 | **219** | 149 |
-| Ultimate Cheese Delight Pizza | 159 | 209 | **269** | 183 |
-| Golden Corn Classic Pizza | 169 | 229 | **289** | 197 |
-| Crunchy Capsicum Pizza | 189 | 249 | **319** | 217 |
-| Herb Paneer Delight Pizza | 209 | 289 | **359** | 244 |
-| Paneer Makhni Royale Pizza | 229 | 309 | **389** | 265 |
-| Mushroom Supreme Pizza | 229 | 299 | **389** | 265 |
-| Vegie Onion Capsicum Pizza | 219 | 289 | **369** | 251 |
-| Creamy Alfredo Pasta | 209 | 219 | **359** | 244 |
-| Classic Red Sauce Pasta | 189 | 199 | **319** | 217 |
-| Street Style Korean Maggi | 159 | 199 | **269** | 183 |
-| Tangy Green Chutney Sandwich | 89 | 119 | **159** | 108 |
-| Fiery Cheese Chilli Sandwich | 129 | 169 | **219** | 149 |
-| Paneer Tikka Sandwich | 169 | 229 | **289** | 197 |
-| Classic French Fries | 99 | 99 | **169** | 115 |
-| Spicy Peri Peri Fries | 129 | 119 | **219** | 149 |
-| Cheesy Garlic Bread Toast | 129 | 129 | **219** | 149 |
-| Crunchy Peri Makhana | 129 | 149 | **219** | 149 |
-| Fiesta Pizza Combo | 319 | 499 | **539** | 367 |
-| Pasta Treat Combo | 299 | 339 | **509** | 347 |
-| Sandwich Meal Box Combo | 269 | 389 | **459** | 313 |
-| Cheese Dip / Peri Peri Dip | 29 | 29 | **49** | 33 |
-| Garlic Butter / Sweet Corn | 25 | 29 | **49** | 33 |
-| Extra Cheese | 39 | 39 | **69** | 47 |
-| Extra Paneer | 59 | 49 | **109** | 74 |
+| Markup | Survives 20% discount | + 10% ads | Customer still ≥ local price until |
+|---:|---:|---:|---:|
+| 1.47× (bare floor) | no | no | 32% off |
+| 1.84× | yes | no | 46% off |
+| **2.2× (chosen)** | **yes** | **yes** | **55% off** |
 
-**26 of 27 items currently pay less than the local kitchen price.** Only the
-Fiesta Combo clears it. The sides and add-ons are worst: they were listed at
-local prices, so a ₹99 portion of fries returns ₹67, and extra paneer at ₹49
-returns ₹33 against a ₹59 local price.
+At 2.2× the headroom is: **27% discount** alone, or **20% discount plus 15% ads**
+together, before payout drops under the local price.
 
-Average change is about **+₹78** per item. The same week at these prices would
-have paid roughly **₹2,034 instead of ₹1,664** — and that is before fixing a
-single rejection.
+### The ladder
+
+Steps shrink as the customer climbs, so the first trade-up is the only real
+decision and every rung after it feels like small change:
+
+| Pizza | Local | **Aggregator** | Step |
+|---|---:|---:|---:|
+| Zesty Onion Feast | 129 | **289** | entry |
+| Ultimate Cheese Delight | 159 | **349** | +60 |
+| Golden Corn Classic | 169 | **379** | +30 |
+| Crunchy Capsicum | 189 | **419** | +40 |
+| Herb Paneer Delight | 209 | **459** | +40 |
+| Vegie Onion Capsicum | 219 | **479** | +20 |
+| Mushroom Supreme | 229 | **499** | +20 |
+| Paneer Makhni Royale | 229 | **519** | +20 |
+
+Paneer Makhni at ₹519 is the anchor: it exists to make ₹459 read as mid-range.
+
+| Rest of the menu | Local | **Aggregator** |
+|---|---:|---:|
+| Tangy Green Chutney Sandwich | 89 | **199** |
+| Fiery Cheese Chilli Sandwich | 129 | **289** |
+| Street Style Korean Maggi | 159 | **349** |
+| Paneer Tikka Sandwich | 169 | **379** |
+| Classic Red Sauce Pasta | 189 | **419** |
+| Creamy Alfredo Pasta | 209 | **459** |
+| Classic French Fries | 99 | **219** |
+| Crunchy Peri Makhana | 129 | **279** |
+| Cheesy Garlic Bread Toast | 129 | **289** |
+| Spicy Peri Peri Fries | 129 | **299** |
+| Garlic Butter / Sweet Corn | 25 | **59** |
+| Cheese Dip / Peri Peri Dip | 29 | **69** |
+| Extra Cheese | 39 | **89** |
+| Extra Paneer | 59 | **139** |
+| Sandwich Meal Box Combo | 269 | **599** |
+| Pasta Treat Combo | 299 | **659** |
+| Fiesta Pizza Combo | 319 | **709** |
+
+### What the ladder does to a cart
+
+Starting from one Herb Paneer at ₹459:
+
+| Action | Cart | You keep extra |
+|---|---:|---:|
+| add a dip | ₹528 | +₹34 |
+| add fries | ₹678 | +₹107 |
+| add fries and a dip | ₹747 | +₹141 |
+| switch to the Fiesta combo | ₹709 | +₹123 |
+
+Combos beat their own parts by **9–13%**, so the upsell reads as a saving rather
+than a spend. Add-ons sit at 13–30% of a pizza — small enough to say yes to
+without thinking, which is exactly where cart growth comes from.
+
+**The missing rung is a cheap side.** The lowest side on the platform is ₹219,
+which is a real decision. A small fries at ₹59 local → **₹129** on the platform
+would be the single best cart-builder on this menu: low enough to be an impulse,
+high enough to clear the floor.
 
 ## Edge cases
 
