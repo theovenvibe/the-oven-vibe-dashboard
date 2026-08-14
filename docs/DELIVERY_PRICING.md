@@ -125,7 +125,8 @@ in the markup.
 | After-hours kitchen (23:30–02:00) | +₹49 | Every late order, **pickup included** — the oven is fired either way. Minimum ₹399, prepaid, **no pasta or maggi** |
 | After-hours delivery (23:30–02:00) | +₹30 | On top of the normal distance fee. Free delivery is switched off in this window |
 | Pickup during the late window | discount withdrawn | The ₹30 pickup discount does not apply — collecting saves the ride, not the reopen |
-| Rain | +₹29 | Only while declared on the site; never applied retroactively |
+| Rain | +₹29 | Only while declared on the site; never applied retroactively. **Waived on a prepaid order — except late night**, where prepaying is the condition of firing the oven rather than a waiver, so the charge still applies |
+| Pre-order | — | An explicit mode with **3 hours** of prep notice. Every rule is judged at the chosen slot: a pre-order for 11:45pm is priced as late night |
 | Quiet hours (12:00–16:00, Mon–Fri) | **₹19** | Free above ₹349 |
 | Pre-ordered 3+ hours ahead | **−₹10** | Lets the kitchen batch |
 | Campus batch (NTPC, Sriram Nagar) | **₹39 flat** | 2+ orders, same campus, within a 20-minute window |
