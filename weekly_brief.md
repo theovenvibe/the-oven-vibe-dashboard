@@ -1,6 +1,6 @@
 # Weekly brief - The Oven Vibe
 
-Generated 2026-08-14T22:15:42 from 273 orders (2026-03-01T21:44:00 to 2026-08-07T19:38:00).
+Generated 2026-08-16T04:44:15 from 273 orders (2026-03-01T21:44:00 to 2026-08-07T19:38:00).
 
 _No cost data loaded (`data/item_costs.csv` absent) - the menu matrix and any margin-flavoured numbers below are revenue, not profit. Fill in `data/item_costs.csv` from the `.example` file to upgrade this._
 
@@ -21,6 +21,16 @@ _No cost data loaded (`data/item_costs.csv` absent) - the menu matrix and any ma
 - Cancel rate: 0.0% this week vs 0.0% prior week.
 - Avg rating: 3.0 this week vs 3.0 prior week.
 - New vs returning customers this week: 5 new, 2 returning.
+
+## Direct vs Zomato
+
+All-time confirmed orders, by channel:
+
+| Source | Orders | Revenue |
+|---|---:|---:|
+| zomato | 260 | ₹81,604 |
+
+_Direct channel has no confirmed orders yet — the kitchen only just relaunched (17 Aug 2026) and this backend's Phase 0 order capture is brand new; this section will fill in as real orders are confirmed._
 
 ## Data you can and cannot trust
 

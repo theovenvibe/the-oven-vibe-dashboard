@@ -27,7 +27,10 @@ is reachable only by hovering:
 
 - **Plan** — next week's forecast with its interval, forecast by weekday, the
   ranked action cards (headline, expected impact, evidence, confidence), the
-  prep-hour heatmap, and kitchen-closure options.
+  prep-hour heatmap, kitchen-closure options, and (once
+  `the-oven-vibe-data-pipeline` has pulled them) a direct-vs-Zomato channel
+  comparison — direct WhatsApp/pickup orders from `the-oven-vibe-backend`
+  next to Zomato, kept side by side rather than merged into one customer view.
 - **Menu** — the menu matrix (units × price, quadrant-labelled, dot area =
   revenue), the item table with sparklines and trend, price-rise and drop
   candidates, and the dormant/revive list.

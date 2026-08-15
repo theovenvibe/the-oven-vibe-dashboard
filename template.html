@@ -1366,6 +1366,46 @@
     return box;
   }
 
+  /**
+   * Phase 8 (backend PRD §11 row 8) — direct D1 orders next to Zomato,
+   * from analytics.direct_vs_zomato (built by analytics.py's
+   * compute_direct_vs_zomato from gold.combined_weekly_sales). null on an
+   * older build or one where the direct pull hasn't run yet — this reads
+   * over the full history, same as the other Plan-view analyses that show
+   * a quiet note instead of responding to the date filter above.
+   */
+  function directVsZomatoCard() {
+    const dvz = A && A.direct_vs_zomato;
+    if (!dvz) return null;
+    const box = card("Direct vs Zomato", "All-time confirmed orders by channel — kept side by side, not merged into one customer identity (the two systems key customers differently). Computed over the full history.", "full");
+    const totals = dvz.totals || [];
+    if (!totals.length || totals.every(function (t) { return t.orders === 0; })) {
+      box.appendChild(el("p", { class: "empty" }, "No confirmed orders on either channel yet."));
+      return box;
+    }
+    const table = el("table");
+    const head = el("tr");
+    ["Channel", "Orders", "Revenue"].forEach(function (h) { head.appendChild(el("th", null, h)); });
+    table.appendChild(el("thead")).appendChild(head);
+    const tbody = el("tbody");
+    totals.forEach(function (t) {
+      const tr = el("tr");
+      tr.appendChild(el("td", { style: "text-align:left" }, t.source));
+      tr.appendChild(el("td", null, num(t.orders, 0)));
+      tr.appendChild(el("td", null, moneyExact(t.revenue)));
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    const scroll = el("div", { class: "scroll" });
+    scroll.appendChild(table);
+    box.appendChild(scroll);
+    const direct = totals.find(function (t) { return t.source === "direct"; });
+    if (!direct || direct.orders === 0) {
+      box.appendChild(el("p", { class: "empty" }, "Direct channel has no confirmed orders yet — the kitchen only just relaunched and order capture is brand new; this fills in as real orders are confirmed."));
+    }
+    return box;
+  }
+
   function emptyCard(title, note) {
     const box = card(title, note);
     box.appendChild(el("p", { class: "empty" }, "Not in this build yet — analytics.py has not produced this section."));
@@ -1510,6 +1550,9 @@
     }
     const dq = dataQualityPanel();
     if (dq) body.appendChild(dq);
+
+    const dvzCard = directVsZomatoCard();
+    if (dvzCard) body.appendChild(dvzCard);
 
     const f = A.forecast || {};
     body.appendChild(heroBlock(

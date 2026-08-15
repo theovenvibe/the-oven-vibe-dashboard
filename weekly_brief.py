@@ -138,6 +138,43 @@ def _data_quality_section(analytics_payload):
     return lines
 
 
+def _direct_vs_zomato_section(analytics_payload):
+    """Phase 8 (backend PRD §11 row 8) — direct D1 orders next to Zomato,
+    from gold.combined_weekly_sales via analytics.compute_direct_vs_zomato.
+    Absent (None) on a warehouse that predates Phase 8 or hasn't pulled
+    direct orders yet — say so rather than silently omitting the section,
+    since "no direct-order data" and "there were none" read very differently.
+    """
+    dvz = analytics_payload.get("direct_vs_zomato")
+    lines = ["", "## Direct vs Zomato", ""]
+    if not dvz:
+        lines.append("No `gold.combined_weekly_sales` in this warehouse yet — run "
+                     "`pipeline.direct` (needs `OVEN_VIBE_ADMIN_TOKEN`) at least once to see "
+                     "direct WhatsApp/pickup orders alongside Zomato here.")
+        return lines
+
+    totals = dvz["totals"]
+    if not totals or all(t["orders"] == 0 for t in totals):
+        lines.append("No confirmed orders on either channel yet.")
+        return lines
+
+    lines.append("All-time confirmed orders, by channel:")
+    lines.append("")
+    lines.append("| Source | Orders | Revenue |")
+    lines.append("|---|---:|---:|")
+    for t in totals:
+        lines.append(f"| {t['source']} | {t['orders']} | {_fmt_money(t['revenue'])} |")
+
+    direct_total = next((t for t in totals if t["source"] == "direct"), None)
+    if direct_total is None or direct_total["orders"] == 0:
+        lines.append("")
+        lines.append("_Direct channel has no confirmed orders yet — the kitchen only just "
+                     "relaunched (17 Aug 2026) and this backend's Phase 0 order capture is "
+                     "brand new; this section will fill in as real orders are confirmed._")
+
+    return lines
+
+
 def _changed_section(analytics_payload):
     lines = ["", "## What changed vs last week", ""]
     wow = _week_over_week(analytics_payload["forecast"]["basis_weeks"])
@@ -244,6 +281,7 @@ def build_brief_text(meta, orders, analytics_payload):
     lines = []
     lines += _headline_section(meta, orders, analytics_payload)
     lines += _changed_section(analytics_payload)
+    lines += _direct_vs_zomato_section(analytics_payload)
     lines += _data_quality_section(analytics_payload)
     lines += _actions_section(analytics_payload)
     lines += _appendix_menu(analytics_payload)

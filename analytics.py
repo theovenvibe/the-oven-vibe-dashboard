@@ -1692,8 +1692,48 @@ def compute_actions(idx, prices, menu_rows, pairs, attach_rows, forecast, demand
 # Entry point
 # --------------------------------------------------------------------------
 
+def compute_direct_vs_zomato(combined_weekly_sales_table):
+    """Phase 8 (backend PRD §11 row 8) — direct D1 orders next to Zomato
+    orders, week by week, from `gold.combined_weekly_sales`.
+
+    Deliberately side-by-side, never merged into one customer or one order
+    stream — the two systems key customers differently and blending them
+    would produce unverifiable false merges (see the data-pipeline repo's
+    pipeline/direct.py for the full reasoning). This is a revenue/order-count
+    comparison by channel, not a unified order ledger.
+
+    Returns {weekly: [...], totals: [{source, orders, revenue}]} — `None`
+    when the table is absent (an older warehouse, or the direct pull hasn't
+    run yet), same "missing table degrades quietly" contract as
+    item_prices_table/menu_items_table/data_quality_table above.
+    """
+    if not combined_weekly_sales_table:
+        return None
+
+    weekly = [
+        {
+            "week_start": r["week_start"],
+            "source": r["source"],
+            "order_count": r["order_count"] or 0,
+            "confirmed_count": r["confirmed_count"] or 0,
+            "revenue": r["revenue"] or 0,
+        }
+        for r in combined_weekly_sales_table
+    ]
+
+    totals_by_source = {}
+    for r in weekly:
+        t = totals_by_source.setdefault(r["source"], {"source": r["source"], "orders": 0, "revenue": 0})
+        t["orders"] += r["confirmed_count"]
+        t["revenue"] += r["revenue"]
+    totals = sorted(totals_by_source.values(), key=lambda t: -t["revenue"])
+
+    return {"weekly": weekly, "totals": totals}
+
+
 def compute_analytics(orders, items, item_costs=None, item_prices_table=None,
-                       menu_items_table=None, data_quality_table=None):
+                       menu_items_table=None, data_quality_table=None,
+                       combined_weekly_sales_table=None):
     """Build the full `analytics` payload defined in docs/ANALYTICS_SPEC.md.
 
     `item_costs`, if given, is a dict of item_name -> unit_cost loaded from
@@ -1701,11 +1741,12 @@ def compute_analytics(orders, items, item_costs=None, item_prices_table=None,
     switches the menu matrix's vertical measure to contribution margin (see
     compute_menu).
 
-    `item_prices_table`, `menu_items_table`, `data_quality_table` are the
-    fetched rows of `gold.item_prices`, `silver.menu_items` and
-    `gold.data_quality` respectively (None if the warehouse predates them -
-    build.py degrades to local computation in that case; nothing here
-    crashes on their absence).
+    `item_prices_table`, `menu_items_table`, `data_quality_table`,
+    `combined_weekly_sales_table` are the fetched rows of `gold.item_prices`,
+    `silver.menu_items`, `gold.data_quality` and `gold.combined_weekly_sales`
+    respectively (None if the warehouse predates them - build.py degrades to
+    local computation / an absent section in that case; nothing here crashes
+    on their absence).
     """
     idx = Index(orders, items)
 
@@ -1759,4 +1800,5 @@ def compute_analytics(orders, items, item_costs=None, item_prices_table=None,
         "data_quality": data_quality_table or [],
         "price_source": price_source,
         "attach_excluded": attach_excluded,
+        "direct_vs_zomato": compute_direct_vs_zomato(combined_weekly_sales_table),
     }

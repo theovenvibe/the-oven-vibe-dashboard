@@ -44,6 +44,17 @@ main/side split and appears on every `menu[]` row), `gold.data_quality`
 (passed through as `analytics.data_quality` and rendered in
 `weekly_brief.md`).
 
+A fourth, `gold.combined_weekly_sales`, was added 16 Aug 2026 (backend PRD
+§11 row 8, Phase 8): direct D1 orders from `../the-oven-vibe-backend` next to
+Zomato orders, by week and `source`. `analytics.compute_direct_vs_zomato`
+turns it into `analytics.direct_vs_zomato` (`None` when the table is
+absent — an older warehouse, or one where `the-oven-vibe-data-pipeline`'s
+`pipeline.direct` hasn't run yet). Rendered as a "Direct vs Zomato" card on
+the Plan tab and a matching section in `weekly_brief.md`. Deliberately a
+channel comparison, not a merged customer view: direct and Zomato orders are
+never joined on customer identity (the two systems key it differently — see
+the pipeline repo's `pipeline/direct.py`).
+
 ## Setup
 
 ```

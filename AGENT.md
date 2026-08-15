@@ -38,10 +38,19 @@ self-contained HTML dashboard (`dashboard.html`), plus a machine-readable
   sample thresholds, capped at best observed performance, `confidence: "low"`
   below a higher bar, `impact_value: null` + "too few sales to estimate"
   below the minimum gate.
-- `gold.item_prices` / `silver.menu_items` / `gold.data_quality` are optional
-  at read time — `build.py`'s `fetch_if_exists` checks
-  `information_schema.tables` first, so pointing `--db` at an older warehouse
-  degrades to local computation instead of crashing.
+- `gold.item_prices` / `silver.menu_items` / `gold.data_quality` /
+  `gold.combined_weekly_sales` are optional at read time — `build.py`'s
+  `fetch_if_exists` checks `information_schema.tables` first, so pointing
+  `--db` at an older warehouse degrades to local computation (or an absent
+  section) instead of crashing.
+- `analytics.direct_vs_zomato` (Phase 8, backend PRD §11 row 8) is `None`
+  until the pipeline repo has run `pipeline.direct` at least once. Rendered
+  on the Plan tab (`directVsZomatoCard` in `template.html`) and in
+  `weekly_brief.md` (`_direct_vs_zomato_section`). It's a channel-revenue
+  comparison, not a merged customer view — direct and Zomato orders are
+  never joined on identity (see the pipeline repo's `pipeline/direct.py` for
+  why), so don't build a feature here that assumes one combined customer
+  list across both sources.
 - The page has no `<!doctype>`, `<html>`, `<head>` or `<body>` wrapper, so it can
   be published as a Claude Artifact as-is. Keep it that way.
 - Everything must stay inline: no CDN scripts, no external fonts, no remote

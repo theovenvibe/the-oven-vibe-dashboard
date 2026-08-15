@@ -107,10 +107,25 @@ user can't audit is a number they won't act on.
     dormant:     [{ item_name, units_lifetime, last_sold, days_dormant,
                     weekly_rate_when_active, estimated_lost_revenue }],
     data_quality: [{ check_name, status, detail, value }],
-    price_source: "gold.item_prices" | "inferred"
+    price_source: "gold.item_prices" | "inferred",
+    direct_vs_zomato: null | { weekly: [{ week_start, source, order_count,
+                                           confirmed_count, revenue }],
+                                totals: [{ source, orders, revenue }] }
   }
 }
 ```
+
+`direct_vs_zomato` (added 16 Aug 2026, backend PRD §11 row 8) — direct D1
+orders from `the-oven-vibe-backend` next to Zomato orders, by week and
+`source` (`"direct"` | `"zomato"`). `null` until
+`the-oven-vibe-data-pipeline`'s `pipeline.direct` has produced
+`gold.combined_weekly_sales` at least once. Deliberately a channel-revenue
+comparison, never a merged customer view: the two systems key customer
+identity differently (this backend by a normalised 10-digit phone it owns
+end to end; the Zomato export by a frequently-masked `Customer Phone`), so
+blending them would produce unverifiable false merges. `totals` is
+`weekly` summed per source, sorted by revenue descending, for a one-glance
+card; `weekly` is there for anyone who wants the trend.
 
 ## Upstream tables (added to the warehouse 13 Aug 2026)
 

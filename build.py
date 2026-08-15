@@ -88,6 +88,15 @@ DATA_QUALITY_SQL = """
     FROM gold.data_quality
 """
 
+# Added to the warehouse 15 Aug 2026 (Phase 8, backend PRD §11 row 8) -
+# optional at read time for the same reason as the tables above: an older
+# warehouse, or one where pipeline.direct hasn't been run yet, won't have it.
+COMBINED_WEEKLY_SALES_SQL = """
+    SELECT week_start, source, order_count, confirmed_count, revenue
+    FROM gold.combined_weekly_sales
+    ORDER BY week_start, source
+"""
+
 
 def jsonable(value):
     if isinstance(value, (datetime, date)):
@@ -202,6 +211,9 @@ def main():
         item_prices_table = fetch_if_exists(con, "gold", "item_prices", ITEM_PRICES_SQL)
         menu_items_table = fetch_if_exists(con, "silver", "menu_items", MENU_ITEMS_SQL)
         data_quality_table = fetch_if_exists(con, "gold", "data_quality", DATA_QUALITY_SQL)
+        combined_weekly_sales_table = fetch_if_exists(
+            con, "gold", "combined_weekly_sales", COMBINED_WEEKLY_SALES_SQL
+        )
     finally:
         con.close()
         if tmp_dir:
@@ -216,6 +228,7 @@ def main():
         item_prices_table=item_prices_table,
         menu_items_table=menu_items_table,
         data_quality_table=data_quality_table,
+        combined_weekly_sales_table=combined_weekly_sales_table,
     )
 
     # has_cost_data reflects whichever cost source actually resolved a
@@ -251,6 +264,8 @@ def main():
     print(f"  silver.menu_items {'found' if menu_items_table is not None else 'absent'}"
           f", gold.data_quality {'found' if data_quality_table is not None else 'absent'}"
           f" ({len(analytics_payload['data_quality'])} checks)")
+    print(f"  gold.combined_weekly_sales {'found' if combined_weekly_sales_table is not None else 'absent'}"
+          f" (direct_vs_zomato {'present' if analytics_payload['direct_vs_zomato'] else 'absent'})")
     print(f"  {WEEKLY_BRIEF_OUT.name} written")
 
 
