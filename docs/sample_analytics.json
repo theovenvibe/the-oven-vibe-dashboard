@@ -1,0 +1,3645 @@
+{
+ "analytics": {
+  "prices": [
+   {
+    "item_name": "\ud83c\udf19 Midnight Pizza Box Combo (7\u201d Pizza + Small Fries)",
+    "unit_price": 269.0,
+    "confidence": "observed",
+    "sample_n": 13
+   },
+   {
+    "item_name": "Paneer Makhni Royale Pizza [Regular, 7 inches]",
+    "unit_price": 309.0,
+    "confidence": "observed",
+    "sample_n": 32
+   },
+   {
+    "item_name": "Zesty Onion Feast Pizza [Regular, 7 inches]",
+    "unit_price": 189.0,
+    "confidence": "observed",
+    "sample_n": 7
+   },
+   {
+    "item_name": "Golden Corn Classic Pizza [Regular, 7 inches]",
+    "unit_price": 229.0,
+    "confidence": "observed",
+    "sample_n": 34
+   },
+   {
+    "item_name": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "unit_price": 289.0,
+    "confidence": "observed",
+    "sample_n": 57
+   },
+   {
+    "item_name": "Sandwich Meal Box Combo",
+    "unit_price": 389.0,
+    "confidence": "observed",
+    "sample_n": 1
+   },
+   {
+    "item_name": "Bestseller Veg Fried Rice",
+    "unit_price": 189.0,
+    "confidence": "observed",
+    "sample_n": 3
+   },
+   {
+    "item_name": "Classic Red Sauce Pasta (Penne)",
+    "unit_price": 179.0,
+    "confidence": "observed",
+    "sample_n": 1
+   },
+   {
+    "item_name": "\u2b50 Ultimate Cheese Delight Pizza [Regular, 7 inches]",
+    "unit_price": 209.0,
+    "confidence": "observed",
+    "sample_n": 28
+   },
+   {
+    "item_name": "Mixed Treasure Fried Rice",
+    "unit_price": 299.0,
+    "confidence": "observed",
+    "sample_n": 2
+   },
+   {
+    "item_name": "Street Style Korean Spicy Veg Maggi",
+    "unit_price": 199.0,
+    "confidence": "observed",
+    "sample_n": 8
+   },
+   {
+    "item_name": "Creamy Alfredo Pasta (Fusilli)",
+    "unit_price": 219.0,
+    "confidence": "observed",
+    "sample_n": 3
+   },
+   {
+    "item_name": "\ud83d\udd25 Most Ordered Classic French Fries",
+    "unit_price": 99.0,
+    "confidence": "observed",
+    "sample_n": 2
+   },
+   {
+    "item_name": "Creamy Cheese Maggi",
+    "unit_price": 219.0,
+    "confidence": "observed",
+    "sample_n": 2
+   },
+   {
+    "item_name": "Spicy Schezwan Special Fried Rice",
+    "unit_price": 278.0,
+    "confidence": "observed",
+    "sample_n": 1
+   },
+   {
+    "item_name": "Fiery Cheese Chilli Sandwich [2 slices]",
+    "unit_price": 169.0,
+    "confidence": "observed",
+    "sample_n": 6
+   },
+   {
+    "item_name": "Tangy Green Chutney Sandwich [2 slices]",
+    "unit_price": 119.0,
+    "confidence": "observed",
+    "sample_n": 1
+   },
+   {
+    "item_name": "Garlic Fried Rice",
+    "unit_price": 209.0,
+    "confidence": "observed",
+    "sample_n": 1
+   },
+   {
+    "item_name": "Cheesy Corn Mix",
+    "unit_price": 179.0,
+    "confidence": "observed",
+    "sample_n": 1
+   },
+   {
+    "item_name": "Paneer Fried Rice",
+    "unit_price": 269.0,
+    "confidence": "observed",
+    "sample_n": 1
+   },
+   {
+    "item_name": "Crunchy Capsicum Pizza [Regular, 7 inches]",
+    "unit_price": 249.0,
+    "confidence": "observed",
+    "sample_n": 4
+   },
+   {
+    "item_name": "Vegie Onion Capsicum Pizza [Regular, 7 inches]",
+    "unit_price": 289.0,
+    "confidence": "observed",
+    "sample_n": 2
+   },
+   {
+    "item_name": "Fiesta Pizza Combo",
+    "unit_price": 499.0,
+    "confidence": "observed",
+    "sample_n": 5
+   },
+   {
+    "item_name": "Tangy Masala Corn",
+    "unit_price": 129.0,
+    "confidence": "observed",
+    "sample_n": 1
+   },
+   {
+    "item_name": "Chilli Garlic Potato Pops",
+    "unit_price": null,
+    "confidence": "unknown",
+    "sample_n": 0
+   },
+   {
+    "item_name": "Paneer Tikka Grilled Sandwich [2 slices]",
+    "unit_price": null,
+    "confidence": "unknown",
+    "sample_n": 0
+   },
+   {
+    "item_name": "Pasta Treat Combo",
+    "unit_price": null,
+    "confidence": "unknown",
+    "sample_n": 0
+   },
+   {
+    "item_name": "Spicy Peri Peri French Fries",
+    "unit_price": null,
+    "confidence": "unknown",
+    "sample_n": 0
+   }
+  ],
+  "menu": [
+   {
+    "item_name": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "units": 83,
+    "orders": 81,
+    "revenue": 23120.0,
+    "revenue_share": 0.3072,
+    "unit_price": 289.0,
+    "price_confidence": "observed",
+    "quadrant": "star",
+    "first_sold": "2026-03-03",
+    "last_sold": "2026-08-07",
+    "days_dormant": 0,
+    "trend_pct": null,
+    "weekly_units": [
+     1,
+     2,
+     2,
+     0,
+     0,
+     5,
+     3,
+     1,
+     2,
+     1,
+     1,
+     5
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": true
+   },
+   {
+    "item_name": "Golden Corn Classic Pizza [Regular, 7 inches]",
+    "units": 46,
+    "orders": 46,
+    "revenue": 10076.0,
+    "revenue_share": 0.1339,
+    "unit_price": 229.0,
+    "price_confidence": "observed",
+    "quadrant": "star",
+    "first_sold": "2026-03-02",
+    "last_sold": "2026-07-29",
+    "days_dormant": 9,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     4,
+     0,
+     3,
+     0,
+     1,
+     2,
+     1,
+     2,
+     1,
+     1,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": true
+   },
+   {
+    "item_name": "Paneer Makhni Royale Pizza [Regular, 7 inches]",
+    "units": 41,
+    "orders": 40,
+    "revenue": 12669.0,
+    "revenue_share": 0.1683,
+    "unit_price": 309.0,
+    "price_confidence": "observed",
+    "quadrant": "star",
+    "first_sold": "2026-03-03",
+    "last_sold": "2026-07-15",
+    "days_dormant": 23,
+    "trend_pct": null,
+    "weekly_units": [
+     3,
+     0,
+     0,
+     2,
+     1,
+     1,
+     0,
+     5,
+     1,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "\u2b50 Ultimate Cheese Delight Pizza [Regular, 7 inches]",
+    "units": 37,
+    "orders": 37,
+    "revenue": 6897.0,
+    "revenue_share": 0.0916,
+    "unit_price": 209.0,
+    "price_confidence": "observed",
+    "quadrant": "plowhorse",
+    "first_sold": "2026-03-03",
+    "last_sold": "2026-08-05",
+    "days_dormant": 2,
+    "trend_pct": null,
+    "weekly_units": [
+     1,
+     1,
+     0,
+     2,
+     1,
+     1,
+     3,
+     2,
+     3,
+     3,
+     0,
+     1
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": true
+   },
+   {
+    "item_name": "Street Style Korean Spicy Veg Maggi",
+    "units": 15,
+    "orders": 13,
+    "revenue": 2587.0,
+    "revenue_share": 0.0344,
+    "unit_price": 199.0,
+    "price_confidence": "observed",
+    "quadrant": "plowhorse",
+    "first_sold": "2026-03-03",
+    "last_sold": "2026-07-28",
+    "days_dormant": 10,
+    "trend_pct": null,
+    "weekly_units": [
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0,
+     2,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "\ud83c\udf19 Midnight Pizza Box Combo (7\u201d Pizza + Small Fries)",
+    "units": 14,
+    "orders": 14,
+    "revenue": 3497.0,
+    "revenue_share": 0.0465,
+    "unit_price": 269.0,
+    "price_confidence": "observed",
+    "quadrant": "star",
+    "first_sold": "2026-03-07",
+    "last_sold": "2026-08-05",
+    "days_dormant": 2,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     1,
+     0,
+     2,
+     1,
+     0,
+     2,
+     2,
+     1
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Fiery Cheese Chilli Sandwich [2 slices]",
+    "units": 13,
+    "orders": 12,
+    "revenue": 2028.0,
+    "revenue_share": 0.0269,
+    "unit_price": 169.0,
+    "price_confidence": "observed",
+    "quadrant": "plowhorse",
+    "first_sold": "2026-03-17",
+    "last_sold": "2026-07-12",
+    "days_dormant": 26,
+    "trend_pct": null,
+    "weekly_units": [
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     2,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "\ud83d\udd25 Most Ordered Classic French Fries",
+    "units": 12,
+    "orders": 12,
+    "revenue": 1188.0,
+    "revenue_share": 0.0158,
+    "unit_price": 99.0,
+    "price_confidence": "observed",
+    "quadrant": "plowhorse",
+    "first_sold": "2026-03-04",
+    "last_sold": "2026-07-31",
+    "days_dormant": 7,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     1,
+     0,
+     0,
+     1,
+     0,
+     0,
+     1,
+     0,
+     0,
+     2,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": true
+   },
+   {
+    "item_name": "Spicy Peri Peri French Fries",
+    "units": 12,
+    "orders": 12,
+    "revenue": 0,
+    "revenue_share": 0.0,
+    "unit_price": null,
+    "price_confidence": "unknown",
+    "quadrant": "plowhorse",
+    "first_sold": "2026-03-09",
+    "last_sold": "2026-07-27",
+    "days_dormant": 11,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     2,
+     0,
+     1,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": true
+   },
+   {
+    "item_name": "Zesty Onion Feast Pizza [Regular, 7 inches]",
+    "units": 9,
+    "orders": 9,
+    "revenue": 1512.0,
+    "revenue_share": 0.0201,
+    "unit_price": 189.0,
+    "price_confidence": "observed",
+    "quadrant": "plowhorse",
+    "first_sold": "2026-03-04",
+    "last_sold": "2026-07-28",
+    "days_dormant": 10,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     1,
+     0,
+     1,
+     0,
+     2,
+     0,
+     0,
+     1,
+     0,
+     1,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Creamy Alfredo Pasta (Fusilli)",
+    "units": 8,
+    "orders": 7,
+    "revenue": 1752.0,
+    "revenue_share": 0.0233,
+    "unit_price": 219.0,
+    "price_confidence": "observed",
+    "quadrant": "star",
+    "first_sold": "2026-03-04",
+    "last_sold": "2026-07-20",
+    "days_dormant": 18,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     1,
+     0,
+     0,
+     0,
+     1,
+     0,
+     0,
+     0,
+     1,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Crunchy Capsicum Pizza [Regular, 7 inches]",
+    "units": 7,
+    "orders": 7,
+    "revenue": 1743.0,
+    "revenue_share": 0.0232,
+    "unit_price": 249.0,
+    "price_confidence": "observed",
+    "quadrant": "star",
+    "first_sold": "2026-03-24",
+    "last_sold": "2026-08-06",
+    "days_dormant": 1,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     1,
+     0,
+     1,
+     0,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Fiesta Pizza Combo",
+    "units": 6,
+    "orders": 6,
+    "revenue": 2994.0,
+    "revenue_share": 0.0398,
+    "unit_price": 499.0,
+    "price_confidence": "observed",
+    "quadrant": "star",
+    "first_sold": "2026-03-01",
+    "last_sold": "2026-07-21",
+    "days_dormant": 17,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0,
+     0,
+     0,
+     1,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Vegie Onion Capsicum Pizza [Regular, 7 inches]",
+    "units": 3,
+    "orders": 3,
+    "revenue": 578.0,
+    "revenue_share": 0.0077,
+    "unit_price": 289.0,
+    "price_confidence": "observed",
+    "quadrant": "star",
+    "first_sold": "2026-03-04",
+    "last_sold": "2026-04-20",
+    "days_dormant": 109,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Chilli Garlic Potato Pops",
+    "units": 3,
+    "orders": 3,
+    "revenue": 0,
+    "revenue_share": 0.0,
+    "unit_price": null,
+    "price_confidence": "unknown",
+    "quadrant": "plowhorse",
+    "first_sold": "2026-03-01",
+    "last_sold": "2026-03-22",
+    "days_dormant": 138,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Bestseller Veg Fried Rice",
+    "units": 3,
+    "orders": 3,
+    "revenue": 567.0,
+    "revenue_share": 0.0075,
+    "unit_price": 189.0,
+    "price_confidence": "observed",
+    "quadrant": "plowhorse",
+    "first_sold": "2026-03-03",
+    "last_sold": "2026-03-10",
+    "days_dormant": 150,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Mixed Treasure Fried Rice",
+    "units": 3,
+    "orders": 3,
+    "revenue": 897.0,
+    "revenue_share": 0.0119,
+    "unit_price": 299.0,
+    "price_confidence": "observed",
+    "quadrant": "star",
+    "first_sold": "2026-03-03",
+    "last_sold": "2026-03-31",
+    "days_dormant": 129,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Paneer Tikka Grilled Sandwich [2 slices]",
+    "units": 3,
+    "orders": 3,
+    "revenue": 0,
+    "revenue_share": 0.0,
+    "unit_price": null,
+    "price_confidence": "unknown",
+    "quadrant": "plowhorse",
+    "first_sold": "2026-04-23",
+    "last_sold": "2026-07-11",
+    "days_dormant": 27,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Classic Red Sauce Pasta (Penne)",
+    "units": 2,
+    "orders": 2,
+    "revenue": 358.0,
+    "revenue_share": 0.0048,
+    "unit_price": 179.0,
+    "price_confidence": "observed",
+    "quadrant": "dog",
+    "first_sold": "2026-03-03",
+    "last_sold": "2026-03-19",
+    "days_dormant": 141,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Spicy Schezwan Special Fried Rice",
+    "units": 2,
+    "orders": 2,
+    "revenue": 556.0,
+    "revenue_share": 0.0074,
+    "unit_price": 278.0,
+    "price_confidence": "observed",
+    "quadrant": "puzzle",
+    "first_sold": "2026-03-13",
+    "last_sold": "2026-03-16",
+    "days_dormant": 144,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Tangy Green Chutney Sandwich [2 slices]",
+    "units": 2,
+    "orders": 2,
+    "revenue": 238.0,
+    "revenue_share": 0.0032,
+    "unit_price": 119.0,
+    "price_confidence": "observed",
+    "quadrant": "dog",
+    "first_sold": "2026-03-15",
+    "last_sold": "2026-03-24",
+    "days_dormant": 136,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Creamy Cheese Maggi",
+    "units": 2,
+    "orders": 2,
+    "revenue": 438.0,
+    "revenue_share": 0.0058,
+    "unit_price": 219.0,
+    "price_confidence": "observed",
+    "quadrant": "puzzle",
+    "first_sold": "2026-03-14",
+    "last_sold": "2026-04-16",
+    "days_dormant": 113,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Tangy Masala Corn",
+    "units": 2,
+    "orders": 2,
+    "revenue": 258.0,
+    "revenue_share": 0.0034,
+    "unit_price": 129.0,
+    "price_confidence": "observed",
+    "quadrant": "dog",
+    "first_sold": "2026-03-22",
+    "last_sold": "2026-05-05",
+    "days_dormant": 94,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Paneer Fried Rice",
+    "units": 2,
+    "orders": 2,
+    "revenue": 538.0,
+    "revenue_share": 0.0071,
+    "unit_price": 269.0,
+    "price_confidence": "observed",
+    "quadrant": "puzzle",
+    "first_sold": "2026-03-30",
+    "last_sold": "2026-04-02",
+    "days_dormant": 127,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Sandwich Meal Box Combo",
+    "units": 1,
+    "orders": 1,
+    "revenue": 389.0,
+    "revenue_share": 0.0052,
+    "unit_price": 389.0,
+    "price_confidence": "observed",
+    "quadrant": "puzzle",
+    "first_sold": "2026-03-07",
+    "last_sold": "2026-03-07",
+    "days_dormant": 153,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Pasta Treat Combo",
+    "units": 1,
+    "orders": 1,
+    "revenue": 0,
+    "revenue_share": 0.0,
+    "unit_price": null,
+    "price_confidence": "unknown",
+    "quadrant": "dog",
+    "first_sold": "2026-03-15",
+    "last_sold": "2026-03-15",
+    "days_dormant": 145,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Garlic Fried Rice",
+    "units": 1,
+    "orders": 1,
+    "revenue": 209.0,
+    "revenue_share": 0.0028,
+    "unit_price": 209.0,
+    "price_confidence": "observed",
+    "quadrant": "dog",
+    "first_sold": "2026-03-25",
+    "last_sold": "2026-03-25",
+    "days_dormant": 135,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   },
+   {
+    "item_name": "Cheesy Corn Mix",
+    "units": 1,
+    "orders": 1,
+    "revenue": 179.0,
+    "revenue_share": 0.0024,
+    "unit_price": 179.0,
+    "price_confidence": "observed",
+    "quadrant": "dog",
+    "first_sold": "2026-04-04",
+    "last_sold": "2026-04-04",
+    "days_dormant": 125,
+    "trend_pct": null,
+    "weekly_units": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "avg_rating_with": null,
+    "avg_rating_without": null,
+    "rating_n": 0,
+    "attach_rate": null,
+    "discount_dependence": null,
+    "frequent_attachment": false
+   }
+  ],
+  "actions": [
+   {
+    "id": "promo_1",
+    "kind": "promo",
+    "item_name": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "headline": "Prompt a side with \ud83d\udd25 Herb Paneer Delight Pizza",
+    "detail": "Attach rate lags the best-observed main; the gap is real money left on the table.",
+    "evidence": "attach rate 14.8% across 81 orders",
+    "impact_value": 12351.7,
+    "impact_basis": "attach-rate gap \u00d7 orders \u00d7 median side price",
+    "confidence": "medium",
+    "priority": 247.03400000000002
+   },
+   {
+    "id": "price_up_1",
+    "kind": "price_up",
+    "item_name": "\u2b50 Ultimate Cheese Delight Pizza [Regular, 7 inches]",
+    "headline": "Raise \u2b50 Ultimate Cheese Delight Pizza by \u20b920",
+    "detail": "High demand, priced below the menu median \u2014 room to move price without denting volume.",
+    "evidence": "37 units sold, unit price \u20b9209.0, n=37 orders",
+    "impact_value": 139.31,
+    "impact_basis": "7.0 units/month \u00d7 \u20b920 rise",
+    "confidence": "medium",
+    "priority": 139.31
+   },
+   {
+    "id": "ops_1",
+    "kind": "ops",
+    "item_name": null,
+    "headline": "Fix prep times over 25 minutes",
+    "detail": "The single biggest driver of low ratings in this data.",
+    "evidence": "2.17\u2605 across 6 slow orders vs 4.16\u2605 across fast ones",
+    "impact_value": null,
+    "impact_basis": "rating protection, not directly monetised",
+    "confidence": "high",
+    "priority": 90
+   },
+   {
+    "id": "combo_1",
+    "kind": "combo",
+    "item_name": null,
+    "headline": "Bundle \ud83d\udd25 Herb Paneer Delight Pizza + \ud83d\udd25 Most Ordered Classic French Fries",
+    "detail": "Most-repeated pair in the basket data \u2014 package it before a customer has to think of it.",
+    "evidence": "n=4 orders together, indicative",
+    "impact_value": 1400,
+    "impact_basis": "4 historical co-orders \u00d7 \u20b9350 combo price",
+    "confidence": "low",
+    "priority": 40
+   },
+   {
+    "id": "winback_1",
+    "kind": "winback",
+    "item_name": null,
+    "headline": "Win back 18 lapsed repeat customers",
+    "detail": "Ordered twice or more, then went quiet for 45+ days.",
+    "evidence": "18 customers, \u20b95310 lifetime spend in the top 5 alone",
+    "impact_value": 796.57,
+    "impact_basis": "15% assumed reactivation on top-5 spend",
+    "confidence": "low",
+    "priority": 40
+   },
+   {
+    "id": "revive_1",
+    "kind": "revive",
+    "item_name": "Sandwich Meal Box Combo",
+    "headline": "Re-promote Sandwich Meal Box Combo",
+    "detail": "Was selling steadily, then stopped \u2014 check listing status before writing it off.",
+    "evidence": "1 units lifetime, dormant 153 days",
+    "impact_value": 8502.43,
+    "impact_basis": "weekly rate when active \u00d7 weeks dormant \u00d7 price",
+    "confidence": "low",
+    "priority": 20
+   },
+   {
+    "id": "drop_1",
+    "kind": "drop",
+    "item_name": "Pasta Treat Combo",
+    "headline": "Drop Pasta Treat Combo from the menu",
+    "detail": "Low demand, low price, dormant \u2014 carries menu-card space without earning it back.",
+    "evidence": "1 units lifetime, dormant 145 days",
+    "impact_value": 0,
+    "impact_basis": "no revenue at stake; frees a menu slot",
+    "confidence": "high",
+    "priority": 10
+   }
+  ],
+  "pairs": [
+   {
+    "a": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "b": "\ud83d\udd25 Most Ordered Classic French Fries",
+    "n": 4,
+    "support": 0.0147,
+    "confidence_ab": 0.0494,
+    "confidence_ba": 0.3333,
+    "lift": 1.12,
+    "strength": "indicative",
+    "combined_value": 388.0,
+    "suggested_combo_price": 350
+   },
+   {
+    "a": "Golden Corn Classic Pizza [Regular, 7 inches]",
+    "b": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "n": 3,
+    "support": 0.011,
+    "confidence_ab": 0.0652,
+    "confidence_ba": 0.037,
+    "lift": 0.22,
+    "strength": "indicative",
+    "combined_value": 518.0,
+    "suggested_combo_price": 470
+   },
+   {
+    "a": "Spicy Peri Peri French Fries",
+    "b": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "n": 3,
+    "support": 0.011,
+    "confidence_ab": 0.25,
+    "confidence_ba": 0.037,
+    "lift": 0.84,
+    "strength": "indicative",
+    "combined_value": null,
+    "suggested_combo_price": null
+   },
+   {
+    "a": "\u2b50 Ultimate Cheese Delight Pizza [Regular, 7 inches]",
+    "b": "\ud83d\udd25 Most Ordered Classic French Fries",
+    "n": 3,
+    "support": 0.011,
+    "confidence_ab": 0.0811,
+    "confidence_ba": 0.25,
+    "lift": 1.84,
+    "strength": "indicative",
+    "combined_value": 308.0,
+    "suggested_combo_price": 280
+   },
+   {
+    "a": "Golden Corn Classic Pizza [Regular, 7 inches]",
+    "b": "Spicy Peri Peri French Fries",
+    "n": 3,
+    "support": 0.011,
+    "confidence_ab": 0.0652,
+    "confidence_ba": 0.25,
+    "lift": 1.48,
+    "strength": "indicative",
+    "combined_value": null,
+    "suggested_combo_price": null
+   },
+   {
+    "a": "Street Style Korean Spicy Veg Maggi",
+    "b": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "n": 2,
+    "support": 0.0073,
+    "confidence_ab": 0.1538,
+    "confidence_ba": 0.0247,
+    "lift": 0.52,
+    "strength": "indicative",
+    "combined_value": 488.0,
+    "suggested_combo_price": 440
+   },
+   {
+    "a": "Golden Corn Classic Pizza [Regular, 7 inches]",
+    "b": "\u2b50 Ultimate Cheese Delight Pizza [Regular, 7 inches]",
+    "n": 2,
+    "support": 0.0073,
+    "confidence_ab": 0.0435,
+    "confidence_ba": 0.0541,
+    "lift": 0.32,
+    "strength": "indicative",
+    "combined_value": 438.0,
+    "suggested_combo_price": 390
+   },
+   {
+    "a": "Spicy Peri Peri French Fries",
+    "b": "\u2b50 Ultimate Cheese Delight Pizza [Regular, 7 inches]",
+    "n": 2,
+    "support": 0.0073,
+    "confidence_ab": 0.1667,
+    "confidence_ba": 0.0541,
+    "lift": 1.23,
+    "strength": "indicative",
+    "combined_value": null,
+    "suggested_combo_price": null
+   },
+   {
+    "a": "Paneer Makhni Royale Pizza [Regular, 7 inches]",
+    "b": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "n": 2,
+    "support": 0.0073,
+    "confidence_ab": 0.05,
+    "confidence_ba": 0.0247,
+    "lift": 0.17,
+    "strength": "indicative",
+    "combined_value": 598.0,
+    "suggested_combo_price": 540
+   },
+   {
+    "a": "Crunchy Capsicum Pizza [Regular, 7 inches]",
+    "b": "Spicy Peri Peri French Fries",
+    "n": 2,
+    "support": 0.0073,
+    "confidence_ab": 0.2857,
+    "confidence_ba": 0.1667,
+    "lift": 6.5,
+    "strength": "indicative",
+    "combined_value": null,
+    "suggested_combo_price": null
+   },
+   {
+    "a": "Paneer Makhni Royale Pizza [Regular, 7 inches]",
+    "b": "\ud83d\udd25 Most Ordered Classic French Fries",
+    "n": 2,
+    "support": 0.0073,
+    "confidence_ab": 0.05,
+    "confidence_ba": 0.1667,
+    "lift": 1.14,
+    "strength": "indicative",
+    "combined_value": 408.0,
+    "suggested_combo_price": 370
+   },
+   {
+    "a": "Paneer Tikka Grilled Sandwich [2 slices]",
+    "b": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "n": 2,
+    "support": 0.0073,
+    "confidence_ab": 0.6667,
+    "confidence_ba": 0.0247,
+    "lift": 2.25,
+    "strength": "indicative",
+    "combined_value": null,
+    "suggested_combo_price": null
+   },
+   {
+    "a": "Fiery Cheese Chilli Sandwich [2 slices]",
+    "b": "Paneer Makhni Royale Pizza [Regular, 7 inches]",
+    "n": 2,
+    "support": 0.0073,
+    "confidence_ab": 0.1667,
+    "confidence_ba": 0.05,
+    "lift": 1.14,
+    "strength": "indicative",
+    "combined_value": 478.0,
+    "suggested_combo_price": 430
+   },
+   {
+    "a": "Creamy Alfredo Pasta (Fusilli)",
+    "b": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "n": 2,
+    "support": 0.0073,
+    "confidence_ab": 0.2857,
+    "confidence_ba": 0.0247,
+    "lift": 0.96,
+    "strength": "indicative",
+    "combined_value": 508.0,
+    "suggested_combo_price": 460
+   }
+  ],
+  "attach": [
+   {
+    "main_item": "Crunchy Capsicum Pizza [Regular, 7 inches]",
+    "orders": 7,
+    "with_side": 2,
+    "attach_rate": 0.2857,
+    "gap_value": 895.02
+   },
+   {
+    "main_item": "Fiesta Pizza Combo",
+    "orders": 6,
+    "with_side": 1,
+    "attach_rate": 0.1667,
+    "gap_value": 894.96
+   },
+   {
+    "main_item": "Golden Corn Classic Pizza [Regular, 7 inches]",
+    "orders": 46,
+    "with_side": 46,
+    "attach_rate": 1.0,
+    "gap_value": 0.0
+   },
+   {
+    "main_item": "Paneer Makhni Royale Pizza [Regular, 7 inches]",
+    "orders": 40,
+    "with_side": 2,
+    "attach_rate": 0.05,
+    "gap_value": 6802.0
+   },
+   {
+    "main_item": "Vegie Onion Capsicum Pizza [Regular, 7 inches]",
+    "orders": 3,
+    "with_side": 0,
+    "attach_rate": 0.0,
+    "gap_value": 537.0
+   },
+   {
+    "main_item": "Zesty Onion Feast Pizza [Regular, 7 inches]",
+    "orders": 9,
+    "with_side": 1,
+    "attach_rate": 0.1111,
+    "gap_value": 1432.02
+   },
+   {
+    "main_item": "\u2b50 Ultimate Cheese Delight Pizza [Regular, 7 inches]",
+    "orders": 37,
+    "with_side": 7,
+    "attach_rate": 0.1892,
+    "gap_value": 5369.93
+   },
+   {
+    "main_item": "\ud83c\udf19 Midnight Pizza Box Combo (7\u201d Pizza + Small Fries)",
+    "orders": 14,
+    "with_side": 14,
+    "attach_rate": 1.0,
+    "gap_value": 0.0
+   },
+   {
+    "main_item": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+    "orders": 81,
+    "with_side": 12,
+    "attach_rate": 0.1481,
+    "gap_value": 12351.7
+   }
+  ],
+  "forecast": {
+   "week_start": "2026-08-10",
+   "orders_expected": 7.9,
+   "orders_low": 7.1,
+   "orders_high": 8.7,
+   "revenue_expected": 2265.1,
+   "revenue_low": 2027.37,
+   "revenue_high": 2502.84,
+   "method": "recency-weighted mean of last 4 same weekdays",
+   "by_weekday": [
+    {
+     "weekday": "Mon",
+     "orders_expected": 0.6,
+     "orders_low": 0.2,
+     "orders_high": 1.0,
+     "revenue_expected": 172.03
+    },
+    {
+     "weekday": "Tue",
+     "orders_expected": 1.4,
+     "orders_low": 0.3,
+     "orders_high": 2.5,
+     "revenue_expected": 401.41
+    },
+    {
+     "weekday": "Wed",
+     "orders_expected": 1.9,
+     "orders_low": 1.5,
+     "orders_high": 2.3,
+     "revenue_expected": 544.77
+    },
+    {
+     "weekday": "Thu",
+     "orders_expected": 1.5,
+     "orders_low": 0.0,
+     "orders_high": 3.0,
+     "revenue_expected": 430.08
+    },
+    {
+     "weekday": "Fri",
+     "orders_expected": 1.4,
+     "orders_low": 0.4,
+     "orders_high": 2.4,
+     "revenue_expected": 401.41
+    },
+    {
+     "weekday": "Sat",
+     "orders_expected": 0.6,
+     "orders_low": 0,
+     "orders_high": 1.6,
+     "revenue_expected": 172.03
+    },
+    {
+     "weekday": "Sun",
+     "orders_expected": 0.5,
+     "orders_low": 0,
+     "orders_high": 1.3,
+     "revenue_expected": 143.36
+    }
+   ],
+   "basis_weeks": [
+    {
+     "week_start": "2026-06-15",
+     "orders": 3,
+     "revenue": 945.0
+    },
+    {
+     "week_start": "2026-06-22",
+     "orders": 12,
+     "revenue": 3446.1
+    },
+    {
+     "week_start": "2026-06-29",
+     "orders": 9,
+     "revenue": 2641.3
+    },
+    {
+     "week_start": "2026-07-06",
+     "orders": 11,
+     "revenue": 2795.0
+    },
+    {
+     "week_start": "2026-07-13",
+     "orders": 9,
+     "revenue": 2563.4
+    },
+    {
+     "week_start": "2026-07-20",
+     "orders": 9,
+     "revenue": 2560.5
+    },
+    {
+     "week_start": "2026-07-27",
+     "orders": 8,
+     "revenue": 2026.62
+    },
+    {
+     "week_start": "2026-08-03",
+     "orders": 7,
+     "revenue": 2311.3
+    }
+   ]
+  },
+  "demand": {
+   "heatmap": [
+    {
+     "weekday": "Mon",
+     "hour": 12,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Mon",
+     "hour": 13,
+     "orders": 4,
+     "revenue": 1360.3,
+     "avg_kpt": 16.0
+    },
+    {
+     "weekday": "Mon",
+     "hour": 14,
+     "orders": 2,
+     "revenue": 814.0,
+     "avg_kpt": 20.4
+    },
+    {
+     "weekday": "Mon",
+     "hour": 15,
+     "orders": 1,
+     "revenue": 270.1,
+     "avg_kpt": 21.9
+    },
+    {
+     "weekday": "Mon",
+     "hour": 16,
+     "orders": 2,
+     "revenue": 553.2,
+     "avg_kpt": 9.0
+    },
+    {
+     "weekday": "Mon",
+     "hour": 17,
+     "orders": 3,
+     "revenue": 849.4,
+     "avg_kpt": 21.5
+    },
+    {
+     "weekday": "Mon",
+     "hour": 18,
+     "orders": 6,
+     "revenue": 2068.4,
+     "avg_kpt": 21.4
+    },
+    {
+     "weekday": "Mon",
+     "hour": 19,
+     "orders": 5,
+     "revenue": 1577.4,
+     "avg_kpt": 21.6
+    },
+    {
+     "weekday": "Mon",
+     "hour": 20,
+     "orders": 5,
+     "revenue": 1543.3,
+     "avg_kpt": 21.2
+    },
+    {
+     "weekday": "Mon",
+     "hour": 21,
+     "orders": 3,
+     "revenue": 708.1,
+     "avg_kpt": 19.0
+    },
+    {
+     "weekday": "Mon",
+     "hour": 22,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Mon",
+     "hour": 23,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Tue",
+     "hour": 12,
+     "orders": 1,
+     "revenue": 199.0,
+     "avg_kpt": 15.2
+    },
+    {
+     "weekday": "Tue",
+     "hour": 13,
+     "orders": 2,
+     "revenue": 925.0,
+     "avg_kpt": 23.8
+    },
+    {
+     "weekday": "Tue",
+     "hour": 14,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Tue",
+     "hour": 15,
+     "orders": 2,
+     "revenue": 491.1,
+     "avg_kpt": 22.1
+    },
+    {
+     "weekday": "Tue",
+     "hour": 16,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Tue",
+     "hour": 17,
+     "orders": 3,
+     "revenue": 1114.0,
+     "avg_kpt": 21.5
+    },
+    {
+     "weekday": "Tue",
+     "hour": 18,
+     "orders": 4,
+     "revenue": 934.0,
+     "avg_kpt": 20.9
+    },
+    {
+     "weekday": "Tue",
+     "hour": 19,
+     "orders": 10,
+     "revenue": 2897.3,
+     "avg_kpt": 19.7
+    },
+    {
+     "weekday": "Tue",
+     "hour": 20,
+     "orders": 9,
+     "revenue": 2530.3,
+     "avg_kpt": 20.0
+    },
+    {
+     "weekday": "Tue",
+     "hour": 21,
+     "orders": 6,
+     "revenue": 1892.1,
+     "avg_kpt": 24.7
+    },
+    {
+     "weekday": "Tue",
+     "hour": 22,
+     "orders": 3,
+     "revenue": 1054.0,
+     "avg_kpt": 20.2
+    },
+    {
+     "weekday": "Tue",
+     "hour": 23,
+     "orders": 2,
+     "revenue": 239.0,
+     "avg_kpt": 16.9
+    },
+    {
+     "weekday": "Wed",
+     "hour": 12,
+     "orders": 1,
+     "revenue": 358.0,
+     "avg_kpt": 27.7
+    },
+    {
+     "weekday": "Wed",
+     "hour": 13,
+     "orders": 5,
+     "revenue": 1265.2,
+     "avg_kpt": 18.7
+    },
+    {
+     "weekday": "Wed",
+     "hour": 14,
+     "orders": 2,
+     "revenue": 507.1,
+     "avg_kpt": 20.8
+    },
+    {
+     "weekday": "Wed",
+     "hour": 15,
+     "orders": 4,
+     "revenue": 1166.1,
+     "avg_kpt": 19.0
+    },
+    {
+     "weekday": "Wed",
+     "hour": 16,
+     "orders": 2,
+     "revenue": 656.0,
+     "avg_kpt": 24.1
+    },
+    {
+     "weekday": "Wed",
+     "hour": 17,
+     "orders": 6,
+     "revenue": 1568.5,
+     "avg_kpt": 18.6
+    },
+    {
+     "weekday": "Wed",
+     "hour": 18,
+     "orders": 7,
+     "revenue": 2100.2,
+     "avg_kpt": 21.5
+    },
+    {
+     "weekday": "Wed",
+     "hour": 19,
+     "orders": 11,
+     "revenue": 3343.8,
+     "avg_kpt": 18.4
+    },
+    {
+     "weekday": "Wed",
+     "hour": 20,
+     "orders": 5,
+     "revenue": 1245.0,
+     "avg_kpt": 18.8
+    },
+    {
+     "weekday": "Wed",
+     "hour": 21,
+     "orders": 4,
+     "revenue": 1338.7,
+     "avg_kpt": 21.4
+    },
+    {
+     "weekday": "Wed",
+     "hour": 22,
+     "orders": 7,
+     "revenue": 1665.5,
+     "avg_kpt": 21.0
+    },
+    {
+     "weekday": "Wed",
+     "hour": 23,
+     "orders": 2,
+     "revenue": 288.1,
+     "avg_kpt": 20.7
+    },
+    {
+     "weekday": "Thu",
+     "hour": 12,
+     "orders": 3,
+     "revenue": 794.3,
+     "avg_kpt": 18.2
+    },
+    {
+     "weekday": "Thu",
+     "hour": 13,
+     "orders": 1,
+     "revenue": 219.0,
+     "avg_kpt": 16.8
+    },
+    {
+     "weekday": "Thu",
+     "hour": 14,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Thu",
+     "hour": 15,
+     "orders": 1,
+     "revenue": 0,
+     "avg_kpt": -38.0
+    },
+    {
+     "weekday": "Thu",
+     "hour": 16,
+     "orders": 2,
+     "revenue": 468.0,
+     "avg_kpt": 19.7
+    },
+    {
+     "weekday": "Thu",
+     "hour": 17,
+     "orders": 5,
+     "revenue": 1730.0,
+     "avg_kpt": 23.1
+    },
+    {
+     "weekday": "Thu",
+     "hour": 18,
+     "orders": 4,
+     "revenue": 1691.0,
+     "avg_kpt": 23.1
+    },
+    {
+     "weekday": "Thu",
+     "hour": 19,
+     "orders": 3,
+     "revenue": 1063.4,
+     "avg_kpt": 23.7
+    },
+    {
+     "weekday": "Thu",
+     "hour": 20,
+     "orders": 7,
+     "revenue": 2036.3,
+     "avg_kpt": 20.1
+    },
+    {
+     "weekday": "Thu",
+     "hour": 21,
+     "orders": 5,
+     "revenue": 1361.6,
+     "avg_kpt": 15.6
+    },
+    {
+     "weekday": "Thu",
+     "hour": 22,
+     "orders": 6,
+     "revenue": 1513.3,
+     "avg_kpt": 21.4
+    },
+    {
+     "weekday": "Thu",
+     "hour": 23,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Fri",
+     "hour": 12,
+     "orders": 1,
+     "revenue": 239.0,
+     "avg_kpt": 20.1
+    },
+    {
+     "weekday": "Fri",
+     "hour": 13,
+     "orders": 1,
+     "revenue": 258.0,
+     "avg_kpt": 18.0
+    },
+    {
+     "weekday": "Fri",
+     "hour": 14,
+     "orders": 2,
+     "revenue": 438.0,
+     "avg_kpt": 16.7
+    },
+    {
+     "weekday": "Fri",
+     "hour": 15,
+     "orders": 1,
+     "revenue": 299.0,
+     "avg_kpt": 25.1
+    },
+    {
+     "weekday": "Fri",
+     "hour": 16,
+     "orders": 1,
+     "revenue": 219.0,
+     "avg_kpt": 9.6
+    },
+    {
+     "weekday": "Fri",
+     "hour": 17,
+     "orders": 2,
+     "revenue": 578.0,
+     "avg_kpt": 24.1
+    },
+    {
+     "weekday": "Fri",
+     "hour": 18,
+     "orders": 7,
+     "revenue": 2229.0,
+     "avg_kpt": 20.5
+    },
+    {
+     "weekday": "Fri",
+     "hour": 19,
+     "orders": 10,
+     "revenue": 3307.0,
+     "avg_kpt": 23.5
+    },
+    {
+     "weekday": "Fri",
+     "hour": 20,
+     "orders": 3,
+     "revenue": 1104.0,
+     "avg_kpt": 20.8
+    },
+    {
+     "weekday": "Fri",
+     "hour": 21,
+     "orders": 1,
+     "revenue": 219.0,
+     "avg_kpt": 15.9
+    },
+    {
+     "weekday": "Fri",
+     "hour": 22,
+     "orders": 6,
+     "revenue": 1877.32,
+     "avg_kpt": 20.2
+    },
+    {
+     "weekday": "Fri",
+     "hour": 23,
+     "orders": 1,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Sat",
+     "hour": 12,
+     "orders": 4,
+     "revenue": 1423.0,
+     "avg_kpt": 29.1
+    },
+    {
+     "weekday": "Sat",
+     "hour": 13,
+     "orders": 1,
+     "revenue": 358.0,
+     "avg_kpt": 20.6
+    },
+    {
+     "weekday": "Sat",
+     "hour": 14,
+     "orders": 3,
+     "revenue": 766.0,
+     "avg_kpt": 20.2
+    },
+    {
+     "weekday": "Sat",
+     "hour": 15,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Sat",
+     "hour": 16,
+     "orders": 1,
+     "revenue": 358.0,
+     "avg_kpt": 21.8
+    },
+    {
+     "weekday": "Sat",
+     "hour": 17,
+     "orders": 4,
+     "revenue": 677.0,
+     "avg_kpt": 18.7
+    },
+    {
+     "weekday": "Sat",
+     "hour": 18,
+     "orders": 3,
+     "revenue": 967.0,
+     "avg_kpt": 31.3
+    },
+    {
+     "weekday": "Sat",
+     "hour": 19,
+     "orders": 6,
+     "revenue": 2358.0,
+     "avg_kpt": 19.8
+    },
+    {
+     "weekday": "Sat",
+     "hour": 20,
+     "orders": 6,
+     "revenue": 1763.0,
+     "avg_kpt": 22.7
+    },
+    {
+     "weekday": "Sat",
+     "hour": 21,
+     "orders": 3,
+     "revenue": 1193.0,
+     "avg_kpt": 25.2
+    },
+    {
+     "weekday": "Sat",
+     "hour": 22,
+     "orders": 4,
+     "revenue": 1145.0,
+     "avg_kpt": 19.5
+    },
+    {
+     "weekday": "Sat",
+     "hour": 23,
+     "orders": 5,
+     "revenue": 866.0,
+     "avg_kpt": 18.5
+    },
+    {
+     "weekday": "Sun",
+     "hour": 12,
+     "orders": 3,
+     "revenue": 1291.0,
+     "avg_kpt": 27.3
+    },
+    {
+     "weekday": "Sun",
+     "hour": 13,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Sun",
+     "hour": 14,
+     "orders": 4,
+     "revenue": 1650.0,
+     "avg_kpt": 24.1
+    },
+    {
+     "weekday": "Sun",
+     "hour": 15,
+     "orders": 1,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Sun",
+     "hour": 16,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    },
+    {
+     "weekday": "Sun",
+     "hour": 17,
+     "orders": 1,
+     "revenue": 319.0,
+     "avg_kpt": 22.9
+    },
+    {
+     "weekday": "Sun",
+     "hour": 18,
+     "orders": 3,
+     "revenue": 1055.0,
+     "avg_kpt": 21.8
+    },
+    {
+     "weekday": "Sun",
+     "hour": 19,
+     "orders": 8,
+     "revenue": 2399.0,
+     "avg_kpt": 19.9
+    },
+    {
+     "weekday": "Sun",
+     "hour": 20,
+     "orders": 2,
+     "revenue": 526.0,
+     "avg_kpt": 19.3
+    },
+    {
+     "weekday": "Sun",
+     "hour": 21,
+     "orders": 5,
+     "revenue": 2219.0,
+     "avg_kpt": 23.0
+    },
+    {
+     "weekday": "Sun",
+     "hour": 22,
+     "orders": 4,
+     "revenue": 1105.0,
+     "avg_kpt": 23.3
+    },
+    {
+     "weekday": "Sun",
+     "hour": 23,
+     "orders": 0,
+     "revenue": 0,
+     "avg_kpt": null
+    }
+   ],
+   "peak_windows": [
+    {
+     "weekday": "Mon",
+     "hour_start": 18,
+     "hour_end": 21,
+     "orders": 16,
+     "share": 0.516
+    },
+    {
+     "weekday": "Tue",
+     "hour_start": 19,
+     "hour_end": 22,
+     "orders": 25,
+     "share": 0.595
+    },
+    {
+     "weekday": "Wed",
+     "hour_start": 18,
+     "hour_end": 20,
+     "orders": 18,
+     "share": 0.321
+    },
+    {
+     "weekday": "Wed",
+     "hour_start": 22,
+     "hour_end": 23,
+     "orders": 7,
+     "share": 0.125
+    },
+    {
+     "weekday": "Thu",
+     "hour_start": 17,
+     "hour_end": 18,
+     "orders": 5,
+     "share": 0.135
+    },
+    {
+     "weekday": "Thu",
+     "hour_start": 20,
+     "hour_end": 23,
+     "orders": 18,
+     "share": 0.486
+    },
+    {
+     "weekday": "Fri",
+     "hour_start": 18,
+     "hour_end": 20,
+     "orders": 17,
+     "share": 0.472
+    },
+    {
+     "weekday": "Fri",
+     "hour_start": 22,
+     "hour_end": 23,
+     "orders": 6,
+     "share": 0.167
+    },
+    {
+     "weekday": "Sat",
+     "hour_start": 19,
+     "hour_end": 21,
+     "orders": 12,
+     "share": 0.3
+    },
+    {
+     "weekday": "Sat",
+     "hour_start": 23,
+     "hour_end": 24,
+     "orders": 5,
+     "share": 0.125
+    },
+    {
+     "weekday": "Sun",
+     "hour_start": 14,
+     "hour_end": 15,
+     "orders": 4,
+     "share": 0.129
+    },
+    {
+     "weekday": "Sun",
+     "hour_start": 19,
+     "hour_end": 20,
+     "orders": 8,
+     "share": 0.258
+    },
+    {
+     "weekday": "Sun",
+     "hour_start": 21,
+     "hour_end": 23,
+     "orders": 9,
+     "share": 0.29
+    }
+   ],
+   "prep_plan": [
+    {
+     "weekday": "Mon",
+     "hour": 13,
+     "orders_expected": 0.27
+    },
+    {
+     "weekday": "Mon",
+     "hour": 14,
+     "orders_expected": 0.13
+    },
+    {
+     "weekday": "Mon",
+     "hour": 15,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Mon",
+     "hour": 16,
+     "orders_expected": 0.13
+    },
+    {
+     "weekday": "Mon",
+     "hour": 17,
+     "orders_expected": 0.2
+    },
+    {
+     "weekday": "Mon",
+     "hour": 18,
+     "orders_expected": 0.4
+    },
+    {
+     "weekday": "Mon",
+     "hour": 19,
+     "orders_expected": 0.33
+    },
+    {
+     "weekday": "Mon",
+     "hour": 20,
+     "orders_expected": 0.33
+    },
+    {
+     "weekday": "Mon",
+     "hour": 21,
+     "orders_expected": 0.2
+    },
+    {
+     "weekday": "Tue",
+     "hour": 12,
+     "orders_expected": 0.06
+    },
+    {
+     "weekday": "Tue",
+     "hour": 13,
+     "orders_expected": 0.12
+    },
+    {
+     "weekday": "Tue",
+     "hour": 15,
+     "orders_expected": 0.12
+    },
+    {
+     "weekday": "Tue",
+     "hour": 17,
+     "orders_expected": 0.18
+    },
+    {
+     "weekday": "Tue",
+     "hour": 18,
+     "orders_expected": 0.24
+    },
+    {
+     "weekday": "Tue",
+     "hour": 19,
+     "orders_expected": 0.59
+    },
+    {
+     "weekday": "Tue",
+     "hour": 20,
+     "orders_expected": 0.53
+    },
+    {
+     "weekday": "Tue",
+     "hour": 21,
+     "orders_expected": 0.35
+    },
+    {
+     "weekday": "Tue",
+     "hour": 22,
+     "orders_expected": 0.18
+    },
+    {
+     "weekday": "Tue",
+     "hour": 23,
+     "orders_expected": 0.12
+    },
+    {
+     "weekday": "Wed",
+     "hour": 12,
+     "orders_expected": 0.06
+    },
+    {
+     "weekday": "Wed",
+     "hour": 13,
+     "orders_expected": 0.28
+    },
+    {
+     "weekday": "Wed",
+     "hour": 14,
+     "orders_expected": 0.11
+    },
+    {
+     "weekday": "Wed",
+     "hour": 15,
+     "orders_expected": 0.22
+    },
+    {
+     "weekday": "Wed",
+     "hour": 16,
+     "orders_expected": 0.11
+    },
+    {
+     "weekday": "Wed",
+     "hour": 17,
+     "orders_expected": 0.33
+    },
+    {
+     "weekday": "Wed",
+     "hour": 18,
+     "orders_expected": 0.39
+    },
+    {
+     "weekday": "Wed",
+     "hour": 19,
+     "orders_expected": 0.61
+    },
+    {
+     "weekday": "Wed",
+     "hour": 20,
+     "orders_expected": 0.28
+    },
+    {
+     "weekday": "Wed",
+     "hour": 21,
+     "orders_expected": 0.22
+    },
+    {
+     "weekday": "Wed",
+     "hour": 22,
+     "orders_expected": 0.39
+    },
+    {
+     "weekday": "Wed",
+     "hour": 23,
+     "orders_expected": 0.11
+    },
+    {
+     "weekday": "Thu",
+     "hour": 12,
+     "orders_expected": 0.21
+    },
+    {
+     "weekday": "Thu",
+     "hour": 13,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Thu",
+     "hour": 15,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Thu",
+     "hour": 16,
+     "orders_expected": 0.14
+    },
+    {
+     "weekday": "Thu",
+     "hour": 17,
+     "orders_expected": 0.36
+    },
+    {
+     "weekday": "Thu",
+     "hour": 18,
+     "orders_expected": 0.29
+    },
+    {
+     "weekday": "Thu",
+     "hour": 19,
+     "orders_expected": 0.21
+    },
+    {
+     "weekday": "Thu",
+     "hour": 20,
+     "orders_expected": 0.5
+    },
+    {
+     "weekday": "Thu",
+     "hour": 21,
+     "orders_expected": 0.36
+    },
+    {
+     "weekday": "Thu",
+     "hour": 22,
+     "orders_expected": 0.43
+    },
+    {
+     "weekday": "Fri",
+     "hour": 12,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Fri",
+     "hour": 13,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Fri",
+     "hour": 14,
+     "orders_expected": 0.14
+    },
+    {
+     "weekday": "Fri",
+     "hour": 15,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Fri",
+     "hour": 16,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Fri",
+     "hour": 17,
+     "orders_expected": 0.14
+    },
+    {
+     "weekday": "Fri",
+     "hour": 18,
+     "orders_expected": 0.5
+    },
+    {
+     "weekday": "Fri",
+     "hour": 19,
+     "orders_expected": 0.71
+    },
+    {
+     "weekday": "Fri",
+     "hour": 20,
+     "orders_expected": 0.21
+    },
+    {
+     "weekday": "Fri",
+     "hour": 21,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Fri",
+     "hour": 22,
+     "orders_expected": 0.43
+    },
+    {
+     "weekday": "Fri",
+     "hour": 23,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Sat",
+     "hour": 12,
+     "orders_expected": 0.25
+    },
+    {
+     "weekday": "Sat",
+     "hour": 13,
+     "orders_expected": 0.06
+    },
+    {
+     "weekday": "Sat",
+     "hour": 14,
+     "orders_expected": 0.19
+    },
+    {
+     "weekday": "Sat",
+     "hour": 16,
+     "orders_expected": 0.06
+    },
+    {
+     "weekday": "Sat",
+     "hour": 17,
+     "orders_expected": 0.25
+    },
+    {
+     "weekday": "Sat",
+     "hour": 18,
+     "orders_expected": 0.19
+    },
+    {
+     "weekday": "Sat",
+     "hour": 19,
+     "orders_expected": 0.38
+    },
+    {
+     "weekday": "Sat",
+     "hour": 20,
+     "orders_expected": 0.38
+    },
+    {
+     "weekday": "Sat",
+     "hour": 21,
+     "orders_expected": 0.19
+    },
+    {
+     "weekday": "Sat",
+     "hour": 22,
+     "orders_expected": 0.25
+    },
+    {
+     "weekday": "Sat",
+     "hour": 23,
+     "orders_expected": 0.31
+    },
+    {
+     "weekday": "Sun",
+     "hour": 12,
+     "orders_expected": 0.2
+    },
+    {
+     "weekday": "Sun",
+     "hour": 14,
+     "orders_expected": 0.27
+    },
+    {
+     "weekday": "Sun",
+     "hour": 15,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Sun",
+     "hour": 17,
+     "orders_expected": 0.07
+    },
+    {
+     "weekday": "Sun",
+     "hour": 18,
+     "orders_expected": 0.2
+    },
+    {
+     "weekday": "Sun",
+     "hour": 19,
+     "orders_expected": 0.53
+    },
+    {
+     "weekday": "Sun",
+     "hour": 20,
+     "orders_expected": 0.13
+    },
+    {
+     "weekday": "Sun",
+     "hour": 21,
+     "orders_expected": 0.33
+    },
+    {
+     "weekday": "Sun",
+     "hour": 22,
+     "orders_expected": 0.27
+    }
+   ],
+   "quiet_windows": [
+    {
+     "weekday": "Mon",
+     "hour_start": 22,
+     "hour_end": 24,
+     "orders": 0,
+     "revenue_at_risk": 0,
+     "monthly_revenue_at_risk": 0.0
+    },
+    {
+     "weekday": "Fri",
+     "hour_start": 12,
+     "hour_end": 14,
+     "orders": 2,
+     "revenue_at_risk": 497.0,
+     "monthly_revenue_at_risk": 93.57
+    },
+    {
+     "weekday": "Fri",
+     "hour_start": 15,
+     "hour_end": 17,
+     "orders": 2,
+     "revenue_at_risk": 518.0,
+     "monthly_revenue_at_risk": 97.52
+    },
+    {
+     "weekday": "Sat",
+     "hour_start": 15,
+     "hour_end": 17,
+     "orders": 1,
+     "revenue_at_risk": 358.0,
+     "monthly_revenue_at_risk": 67.4
+    }
+   ],
+   "closure_options": [
+    {
+     "label": "Mon 22:00-24:00, once a month",
+     "scope": "monthly",
+     "weekday": "Mon",
+     "hour_start": 22,
+     "hour_end": 24,
+     "orders_lost_per_month": 0.0,
+     "revenue_at_risk_per_month": 0.0,
+     "share_of_revenue": 0.0,
+     "verdict": "closing one Mon 22-24h a month costs about \u20b90, under 1% of revenue"
+    },
+    {
+     "label": "Sat 15:00-17:00, once a month",
+     "scope": "monthly",
+     "weekday": "Sat",
+     "hour_start": 15,
+     "hour_end": 17,
+     "orders_lost_per_month": 0.0,
+     "revenue_at_risk_per_month": 15.57,
+     "share_of_revenue": 0.0011,
+     "verdict": "closing one Sat 15-17h a month costs about \u20b916, under 1% of revenue"
+    },
+    {
+     "label": "Fri 12:00-14:00, once a month",
+     "scope": "monthly",
+     "weekday": "Fri",
+     "hour_start": 12,
+     "hour_end": 14,
+     "orders_lost_per_month": 0.1,
+     "revenue_at_risk_per_month": 21.61,
+     "share_of_revenue": 0.0015,
+     "verdict": "closing one Fri 12-14h a month costs about \u20b922, under 1% of revenue"
+    },
+    {
+     "label": "Fri 15:00-17:00, once a month",
+     "scope": "monthly",
+     "weekday": "Fri",
+     "hour_start": 15,
+     "hour_end": 17,
+     "orders_lost_per_month": 0.1,
+     "revenue_at_risk_per_month": 22.52,
+     "share_of_revenue": 0.0016,
+     "verdict": "closing one Fri 15-17h a month costs about \u20b923, under 1% of revenue"
+    }
+   ]
+  },
+  "quality": {
+   "funnel": [
+    {
+     "stage": "Placed",
+     "orders": 273,
+     "pct": 1.0
+    },
+    {
+     "stage": "Delivered",
+     "orders": 260,
+     "pct": 0.9524
+    },
+    {
+     "stage": "Rated",
+     "orders": 51,
+     "pct": 0.1868
+    }
+   ],
+   "rating_drivers": [
+    {
+     "factor": "prep_time",
+     "bucket": ">25 min",
+     "n": 6,
+     "avg_rating": 2.17,
+     "delta": -1.99
+    },
+    {
+     "factor": "prep_time",
+     "bucket": "<=25 min",
+     "n": 44,
+     "avg_rating": 4.16,
+     "delta": null
+    }
+   ],
+   "slow_orders": {
+    "threshold_min": 25,
+    "n": 6,
+    "avg_rating": 2.17,
+    "avg_rating_fast": 4.16,
+    "items": [
+     {
+      "item_name": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]",
+      "n": 3,
+      "avg_kpt": 27.7
+     },
+     {
+      "item_name": "\ud83c\udf19 Midnight Pizza Box Combo (7\u201d Pizza + Small Fries)",
+      "n": 2,
+      "avg_kpt": 25.6
+     },
+     {
+      "item_name": "Pasta Treat Combo",
+      "n": 1,
+      "avg_kpt": 30.7
+     },
+     {
+      "item_name": "Tangy Green Chutney Sandwich [2 slices]",
+      "n": 1,
+      "avg_kpt": 30.7
+     },
+     {
+      "item_name": "Spicy Peri Peri French Fries",
+      "n": 1,
+      "avg_kpt": 45.8
+     },
+     {
+      "item_name": "Crunchy Capsicum Pizza [Regular, 7 inches]",
+      "n": 1,
+      "avg_kpt": 45.8
+     }
+    ]
+   },
+   "loss_reasons": [
+    {
+     "reason": "Cancelled by Zomato",
+     "n": 5,
+     "lost_value": 1425.1
+    },
+    {
+     "reason": "Cancelled by Customer",
+     "n": 3,
+     "lost_value": 806.2
+    },
+    {
+     "reason": "Items out of stock",
+     "n": 3,
+     "lost_value": 798.1
+    },
+    {
+     "reason": "Kitchen is full",
+     "n": 1,
+     "lost_value": 435.0
+    },
+    {
+     "reason": "Timeout",
+     "n": 1,
+     "lost_value": 528.0
+    }
+   ],
+   "weekly": [
+    {
+     "week_start": "2026-02-23",
+     "cancel_rate": 0.0,
+     "avg_kpt": 26.8,
+     "avg_rider_wait": 10.0,
+     "complaints": 0,
+     "avg_rating": null
+    },
+    {
+     "week_start": "2026-03-02",
+     "cancel_rate": 0.0,
+     "avg_kpt": 21.9,
+     "avg_rider_wait": 6.2,
+     "complaints": 0,
+     "avg_rating": 3.71
+    },
+    {
+     "week_start": "2026-03-09",
+     "cancel_rate": 0.0417,
+     "avg_kpt": 21.2,
+     "avg_rider_wait": 7.5,
+     "complaints": 0,
+     "avg_rating": 4.0
+    },
+    {
+     "week_start": "2026-03-16",
+     "cancel_rate": 0.1765,
+     "avg_kpt": 21.2,
+     "avg_rider_wait": 5.9,
+     "complaints": 0,
+     "avg_rating": 3.0
+    },
+    {
+     "week_start": "2026-03-23",
+     "cancel_rate": 0.0556,
+     "avg_kpt": 20.1,
+     "avg_rider_wait": 6.9,
+     "complaints": 0,
+     "avg_rating": 4.71
+    },
+    {
+     "week_start": "2026-03-30",
+     "cancel_rate": 0.0,
+     "avg_kpt": 20.2,
+     "avg_rider_wait": 7.5,
+     "complaints": 0,
+     "avg_rating": 4.14
+    },
+    {
+     "week_start": "2026-04-06",
+     "cancel_rate": 0.05,
+     "avg_kpt": 18.4,
+     "avg_rider_wait": 6.9,
+     "complaints": 0,
+     "avg_rating": 5.0
+    },
+    {
+     "week_start": "2026-04-13",
+     "cancel_rate": 0.0,
+     "avg_kpt": 20.7,
+     "avg_rider_wait": 7.2,
+     "complaints": 0,
+     "avg_rating": 4.0
+    },
+    {
+     "week_start": "2026-04-20",
+     "cancel_rate": 0.0,
+     "avg_kpt": 21.9,
+     "avg_rider_wait": 7.4,
+     "complaints": 0,
+     "avg_rating": null
+    },
+    {
+     "week_start": "2026-04-27",
+     "cancel_rate": 0.0667,
+     "avg_kpt": 20.2,
+     "avg_rider_wait": 5.2,
+     "complaints": 0,
+     "avg_rating": 4.0
+    },
+    {
+     "week_start": "2026-05-04",
+     "cancel_rate": 0.0,
+     "avg_kpt": 20.8,
+     "avg_rider_wait": 9.2,
+     "complaints": 2,
+     "avg_rating": 4.5
+    },
+    {
+     "week_start": "2026-05-11",
+     "cancel_rate": 0.0,
+     "avg_kpt": 18.3,
+     "avg_rider_wait": 7.9,
+     "complaints": 0,
+     "avg_rating": 4.0
+    },
+    {
+     "week_start": "2026-05-18",
+     "cancel_rate": 0.0,
+     "avg_kpt": 23.5,
+     "avg_rider_wait": 8.2,
+     "complaints": 0,
+     "avg_rating": 1.0
+    },
+    {
+     "week_start": "2026-05-25",
+     "cancel_rate": 0.0,
+     "avg_kpt": 18.5,
+     "avg_rider_wait": 0.8,
+     "complaints": 0,
+     "avg_rating": null
+    },
+    {
+     "week_start": "2026-06-01",
+     "cancel_rate": 0.1111,
+     "avg_kpt": 13.2,
+     "avg_rider_wait": 5.9,
+     "complaints": 0,
+     "avg_rating": null
+    },
+    {
+     "week_start": "2026-06-15",
+     "cancel_rate": 0.0,
+     "avg_kpt": 22.5,
+     "avg_rider_wait": 7.3,
+     "complaints": 0,
+     "avg_rating": 4.0
+    },
+    {
+     "week_start": "2026-06-22",
+     "cancel_rate": 0.0833,
+     "avg_kpt": 20.8,
+     "avg_rider_wait": 10.5,
+     "complaints": 0,
+     "avg_rating": 4.5
+    },
+    {
+     "week_start": "2026-06-29",
+     "cancel_rate": 0.0,
+     "avg_kpt": 17.8,
+     "avg_rider_wait": 7.8,
+     "complaints": 0,
+     "avg_rating": null
+    },
+    {
+     "week_start": "2026-07-06",
+     "cancel_rate": 0.2727,
+     "avg_kpt": 21.5,
+     "avg_rider_wait": 5.2,
+     "complaints": 0,
+     "avg_rating": 4.5
+    },
+    {
+     "week_start": "2026-07-13",
+     "cancel_rate": 0.1111,
+     "avg_kpt": 21.2,
+     "avg_rider_wait": 6.7,
+     "complaints": 0,
+     "avg_rating": 2.5
+    },
+    {
+     "week_start": "2026-07-20",
+     "cancel_rate": 0.0,
+     "avg_kpt": 25.1,
+     "avg_rider_wait": 9.0,
+     "complaints": 0,
+     "avg_rating": null
+    },
+    {
+     "week_start": "2026-07-27",
+     "cancel_rate": 0.0,
+     "avg_kpt": 22.3,
+     "avg_rider_wait": 7.0,
+     "complaints": 0,
+     "avg_rating": 3.0
+    },
+    {
+     "week_start": "2026-08-03",
+     "cancel_rate": 0.0,
+     "avg_kpt": 20.7,
+     "avg_rider_wait": 5.4,
+     "complaints": 0,
+     "avg_rating": 3.0
+    }
+   ]
+  },
+  "customers": {
+   "rfm": [
+    {
+     "segment": "at_risk",
+     "customers": 12,
+     "revenue": 8429.6,
+     "avg_orders": 2.25,
+     "avg_recency_days": 101.9
+    },
+    {
+     "segment": "lost",
+     "customers": 158,
+     "revenue": 48969.1,
+     "avg_orders": 1.03,
+     "avg_recency_days": 117.1
+    },
+    {
+     "segment": "champion",
+     "customers": 5,
+     "revenue": 8367.9,
+     "avg_orders": 6.0,
+     "avg_recency_days": 9.0
+    },
+    {
+     "segment": "loyal",
+     "customers": 8,
+     "revenue": 6885.5,
+     "avg_orders": 2.62,
+     "avg_recency_days": 34.1
+    },
+    {
+     "segment": "promising",
+     "customers": 32,
+     "revenue": 8952.32,
+     "avg_orders": 1.0,
+     "avg_recency_days": 16.6
+    }
+   ],
+   "cohorts": [
+    {
+     "cohort_month": "2026-03",
+     "customers": 96,
+     "repeat_30": 11,
+     "repeat_60": 15,
+     "repeat_90": 16
+    },
+    {
+     "cohort_month": "2026-04",
+     "customers": 42,
+     "repeat_30": 6,
+     "repeat_60": 7,
+     "repeat_90": 7
+    },
+    {
+     "cohort_month": "2026-05",
+     "customers": 19,
+     "repeat_30": 0,
+     "repeat_60": 1,
+     "repeat_90": 3
+    },
+    {
+     "cohort_month": "2026-06",
+     "customers": 20,
+     "repeat_30": 0,
+     "repeat_60": 0,
+     "repeat_90": 0
+    },
+    {
+     "cohort_month": "2026-07",
+     "customers": 33,
+     "repeat_30": 1,
+     "repeat_60": 1,
+     "repeat_90": 1
+    },
+    {
+     "cohort_month": "2026-08",
+     "customers": 5,
+     "repeat_30": 0,
+     "repeat_60": 0,
+     "repeat_90": 0
+    }
+   ],
+   "winback": [
+    {
+     "customer_id": "cae781c91c564d21265740dfeca7d4e91c9729ec03c02c976237a907d775c0c8",
+     "orders": 4,
+     "spend": 1292.2,
+     "last_order_at": "2026-06-20T20:49:00",
+     "days_since": 48,
+     "favourite_item": "Paneer Makhni Royale Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "5082fc72b4b94031860bfa45660dc4ff568f57eb650e1b1f0adc18dcbad093a3",
+     "orders": 4,
+     "spend": 1274.3,
+     "last_order_at": "2026-05-13T15:30:00",
+     "days_since": 86,
+     "favourite_item": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "d908b23c029ece8581bb8d24a8e880fb861d6634864f3a83005f84f011105dbc",
+     "orders": 2,
+     "spend": 1085.0,
+     "last_order_at": "2026-04-17T20:36:00",
+     "days_since": 112,
+     "favourite_item": "Fiesta Pizza Combo"
+    },
+    {
+     "customer_id": "f0ac8d4fca436d571c3a35cac34fed56b12af83756d2c64423718d278997e131",
+     "orders": 2,
+     "spend": 943.0,
+     "last_order_at": "2026-05-02T21:08:00",
+     "days_since": 97,
+     "favourite_item": "Paneer Makhni Royale Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "70773b8a81799e3078a423e2757a650c5f45688207e9aeaa073c851110adb625",
+     "orders": 2,
+     "spend": 716.0,
+     "last_order_at": "2026-04-29T12:12:00",
+     "days_since": 100,
+     "favourite_item": "Golden Corn Classic Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "fc87c3117c3f6e3ca67906476b93fb861c793e438e32ad745efb121b2cce6103",
+     "orders": 3,
+     "spend": 708.1,
+     "last_order_at": "2026-05-05T18:20:00",
+     "days_since": 94,
+     "favourite_item": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "6157284ea51247f37b49b269315453bdf4d1ff2aaeaa5377f38d537ff835e034",
+     "orders": 2,
+     "spend": 688.0,
+     "last_order_at": "2026-04-29T19:39:00",
+     "days_since": 100,
+     "favourite_item": "\u2b50 Ultimate Cheese Delight Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "b5c63073bf3e99ead1a322b602cd8385b70c6c6e54e1f8873fa5c97eb68f4e48",
+     "orders": 2,
+     "spend": 683.2,
+     "last_order_at": "2026-04-03T18:44:00",
+     "days_since": 126,
+     "favourite_item": "Spicy Peri Peri French Fries"
+    },
+    {
+     "customer_id": "309440d626f0564225868b93619400be189ad5aa61751fd651987f7d190a01d2",
+     "orders": 2,
+     "spend": 657.0,
+     "last_order_at": "2026-03-16T19:41:00",
+     "days_since": 144,
+     "favourite_item": "Creamy Alfredo Pasta (Fusilli)"
+    },
+    {
+     "customer_id": "60a6a552e871be218f95ce2eed03ecd43a5b4dca23f7212640128fe9aa1f59f9",
+     "orders": 2,
+     "spend": 607.1,
+     "last_order_at": "2026-03-04T18:38:00",
+     "days_since": 156,
+     "favourite_item": "Paneer Makhni Royale Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "3e34d5ff9c00a7ace2e12503a2992ba7447b40c18c5e449aa301b4eb6aeaa0e4",
+     "orders": 2,
+     "spend": 598.0,
+     "last_order_at": "2026-04-11T20:28:00",
+     "days_since": 118,
+     "favourite_item": "\ud83d\udd25 Herb Paneer Delight Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "d938385876aa1fbbe2b82f7d42a32bb0003acb629caaa23f86ef7a2df2723c82",
+     "orders": 2,
+     "spend": 576.2,
+     "last_order_at": "2026-04-22T13:43:00",
+     "days_since": 107,
+     "favourite_item": "Paneer Makhni Royale Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "36c7acff75ff8698506472b6ef2b81b26b3296e65333d22be0f62a51f420d990",
+     "orders": 2,
+     "spend": 538.0,
+     "last_order_at": "2026-05-16T19:22:00",
+     "days_since": 83,
+     "favourite_item": "\u2b50 Ultimate Cheese Delight Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "0472394d359ace87f27d19bdd24c480870d8474dcde257a9e9edaddde6cf5696",
+     "orders": 2,
+     "spend": 478.0,
+     "last_order_at": "2026-04-18T17:21:00",
+     "days_since": 111,
+     "favourite_item": "Golden Corn Classic Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "8635ba65059c6cebd4aa0c8dd61c67639d8bf7e049445bc03612b5b8a477747f",
+     "orders": 2,
+     "spend": 428.0,
+     "last_order_at": "2026-04-04T23:19:00",
+     "days_since": 125,
+     "favourite_item": "Golden Corn Classic Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "295a65085bf780338cac8a396051d0e24d096ef91d632c7b30c0cbbb4871d967",
+     "orders": 2,
+     "spend": 418.0,
+     "last_order_at": "2026-04-11T19:06:00",
+     "days_since": 118,
+     "favourite_item": "Street Style Korean Spicy Veg Maggi"
+    },
+    {
+     "customer_id": "efe6e903260f23f00e75ff99cf17c975e7d4cbd253ef128e612dbe5fb5dfaaf0",
+     "orders": 2,
+     "spend": 407.0,
+     "last_order_at": "2026-05-02T17:15:00",
+     "days_since": 97,
+     "favourite_item": "Paneer Makhni Royale Pizza [Regular, 7 inches]"
+    },
+    {
+     "customer_id": "610778b78f3718c3100f2253092f550ec75f0f3c8c09df2ced9ec8ab63615aab",
+     "orders": 2,
+     "spend": 229.0,
+     "last_order_at": "2026-03-18T23:27:00",
+     "days_since": 142,
+     "favourite_item": "Creamy Cheese Maggi"
+    }
+   ],
+   "weekly_split": [
+    {
+     "week_start": "2026-02-23",
+     "new_customers": 1,
+     "returning_customers": 0,
+     "new_revenue": 667.0,
+     "returning_revenue": 0.0
+    },
+    {
+     "week_start": "2026-03-02",
+     "new_customers": 38,
+     "returning_customers": 0,
+     "new_revenue": 11633.8,
+     "returning_revenue": 0.0
+    },
+    {
+     "week_start": "2026-03-09",
+     "new_customers": 24,
+     "returning_customers": 0,
+     "new_revenue": 7570.6,
+     "returning_revenue": 0.0
+    },
+    {
+     "week_start": "2026-03-16",
+     "new_customers": 13,
+     "returning_customers": 4,
+     "new_revenue": 3321.0,
+     "returning_revenue": 806.0
+    },
+    {
+     "week_start": "2026-03-23",
+     "new_customers": 16,
+     "returning_customers": 2,
+     "new_revenue": 4521.9,
+     "returning_revenue": 377.0
+    },
+    {
+     "week_start": "2026-03-30",
+     "new_customers": 15,
+     "returning_customers": 5,
+     "new_revenue": 4580.7,
+     "returning_revenue": 1480.2
+    },
+    {
+     "week_start": "2026-04-06",
+     "new_customers": 14,
+     "returning_customers": 6,
+     "new_revenue": 4001.3,
+     "returning_revenue": 1763.1
+    },
+    {
+     "week_start": "2026-04-13",
+     "new_customers": 9,
+     "returning_customers": 4,
+     "new_revenue": 2424.2,
+     "returning_revenue": 1193.0
+    },
+    {
+     "week_start": "2026-04-20",
+     "new_customers": 6,
+     "returning_customers": 2,
+     "new_revenue": 2393.1,
+     "returning_revenue": 647.3
+    },
+    {
+     "week_start": "2026-04-27",
+     "new_customers": 10,
+     "returning_customers": 5,
+     "new_revenue": 3408.6,
+     "returning_revenue": 1781.0
+    },
+    {
+     "week_start": "2026-05-04",
+     "new_customers": 4,
+     "returning_customers": 3,
+     "new_revenue": 1248.1,
+     "returning_revenue": 1013.1
+    },
+    {
+     "week_start": "2026-05-11",
+     "new_customers": 3,
+     "returning_customers": 3,
+     "new_revenue": 1134.0,
+     "returning_revenue": 916.0
+    },
+    {
+     "week_start": "2026-05-18",
+     "new_customers": 8,
+     "returning_customers": 0,
+     "new_revenue": 2746.1,
+     "returning_revenue": 0.0
+    },
+    {
+     "week_start": "2026-05-25",
+     "new_customers": 1,
+     "returning_customers": 0,
+     "new_revenue": 588.0,
+     "returning_revenue": 0.0
+    },
+    {
+     "week_start": "2026-06-01",
+     "new_customers": 8,
+     "returning_customers": 1,
+     "new_revenue": 1812.0,
+     "returning_revenue": 288.1
+    },
+    {
+     "week_start": "2026-06-15",
+     "new_customers": 2,
+     "returning_customers": 1,
+     "new_revenue": 626.0,
+     "returning_revenue": 319.0
+    },
+    {
+     "week_start": "2026-06-22",
+     "new_customers": 7,
+     "returning_customers": 5,
+     "new_revenue": 1813.1,
+     "returning_revenue": 1633.0
+    },
+    {
+     "week_start": "2026-06-29",
+     "new_customers": 9,
+     "returning_customers": 0,
+     "new_revenue": 2641.3,
+     "returning_revenue": 0.0
+    },
+    {
+     "week_start": "2026-07-06",
+     "new_customers": 10,
+     "returning_customers": 1,
+     "new_revenue": 2556.0,
+     "returning_revenue": 239.0
+    },
+    {
+     "week_start": "2026-07-13",
+     "new_customers": 6,
+     "returning_customers": 3,
+     "new_revenue": 1838.4,
+     "returning_revenue": 725.0
+    },
+    {
+     "week_start": "2026-07-20",
+     "new_customers": 4,
+     "returning_customers": 5,
+     "new_revenue": 946.0,
+     "returning_revenue": 1614.5
+    },
+    {
+     "week_start": "2026-07-27",
+     "new_customers": 7,
+     "returning_customers": 1,
+     "new_revenue": 1827.62,
+     "returning_revenue": 199.0
+    },
+    {
+     "week_start": "2026-08-03",
+     "new_customers": 5,
+     "returning_customers": 2,
+     "new_revenue": 1784.3,
+     "returning_revenue": 527.0
+    }
+   ],
+   "repeat_rate_trend": [
+    {
+     "week_start": "2026-02-23",
+     "repeat_share": 0.0
+    },
+    {
+     "week_start": "2026-03-02",
+     "repeat_share": 0.0
+    },
+    {
+     "week_start": "2026-03-09",
+     "repeat_share": 0.0
+    },
+    {
+     "week_start": "2026-03-16",
+     "repeat_share": 0.2353
+    },
+    {
+     "week_start": "2026-03-23",
+     "repeat_share": 0.1111
+    },
+    {
+     "week_start": "2026-03-30",
+     "repeat_share": 0.25
+    },
+    {
+     "week_start": "2026-04-06",
+     "repeat_share": 0.3
+    },
+    {
+     "week_start": "2026-04-13",
+     "repeat_share": 0.3077
+    },
+    {
+     "week_start": "2026-04-20",
+     "repeat_share": 0.25
+    },
+    {
+     "week_start": "2026-04-27",
+     "repeat_share": 0.3333
+    },
+    {
+     "week_start": "2026-05-04",
+     "repeat_share": 0.4286
+    },
+    {
+     "week_start": "2026-05-11",
+     "repeat_share": 0.5
+    },
+    {
+     "week_start": "2026-05-18",
+     "repeat_share": 0.0
+    },
+    {
+     "week_start": "2026-05-25",
+     "repeat_share": 0.0
+    },
+    {
+     "week_start": "2026-06-01",
+     "repeat_share": 0.1111
+    },
+    {
+     "week_start": "2026-06-15",
+     "repeat_share": 0.3333
+    },
+    {
+     "week_start": "2026-06-22",
+     "repeat_share": 0.4167
+    },
+    {
+     "week_start": "2026-06-29",
+     "repeat_share": 0.0
+    },
+    {
+     "week_start": "2026-07-06",
+     "repeat_share": 0.0909
+    },
+    {
+     "week_start": "2026-07-13",
+     "repeat_share": 0.3333
+    },
+    {
+     "week_start": "2026-07-20",
+     "repeat_share": 0.5556
+    },
+    {
+     "week_start": "2026-07-27",
+     "repeat_share": 0.125
+    },
+    {
+     "week_start": "2026-08-03",
+     "repeat_share": 0.2857
+    }
+   ]
+  },
+  "discounts": [
+   {
+    "construct": "10% off upto Rs.40",
+    "orders": 71,
+    "aov": 327.88,
+    "discount_funded": 2330.5,
+    "net_revenue": 19637.6,
+    "aov_vs_undiscounted": 0.0276,
+    "repeat_rate": 0.0806,
+    "verdict": "net positive"
+   },
+   {
+    "construct": "50% off upto Rs.100",
+    "orders": 15,
+    "aov": 257.36,
+    "discount_funded": 0,
+    "net_revenue": 3603.0,
+    "aov_vs_undiscounted": -0.1934,
+    "repeat_rate": 0.0,
+    "verdict": "net positive"
+   },
+   {
+    "construct": "Flat Rs.100 off",
+    "orders": 10,
+    "aov": 251.38,
+    "discount_funded": 0,
+    "net_revenue": 2011.0,
+    "aov_vs_undiscounted": -0.2122,
+    "repeat_rate": 0.0,
+    "verdict": "net positive"
+   },
+   {
+    "construct": "Flat Rs.101 off",
+    "orders": 3,
+    "aov": 232.33,
+    "discount_funded": 0,
+    "net_revenue": 697.0,
+    "aov_vs_undiscounted": -0.2719,
+    "repeat_rate": 0.0,
+    "verdict": "net positive"
+   },
+   {
+    "construct": "40% off upto Rs.80",
+    "orders": 3,
+    "aov": 265.67,
+    "discount_funded": 0,
+    "net_revenue": 797.0,
+    "aov_vs_undiscounted": -0.1674,
+    "repeat_rate": 0.0,
+    "verdict": "net positive"
+   },
+   {
+    "construct": "Flat Rs.75 off",
+    "orders": 2,
+    "aov": 309.0,
+    "discount_funded": 0,
+    "net_revenue": 618.0,
+    "aov_vs_undiscounted": -0.0316,
+    "repeat_rate": 0.0,
+    "verdict": "net positive"
+   },
+   {
+    "construct": "70% off upto Rs.140",
+    "orders": 1,
+    "aov": 219.0,
+    "discount_funded": 0,
+    "net_revenue": 219.0,
+    "aov_vs_undiscounted": -0.3137,
+    "repeat_rate": 0.0,
+    "verdict": "net positive"
+   }
+  ],
+  "dormant": [
+   {
+    "item_name": "Sandwich Meal Box Combo",
+    "units_lifetime": 1,
+    "last_sold": "2026-03-07",
+    "days_dormant": 153,
+    "weekly_rate_when_active": 1.0,
+    "estimated_lost_revenue": 8502.43
+   },
+   {
+    "item_name": "Bestseller Veg Fried Rice",
+    "units_lifetime": 3,
+    "last_sold": "2026-03-10",
+    "days_dormant": 150,
+    "weekly_rate_when_active": 3.0,
+    "estimated_lost_revenue": 12150.0
+   },
+   {
+    "item_name": "Pasta Treat Combo",
+    "units_lifetime": 1,
+    "last_sold": "2026-03-15",
+    "days_dormant": 145,
+    "weekly_rate_when_active": 1.0,
+    "estimated_lost_revenue": 0.0
+   },
+   {
+    "item_name": "Spicy Schezwan Special Fried Rice",
+    "units_lifetime": 2,
+    "last_sold": "2026-03-16",
+    "days_dormant": 144,
+    "weekly_rate_when_active": 2.0,
+    "estimated_lost_revenue": 11437.71
+   },
+   {
+    "item_name": "Classic Red Sauce Pasta (Penne)",
+    "units_lifetime": 2,
+    "last_sold": "2026-03-19",
+    "days_dormant": 141,
+    "weekly_rate_when_active": 0.88,
+    "estimated_lost_revenue": 3154.88
+   },
+   {
+    "item_name": "Chilli Garlic Potato Pops",
+    "units_lifetime": 3,
+    "last_sold": "2026-03-22",
+    "days_dormant": 138,
+    "weekly_rate_when_active": 1.0,
+    "estimated_lost_revenue": 0.0
+   },
+   {
+    "item_name": "Tangy Green Chutney Sandwich [2 slices]",
+    "units_lifetime": 2,
+    "last_sold": "2026-03-24",
+    "days_dormant": 136,
+    "weekly_rate_when_active": 1.56,
+    "estimated_lost_revenue": 3596.44
+   },
+   {
+    "item_name": "Garlic Fried Rice",
+    "units_lifetime": 1,
+    "last_sold": "2026-03-25",
+    "days_dormant": 135,
+    "weekly_rate_when_active": 1.0,
+    "estimated_lost_revenue": 4030.71
+   },
+   {
+    "item_name": "Mixed Treasure Fried Rice",
+    "units_lifetime": 3,
+    "last_sold": "2026-03-31",
+    "days_dormant": 129,
+    "weekly_rate_when_active": 0.75,
+    "estimated_lost_revenue": 4132.61
+   },
+   {
+    "item_name": "Paneer Fried Rice",
+    "units_lifetime": 2,
+    "last_sold": "2026-04-02",
+    "days_dormant": 127,
+    "weekly_rate_when_active": 2.0,
+    "estimated_lost_revenue": 9760.86
+   },
+   {
+    "item_name": "Cheesy Corn Mix",
+    "units_lifetime": 1,
+    "last_sold": "2026-04-04",
+    "days_dormant": 125,
+    "weekly_rate_when_active": 1.0,
+    "estimated_lost_revenue": 3196.43
+   },
+   {
+    "item_name": "Creamy Cheese Maggi",
+    "units_lifetime": 2,
+    "last_sold": "2026-04-16",
+    "days_dormant": 113,
+    "weekly_rate_when_active": 0.42,
+    "estimated_lost_revenue": 1499.82
+   },
+   {
+    "item_name": "Vegie Onion Capsicum Pizza [Regular, 7 inches]",
+    "units_lifetime": 3,
+    "last_sold": "2026-04-20",
+    "days_dormant": 109,
+    "weekly_rate_when_active": 0.45,
+    "estimated_lost_revenue": 2010.7
+   },
+   {
+    "item_name": "Tangy Masala Corn",
+    "units_lifetime": 2,
+    "last_sold": "2026-05-05",
+    "days_dormant": 94,
+    "weekly_rate_when_active": 0.32,
+    "estimated_lost_revenue": 551.18
+   }
+  ]
+ },
+ "meta_extra": {
+  "has_cost_data": false
+ }
+}

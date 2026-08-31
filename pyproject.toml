@@ -1,0 +1,8 @@
+[project]
+name = "the-oven-vibe-dashboard"
+version = "0.1.0"
+description = "Static single-file dashboard built from the Oven Vibe DuckDB warehouse"
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb>=1.5.5",
+]

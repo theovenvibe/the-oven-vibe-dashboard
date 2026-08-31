@@ -1,0 +1,2561 @@
+<meta charset="utf-8">
+<title>The Oven Vibe</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:           #f9f9f7;
+    --surface:        #fcfcfb;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --grid:           #e1e0d9;
+    --axis:           #c3c2b7;
+    --border:         rgba(11, 11, 11, 0.10);
+    --series-1:       #2a78d6;
+    --series-2:       #eb6834;
+    --series-3:       #1baf7a;
+    /* Menu-matrix quadrants. A four-hue categorical set, validated for
+       colourblind separation and for contrast against the card surface
+       rather than picked by eye. Identity is never colour alone here --
+       the quadrant is also position on the plot, a legend entry and a
+       tooltip row. */
+    --quad-star:      #12855f;
+    --quad-plowhorse: #2a78d6;
+    --quad-puzzle:    #b4600f;
+    --quad-dog:       #8257c4;
+    --good:           #0ca30c;
+    --warning:        #fab219;
+    --serious:        #ec835a;
+    --critical:       #d03b3b;
+    --ghost:          rgba(11, 11, 11, 0.04);
+    /* sequential blue ramp — heatmap / cohort magnitude only */
+    --seq-100:        #cde2fb;
+    --seq-150:        #b7d3f6;
+    --seq-200:        #9ec5f4;
+    --seq-250:        #86b6ef;
+    --seq-300:        #6da7ec;
+    --seq-350:        #5598e7;
+    --seq-400:        #3987e5;
+    --seq-450:        #2a78d6;
+    --seq-500:        #256abf;
+    --seq-550:        #1c5cab;
+    --seq-600:        #184f95;
+    --seq-650:        #104281;
+    --seq-700:        #0d366b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page:           #0d0d0d;
+      --surface:        #1a1a19;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --grid:           #2c2c2a;
+      --axis:           #383835;
+      --border:         rgba(255, 255, 255, 0.10);
+      --series-1:       #3987e5;
+      --series-2:       #d95926;
+      --series-3:       #199e70;
+      /* Re-stepped for the dark surface, not flipped: the light values
+         fall outside the readable lightness band on #1a1a19. */
+      --quad-star:      #22a97c;
+      --quad-plowhorse: #3d84dc;
+      --quad-puzzle:    #c87c2c;
+      --quad-dog:       #9680d4;
+      --good:           #0ca30c;
+      --warning:        #fab219;
+      --serious:        #ec835a;
+      --critical:       #d03b3b;
+      --ghost:          rgba(255, 255, 255, 0.06);
+      --seq-100:        #cde2fb;
+      --seq-150:        #b7d3f6;
+      --seq-200:        #9ec5f4;
+      --seq-250:        #86b6ef;
+      --seq-300:        #6da7ec;
+      --seq-350:        #5598e7;
+      --seq-400:        #3987e5;
+      --seq-450:        #2a78d6;
+      --seq-500:        #256abf;
+      --seq-550:        #1c5cab;
+      --seq-600:        #184f95;
+      --seq-650:        #104281;
+      --seq-700:        #0d366b;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page:           #0d0d0d;
+    --surface:        #1a1a19;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --grid:           #2c2c2a;
+    --axis:           #383835;
+    --border:         rgba(255, 255, 255, 0.10);
+    --series-1:       #3987e5;
+    --series-2:       #d95926;
+    --series-3:       #199e70;
+    /* Re-stepped for the dark surface, not flipped: the light values
+       fall outside the readable lightness band on #1a1a19. */
+    --quad-star:      #22a97c;
+    --quad-plowhorse: #3d84dc;
+    --quad-puzzle:    #c87c2c;
+    --quad-dog:       #9680d4;
+    --good:           #0ca30c;
+    --warning:        #fab219;
+    --serious:        #ec835a;
+    --critical:       #d03b3b;
+    --ghost:          rgba(255, 255, 255, 0.06);
+    --seq-100:        #cde2fb;
+    --seq-150:        #b7d3f6;
+    --seq-200:        #9ec5f4;
+    --seq-250:        #86b6ef;
+    --seq-300:        #6da7ec;
+    --seq-350:        #5598e7;
+    --seq-400:        #3987e5;
+    --seq-450:        #2a78d6;
+    --seq-500:        #256abf;
+    --seq-550:        #1c5cab;
+    --seq-600:        #184f95;
+    --seq-650:        #104281;
+    --seq-700:        #0d366b;
+  }
+
+  body {
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 32px 20px 64px;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; }
+
+  header { margin-bottom: 24px; }
+  h1 { font-size: 28px; font-weight: 650; letter-spacing: -0.01em; margin: 0; }
+  .sub { color: var(--text-secondary); font-size: 14px; margin-top: 4px; }
+
+  /* Filters — one row, above everything they scope. */
+  .filters {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    margin: 20px 0 24px;
+  }
+  .filters .group { display: flex; flex-wrap: wrap; gap: 6px; }
+  button.chip, select, input[type="date"] {
+    font: inherit; font-size: 13px;
+    color: var(--text-secondary);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  button.chip:hover, select:hover { background: var(--ghost); }
+  button.chip[aria-pressed="true"] {
+    color: var(--text-primary);
+    font-weight: 600;
+    border-color: var(--axis);
+    background: var(--ghost);
+  }
+  .spacer { flex: 1 1 auto; }
+  label.field { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+
+  /* Weekday multi-select — small toggle chips, not a native <select multiple>. */
+  .weekday-picker { display: flex; gap: 4px; }
+  .weekday-picker button.chip { padding: 6px 9px; }
+
+  :focus-visible {
+    outline: 2px solid var(--series-1);
+    outline-offset: 2px;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex; gap: 4px; margin: 0 0 20px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; height: 0; }
+  .tabs button {
+    font: inherit; font-size: 13px; font-weight: 600;
+    color: var(--text-muted); background: none; border: none;
+    padding: 10px 4px; margin-right: 18px;
+    cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    position: relative; top: 1px;
+  }
+  .tabs button:hover { color: var(--text-secondary); }
+  .tabs button[aria-selected="true"] {
+    color: var(--text-primary);
+    border-bottom-color: var(--text-primary);
+  }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted); margin: 0 0 4px;
+  }
+
+  .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .scope-chip {
+    flex: none; font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+    padding: 2px 7px; border-radius: 999px;
+    color: var(--text-muted); background: var(--ghost); border: 1px solid var(--border);
+  }
+  .scope-chip.scoped { color: var(--series-1); border-color: color-mix(in srgb, var(--series-1) 40%, transparent); }
+
+  .selection-bar {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px;
+    margin: 2px 0 14px; padding: 9px 12px;
+    background: var(--ghost); border: 1px solid var(--border); border-radius: 8px;
+    font-size: 13px; color: var(--text-secondary);
+  }
+  .selection-bar .figure { color: var(--text-primary); font-weight: 650; font-variant-numeric: tabular-nums; }
+  .selection-bar .scope-warn { color: var(--warning); }
+
+  .quiet-note {
+    font-size: 12px; color: var(--text-muted); margin: -8px 0 20px;
+    padding: 8px 12px; border: 1px dashed var(--border); border-radius: 10px;
+    display: inline-block;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px 14px;
+  }
+  .card h2 { font-size: 15px; font-weight: 600; margin: 0; }
+  .card .note { font-size: 12px; color: var(--text-muted); margin: 2px 0 10px; }
+
+  .hero { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; margin-bottom: 16px; }
+  .hero .figure { font-size: 52px; font-weight: 650; letter-spacing: -0.02em; line-height: 1.05; }
+  .hero .label { font-size: 13px; color: var(--text-secondary); }
+  .hero .delta { font-size: 13px; color: var(--text-secondary); padding-bottom: 8px; }
+  .hero .delta strong { font-weight: 600; }
+  .up { color: var(--good); }
+  .down { color: var(--critical); }
+
+  .tiles {
+    display: grid; gap: 12px; margin-bottom: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  }
+  .tile { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+  .tile .label { font-size: 12px; color: var(--text-secondary); }
+  .tile .value { font-size: 24px; font-weight: 620; letter-spacing: -0.01em; }
+  .tile .foot { font-size: 12px; color: var(--text-muted); }
+
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .grid .full { grid-column: 1 / -1; }
+  @media (max-width: 820px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+  .chart { position: relative; }
+  .chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .axis-text { fill: var(--text-muted); font-size: 11px; }
+  .value-text { fill: var(--text-secondary); font-size: 11px; font-weight: 600; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--text-secondary); margin: 2px 0 6px; }
+  .legend .key { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .swatch { width: 11px; height: 11px; border-radius: 3px; }
+  .legend .stroke { width: 14px; height: 2px; border-radius: 2px; }
+
+  .tip {
+    position: absolute; pointer-events: none; opacity: 0;
+    transform: translate(-50%, -100%);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+    padding: 8px 10px; font-size: 12px; min-width: 108px;
+    transition: opacity 90ms linear;
+    z-index: 5;
+  }
+  .tip .head { color: var(--text-secondary); font-size: 11px; margin-bottom: 4px; }
+  .tip .row { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .tip .row .k { width: 14px; height: 2px; border-radius: 2px; flex: none; }
+  .tip .row .v { font-weight: 650; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+  .tip .row .n { color: var(--text-secondary); }
+
+  /* Action cards — the whole dashboard exists to produce these. */
+  .actions-list { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .action-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .action-card .kind { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+  .action-card .headline { font-size: 15px; font-weight: 650; letter-spacing: -0.01em; }
+  .action-card .impact { font-size: 22px; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .action-card .impact-basis { font-size: 12px; color: var(--text-muted); }
+  .action-card .evidence { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .action-card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+
+  .chip-confidence {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 650; letter-spacing: 0.02em;
+    padding: 3px 9px; border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+  .chip-confidence::before { content: ""; width: 6px; height: 6px; border-radius: 50%; flex: none; }
+  .chip-confidence.high { color: var(--good); }
+  .chip-confidence.high::before { background: var(--good); }
+  .chip-confidence.medium { color: var(--warning); }
+  .chip-confidence.medium::before { background: var(--warning); }
+  .chip-confidence.low { color: var(--text-muted); }
+  .chip-confidence.low::before { background: var(--text-muted); }
+
+  .strength-chip {
+    font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 6px;
+    border: 1px solid var(--border); color: var(--text-secondary);
+  }
+  .strength-chip.solid { color: var(--text-primary); border-color: var(--axis); }
+  .reads-as { display: block; font-size: 10px; font-weight: 400; color: var(--text-muted); }
+
+  /* Heatmap */
+  .heatmap-controls { display: flex; gap: 6px; margin: 2px 0 10px; }
+  .heatmap-wrap { overflow-x: auto; }
+  .hm-cell { stroke: var(--surface); stroke-width: 2; }
+  .hm-cell.quiet-outline { stroke: var(--text-secondary); stroke-width: 1.5; stroke-dasharray: 2 2; }
+  .hm-label { fill: var(--text-muted); font-size: 11px; }
+  .hm-scale-label { fill: var(--text-muted); font-size: 10px; }
+  /* The heatmap is intentionally NOT stretched to the card's full width like
+     other charts — its viewBox units are sized 1:1 with cells/text, and
+     .heatmap-wrap already scrolls horizontally when it doesn't fit. */
+  /* Cap the upscale: the grid's viewBox is ~400 units wide, so letting it fill
+     a 900px card scales the 11px labels to ~24px — far louder than any other
+     type on the page. 1.4x keeps them in the axis-label family. */
+  .heatmap-wrap svg { width: auto; max-width: min(100%, 560px); }
+  .hm-legend { align-items: center; }
+  .hm-legend .ramp { display: inline-flex; gap: 2px; margin: 0 6px; }
+  .hm-legend .ramp span { width: 14px; height: 10px; border-radius: 2px; display: inline-block; }
+  .hm-legend .range { color: var(--text-secondary); }
+
+  /* Menu matrix scatter */
+  .quadrant-label { fill: var(--text-muted); font-size: 11px; font-weight: 650; letter-spacing: 0.03em; text-transform: uppercase; }
+  /* No default fill here: a CSS rule beats a presentation attribute, so a
+     `.scatter-dot { fill: ... }` silently overrode the per-quadrant colour set
+     on each circle. The colour is set on the element instead. */
+  .scatter-dot.outlier-label { fill: var(--text-secondary); font-size: 10px; font-weight: 600; }
+
+  /* Forecast band */
+  .forecast-method { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+  /* Cohort grid */
+  .cohort-grid { border-collapse: collapse; font-size: 12px; }
+  .cohort-grid td, .cohort-grid th { text-align: center; padding: 0; border: none; }
+  .cohort-cell {
+    width: 56px; height: 34px; display: flex; align-items: center; justify-content: center;
+    font-variant-numeric: tabular-nums; font-weight: 600; border-radius: 6px; margin: 2px;
+  }
+
+  /* Sparkline in table rows */
+  .spark { display: block; overflow: visible; vertical-align: middle; }
+  .spark path.line { fill: none; stroke: var(--series-1); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .spark circle { fill: var(--series-1); }
+
+  /* Data-quality trust panel — small, quiet, never louder than the hero
+     forecast below it. Only failing/warning checks show inline; passing
+     checks sit behind a native disclosure. */
+  .dq-panel {
+    border: 1px solid var(--border); border-radius: 10px; margin: 0 0 16px; overflow: hidden;
+    background: var(--surface); font-size: 12px;
+  }
+  .dq-row {
+    display: flex; align-items: baseline; gap: 8px; font-size: 12px;
+    padding: 6px 12px; border-bottom: 1px solid var(--grid);
+  }
+  .dq-row:last-child { border-bottom: none; }
+  .dq-row .status-text { font-weight: 700; text-transform: uppercase; font-size: 10px; width: 32px; flex: none; }
+  .dq-name { color: var(--text-primary); font-weight: 600; flex: none; }
+  .dq-detail-text { color: var(--text-muted); }
+  .dq-good-details { border-top: 1px solid var(--border); }
+  .dq-good-details > summary {
+    cursor: pointer; font-size: 12px; color: var(--text-muted); font-weight: 600;
+    padding: 6px 12px; list-style: revert;
+  }
+  .dq-good-details[open] > summary { border-bottom: 1px solid var(--grid); }
+
+  .status-text.good { color: var(--good); }
+  .status-text.warning { color: var(--warning); }
+  .status-text.serious { color: var(--serious); }
+  .status-text.critical { color: var(--critical); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
+  }
+
+  details.table-view { margin-top: 24px; }
+  details.table-view summary {
+    cursor: pointer; font-size: 13px; color: var(--text-secondary);
+    padding: 6px 0;
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 8px; }
+  th, td { text-align: right; padding: 6px 10px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--text-secondary); font-weight: 600; }
+  td { font-variant-numeric: tabular-nums; color: var(--text-primary); }
+  .scroll { overflow-x: auto; }
+
+  footer { color: var(--text-muted); font-size: 12px; margin-top: 28px; }
+  .empty { color: var(--text-muted); font-size: 13px; padding: 24px 0; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1 id="title">The Oven Vibe</h1>
+    <div class="sub" id="subtitle"></div>
+  </header>
+
+  <div class="filters">
+    <div class="group" id="range-presets" role="group" aria-label="Date range"></div>
+    <label class="field">from <input type="date" id="from"></label>
+    <label class="field">to <input type="date" id="to"></label>
+    <div class="weekday-picker" id="weekday-picker" role="group" aria-label="Weekdays"></div>
+    <div class="spacer"></div>
+    <label class="field">status
+      <select id="status">
+        <option value="all">All orders</option>
+        <option value="Delivered">Delivered only</option>
+        <option value="failed">Not delivered</option>
+      </select>
+    </label>
+  </div>
+
+  <!-- What the filters currently select. It sits with the filters rather than
+       inside a tab, because the complaint it answers is "I changed a filter and
+       nothing moved" -- and on tabs whose cards are built from the full history
+       at build time, nothing visible did. -->
+  <div class="selection-bar" id="selection-bar"></div>
+
+  <div class="tabs" id="tabs" role="tablist" aria-label="Dashboard views"></div>
+
+  <div id="body"></div>
+
+  <footer id="footer"></footer>
+</div>
+
+<script id="payload" type="application/json">__DASHBOARD_DATA__</script>
+<script>
+(function () {
+  "use strict";
+
+  const DATA = JSON.parse(document.getElementById("payload").textContent);
+  const A = DATA.analytics || null;
+  const SVG_NS = "http://www.w3.org/2000/svg";
+  const DAY_MS = 86400000;
+  const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const SEQ_STEPS = ["--seq-100", "--seq-200", "--seq-300", "--seq-400", "--seq-500", "--seq-600", "--seq-700"];
+  const TABS = [
+    { key: "plan", label: "Plan" },
+    { key: "menu", label: "Menu" },
+    { key: "combos", label: "Combos" },
+    { key: "customers", label: "Customers" },
+    { key: "quality", label: "Quality" },
+    { key: "demand", label: "Demand" }
+  ];
+
+  /* ---------- data prep ---------- */
+
+  const itemsByOrder = new Map();
+  for (const it of DATA.items) {
+    if (!itemsByOrder.has(it.order_id)) itemsByOrder.set(it.order_id, []);
+    itemsByOrder.get(it.order_id).push(it);
+  }
+
+  const ORDERS = DATA.orders.map(function (o) {
+    const at = new Date(o.order_placed_at);
+    return Object.assign({}, o, {
+      at: at,
+      day: startOfDay(at),
+      week: startOfWeek(at),
+      hour: at.getHours(),
+      weekday: (at.getDay() + 6) % 7,          // 0 = Monday
+      delivered: o.order_status === "Delivered",
+      discount: (o.restaurant_discount || 0) + (o.gold_discount || 0),
+      lines: itemsByOrder.get(o.order_id) || []
+    });
+  });
+
+  const FIRST_DAY = ORDERS.length ? ORDERS[0].day : startOfDay(new Date());
+  const LAST_DAY = ORDERS.length ? ORDERS[ORDERS.length - 1].day : FIRST_DAY;
+
+  function startOfDay(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function startOfWeek(d) {
+    const s = startOfDay(d);
+    s.setDate(s.getDate() - ((s.getDay() + 6) % 7));
+    return s;
+  }
+  function isoDate(d) {
+    return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  }
+  function pad(n) { return n < 10 ? "0" + n : String(n); }
+
+  /* ---------- formatting ---------- */
+
+  const RUPEE = "₹";
+  function money(v) {
+    if (v == null) return "—";
+    const abs = Math.abs(v);
+    if (abs >= 100000) return RUPEE + (v / 100000).toFixed(abs >= 1000000 ? 0 : 1) + "L";
+    if (abs >= 1000) return RUPEE + (v / 1000).toFixed(abs >= 10000 ? 0 : 1) + "K";
+    return RUPEE + Math.round(v).toLocaleString("en-IN");
+  }
+  function moneyExact(v) {
+    return v == null ? "—" : RUPEE + Math.round(v).toLocaleString("en-IN");
+  }
+  function num(v, digits) {
+    return v == null ? "—" : Number(v).toFixed(digits == null ? 0 : digits);
+  }
+  function pct(v, digits) { return v == null ? "—" : (v * 100).toFixed(digits == null ? 0 : digits) + "%"; }
+  function shortDate(d) { return d.toLocaleDateString("en-GB", { day: "numeric", month: "short" }); }
+  function longDate(d) { return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); }
+  function hourLabel(h) {
+    // Windows can carry an hour_end of 24 (midnight rollover) — normalize
+    // into 0-23 first so "24" (which would otherwise read as 12pm) becomes
+    // the correct "12am".
+    const hh24 = ((h % 24) + 24) % 24;
+    const suffix = hh24 < 12 ? "am" : "pm";
+    const hh = hh24 % 12 === 0 ? 12 : hh24 % 12;
+    return hh + suffix;
+  }
+  function mean(values) {
+    const clean = values.filter(function (v) { return v != null && !isNaN(v); });
+    if (!clean.length) return null;
+    return clean.reduce(function (a, b) { return a + b; }, 0) / clean.length;
+  }
+  function sum(values) {
+    return values.reduce(function (a, b) { return a + (b || 0); }, 0);
+  }
+  function median(values) {
+    const clean = values.filter(function (v) { return v != null && !isNaN(v); }).slice().sort(function (a, b) { return a - b; });
+    if (!clean.length) return 0;
+    const mid = Math.floor(clean.length / 2);
+    return clean.length % 2 ? clean[mid] : (clean[mid - 1] + clean[mid]) / 2;
+  }
+
+  /* ---------- state & filtering ---------- */
+
+  const PRESETS = [
+    { key: "all", label: "All time" },
+    { key: "90", label: "Last 90 days", days: 90 },
+    { key: "30", label: "Last 30 days", days: 30 },
+    { key: "7", label: "Last 7 days", days: 7 }
+  ];
+
+  const state = {
+    preset: "all", from: FIRST_DAY, to: LAST_DAY, status: "all", weekdays: [0, 1, 2, 3, 4, 5, 6], tab: "plan",
+    menuCategory: "all", comboCategory: "all"
+  };
+
+  function applyPreset(key) {
+    state.preset = key;
+    const preset = PRESETS.find(function (p) { return p.key === key; });
+    if (preset && preset.days) {
+      state.from = new Date(LAST_DAY.getTime() - (preset.days - 1) * DAY_MS);
+    } else {
+      state.from = FIRST_DAY;
+    }
+    state.to = LAST_DAY;
+  }
+
+  function selection() {
+    return ORDERS.filter(function (o) {
+      if (o.day < state.from || o.day > state.to) return false;
+      if (state.status === "Delivered" && !o.delivered) return false;
+      if (state.status === "failed" && o.delivered) return false;
+      if (state.weekdays.length < 7 && state.weekdays.indexOf(o.weekday) === -1) return false;
+      return true;
+    });
+  }
+
+  function previousWindow(rows) {
+    // Same-length window immediately before the current one, for the hero delta.
+    const span = Math.round((state.to - state.from) / DAY_MS) + 1;
+    const prevTo = new Date(state.from.getTime() - DAY_MS);
+    const prevFrom = new Date(prevTo.getTime() - (span - 1) * DAY_MS);
+    if (prevTo < FIRST_DAY) return null;
+    const prev = ORDERS.filter(function (o) {
+      if (o.day < prevFrom || o.day > prevTo) return false;
+      if (state.status === "Delivered" && !o.delivered) return false;
+      if (state.status === "failed" && o.delivered) return false;
+      return true;
+    });
+    return { rows: prev, from: prevFrom, to: prevTo };
+  }
+
+  /* ---------- tiny DOM helpers ---------- */
+
+  function el(tag, attrs, text) {
+    const node = document.createElement(tag);
+    for (const k in attrs || {}) node.setAttribute(k, attrs[k]);
+    if (text != null) node.textContent = text;
+    return node;
+  }
+  function svgEl(tag, attrs) {
+    const node = document.createElementNS(SVG_NS, tag);
+    for (const k in attrs || {}) node.setAttribute(k, attrs[k]);
+    return node;
+  }
+  // Which cards actually answer the filter bar. Established by rendering every
+  // tab twice -- once at "All time", once at "Last 7 days" -- and diffing the
+  // text of each card, not by reading the code and hoping. Everything not in
+  // here is built once at build time over the whole history, and now says so on
+  // its own face rather than in a note somebody has to scroll past.
+  const SCOPED_CARDS = {
+    "Where we've been": 1,
+    "Order frequency in this range": 1,
+    "Kitchen prep time and rider wait, by week": 1,
+    "Ratings given": 1,
+    "Why orders were lost, in this range": 1,
+    "When orders come in": 1
+  };
+
+  function card(title, note, extraClass) {
+    const box = el("section", { class: "card" + (extraClass ? " " + extraClass : "") });
+    const head = el("div", { class: "card-head" });
+    head.appendChild(el("h2", null, title));
+    head.appendChild(el("span", { class: "scope-chip" + (SCOPED_CARDS[title] ? " scoped" : "") },
+      SCOPED_CARDS[title] ? "this range" : "whole history"));
+    box.appendChild(head);
+    if (note) box.appendChild(el("p", { class: "note" }, note));
+    return box;
+  }
+  function legend(entries) {
+    const wrap = el("div", { class: "legend" });
+    entries.forEach(function (e) {
+      const key = el("span", { class: "key" });
+      const mark = el("span", { class: e.line ? "swatch stroke" : "swatch" });
+      mark.style.background = e.color;
+      key.appendChild(mark);
+      key.appendChild(el("span", null, e.name));
+      wrap.appendChild(key);
+    });
+    return wrap;
+  }
+
+  /* ---------- chart plumbing ---------- */
+
+  // Half-width cards get their own smaller viewBox so the 11px axis type scales
+  // up with the card instead of shrinking inside it.
+  function dims(compact) {
+    const W = compact ? 400 : 760;
+    const H = compact ? 260 : 300;
+    const PAD = { top: 16, right: 14, bottom: 32, left: compact ? 40 : 58 };
+    return {
+      W: W, H: H, PAD: PAD,
+      PLOT_W: W - PAD.left - PAD.right,
+      PLOT_H: H - PAD.top - PAD.bottom
+    };
+  }
+
+  function chartFrame(d) {
+    const holder = el("div", { class: "chart" });
+    const svg = svgEl("svg", { viewBox: "0 0 " + d.W + " " + d.H, role: "img" });
+    const tip = el("div", { class: "tip" });
+    holder.appendChild(svg);
+    holder.appendChild(tip);
+    return { holder: holder, svg: svg, tip: tip };
+  }
+
+  // Round the axis top up to a value whose ticks all land on clean numbers.
+  function niceMax(value, ticks) {
+    if (!value || value <= 0) return 1;
+    const count = ticks || 4;
+    const raw = value / count;
+    const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    const steps = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 7.5, 8, 10];
+    for (let i = 0; i < steps.length; i++) {
+      const step = steps[i] * mag;
+      // On small count axes a fractional step prints ticks like 7.5 as "8".
+      if (value <= 100 && !Number.isInteger(step)) continue;
+      if (step * count >= value) return step * count;
+    }
+    return 10 * mag * count;
+  }
+
+  function yAxis(svg, d, max, fmt, ticks) {
+    const count = ticks || 4;
+    for (let i = 0; i <= count; i++) {
+      const v = (max / count) * i;
+      const y = d.PAD.top + d.PLOT_H - (v / max) * d.PLOT_H;
+      svg.appendChild(svgEl("line", {
+        x1: d.PAD.left, x2: d.PAD.left + d.PLOT_W, y1: y, y2: y,
+        stroke: i === 0 ? "var(--axis)" : "var(--grid)", "stroke-width": 1
+      }));
+      const label = svgEl("text", {
+        x: d.PAD.left - 8, y: y + 4, "text-anchor": "end", class: "axis-text"
+      });
+      label.textContent = fmt(v);
+      svg.appendChild(label);
+    }
+  }
+
+  function xLabel(svg, d, x, text) {
+    const node = svgEl("text", {
+      x: x, y: d.PAD.top + d.PLOT_H + 18, "text-anchor": "middle", class: "axis-text"
+    });
+    node.textContent = text;
+    svg.appendChild(node);
+  }
+
+  // Rounded at the data end, square at the baseline.
+  function columnPath(x, y, w, h, r) {
+    const radius = Math.max(0, Math.min(r, w / 2, h));
+    if (h <= 0.5) return "";
+    return "M" + x + "," + (y + h) +
+      "V" + (y + radius) +
+      "a" + radius + "," + radius + " 0 0 1 " + radius + ",-" + radius +
+      "h" + (w - 2 * radius) +
+      "a" + radius + "," + radius + " 0 0 1 " + radius + "," + radius +
+      "V" + (y + h) + "Z";
+  }
+  function barPath(x, y, w, h, r) {
+    const radius = Math.max(0, Math.min(r, h / 2, w));
+    if (w <= 0.5) return "";
+    return "M" + x + "," + y +
+      "H" + (x + w - radius) +
+      "a" + radius + "," + radius + " 0 0 1 " + radius + "," + radius +
+      "v" + (h - 2 * radius) +
+      "a" + radius + "," + radius + " 0 0 1 -" + radius + "," + radius +
+      "H" + x + "Z";
+  }
+
+  function showTip(tip, holder, d, svgX, svgY, head, rows) {
+    tip.textContent = "";
+    tip.appendChild(el("div", { class: "head" }, head));
+    rows.forEach(function (r) {
+      const row = el("div", { class: "row" });
+      if (r.color) {
+        const key = el("span", { class: "k" });
+        key.style.background = r.color;
+        row.appendChild(key);
+      }
+      row.appendChild(el("span", { class: "v" }, r.value));
+      if (r.name) row.appendChild(el("span", { class: "n" }, r.name));
+      tip.appendChild(row);
+    });
+    const rect = holder.getBoundingClientRect();
+    const x = (svgX / d.W) * rect.width;
+    tip.style.left = Math.max(60, Math.min(rect.width - 60, x)) + "px";
+    tip.style.top = Math.max(6, (svgY / d.H) * rect.height - 8) + "px";
+    tip.style.opacity = "1";
+  }
+  function hideTip(tip) { tip.style.opacity = "0"; }
+
+  /* ---------- chart types ---------- */
+
+  function columnChart(opts) {
+    // opts: rows [{label, value, tipHead, tipRows}], fmt, color, labelEvery, valueLabels
+    const d = dims(opts.compact);
+    const f = chartFrame(d);
+    const rows = opts.rows;
+    if (!rows.length) { f.holder.appendChild(el("p", { class: "empty" }, "No orders in this range.")); return f.holder; }
+
+    const max = niceMax(Math.max.apply(null, rows.map(function (r) { return r.value; })));
+    yAxis(f.svg, d, max, opts.fmt);
+
+    const band = d.PLOT_W / rows.length;
+    const width = Math.min(24, Math.max(3, band - Math.max(2, band * 0.3)));
+    const color = opts.color || "var(--series-1)";
+    const labelEvery = opts.labelEvery || 1;
+
+    rows.forEach(function (r, i) {
+      const cx = d.PAD.left + band * (i + 0.5);
+      const h = (r.value / max) * d.PLOT_H;
+      const y = d.PAD.top + d.PLOT_H - h;
+      const path = svgEl("path", { d: columnPath(cx - width / 2, y, width, h, 4), fill: color });
+      f.svg.appendChild(path);
+
+      if (opts.valueLabels && r.value > 0) {
+        const t = svgEl("text", { x: cx, y: y - 6, "text-anchor": "middle", class: "value-text" });
+        t.textContent = opts.fmt(r.value);
+        f.svg.appendChild(t);
+      }
+
+      // Hit target spans the whole band, not just the painted column.
+      const hit = svgEl("rect", {
+        x: d.PAD.left + band * i, y: d.PAD.top, width: band, height: d.PLOT_H,
+        fill: "transparent", tabindex: "0"
+      });
+      const focus = function () {
+        path.setAttribute("opacity", "0.78");
+        showTip(f.tip, f.holder, d, cx, y, r.tipHead || r.label,
+          r.tipRows || [{ value: opts.fmt(r.value), color: color }]);
+      };
+      const blur = function () { path.removeAttribute("opacity"); hideTip(f.tip); };
+      hit.addEventListener("pointerenter", focus);
+      hit.addEventListener("focus", focus);
+      hit.addEventListener("pointerleave", blur);
+      hit.addEventListener("blur", blur);
+      f.svg.appendChild(hit);
+
+      if (i % labelEvery === 0) xLabel(f.svg, d, cx, r.label);
+    });
+
+    return f.holder;
+  }
+
+  function stackedColumnChart(opts) {
+    // opts: labels[], series [{name, color, values[]}], fmt, labelEvery
+    const d = dims(opts.compact);
+    const f = chartFrame(d);
+    const n = opts.labels.length;
+    if (!n) { f.holder.appendChild(el("p", { class: "empty" }, "No orders in this range.")); return f.holder; }
+
+    const totals = opts.labels.map(function (_, i) {
+      return sum(opts.series.map(function (s) { return s.values[i]; }));
+    });
+    const max = niceMax(Math.max.apply(null, totals));
+    yAxis(f.svg, d, max, opts.fmt);
+
+    const band = d.PLOT_W / n;
+    const width = Math.min(24, Math.max(3, band - Math.max(2, band * 0.3)));
+
+    opts.labels.forEach(function (label, i) {
+      const cx = d.PAD.left + band * (i + 0.5);
+      let cursor = d.PAD.top + d.PLOT_H;
+      const paths = [];
+      opts.series.forEach(function (s, si) {
+        const raw = (s.values[i] / max) * d.PLOT_H;
+        if (raw <= 0) return;
+        // 2px surface gap between touching segments.
+        const gap = si === 0 ? 0 : 2;
+        const h = Math.max(0.5, raw - gap);
+        const y = cursor - h;
+        const isTop = opts.series.slice(si + 1).every(function (o) { return !o.values[i]; });
+        const p = svgEl("path", {
+          d: isTop ? columnPath(cx - width / 2, y, width, h, 4)
+                   : "M" + (cx - width / 2) + "," + y + "h" + width + "v" + h + "h-" + width + "Z",
+          fill: s.color
+        });
+        f.svg.appendChild(p);
+        paths.push(p);
+        cursor = y - gap;
+      });
+
+      const hit = svgEl("rect", {
+        x: d.PAD.left + band * i, y: d.PAD.top, width: band, height: d.PLOT_H,
+        fill: "transparent", tabindex: "0"
+      });
+      const top = d.PAD.top + d.PLOT_H - (totals[i] / max) * d.PLOT_H;
+      const focus = function () {
+        paths.forEach(function (p) { p.setAttribute("opacity", "0.78"); });
+        showTip(f.tip, f.holder, d, cx, top, label, opts.series.map(function (s) {
+          return { color: s.color, name: s.name, value: opts.fmt(s.values[i]) };
+        }));
+      };
+      const blur = function () {
+        paths.forEach(function (p) { p.removeAttribute("opacity"); });
+        hideTip(f.tip);
+      };
+      hit.addEventListener("pointerenter", focus);
+      hit.addEventListener("focus", focus);
+      hit.addEventListener("pointerleave", blur);
+      hit.addEventListener("blur", blur);
+      f.svg.appendChild(hit);
+
+      if (i % (opts.labelEvery || 1) === 0) xLabel(f.svg, d, cx, label);
+    });
+
+    return f.holder;
+  }
+
+  function lineChart(opts) {
+    // opts: labels[], series [{name, color, values[]}], fmt, labelEvery
+    const d = dims(opts.compact);
+    const f = chartFrame(d);
+    const n = opts.labels.length;
+    if (!n) { f.holder.appendChild(el("p", { class: "empty" }, "No orders in this range.")); return f.holder; }
+
+    let peak = 0;
+    opts.series.forEach(function (s) {
+      s.values.forEach(function (v) { if (v != null && v > peak) peak = v; });
+    });
+    const max = niceMax(peak);
+    yAxis(f.svg, d, max, opts.fmt);
+
+    const step = n > 1 ? d.PLOT_W / (n - 1) : 0;
+    const xAt = function (i) { return n > 1 ? d.PAD.left + step * i : d.PAD.left + d.PLOT_W / 2; };
+    const yAt = function (v) { return d.PAD.top + d.PLOT_H - (v / max) * d.PLOT_H; };
+
+    const crosshair = svgEl("line", {
+      y1: d.PAD.top, y2: d.PAD.top + d.PLOT_H, stroke: "var(--axis)", "stroke-width": 1, opacity: 0
+    });
+    f.svg.appendChild(crosshair);
+
+    opts.series.forEach(function (s) {
+      let d = "", open = false;
+      s.values.forEach(function (v, i) {
+        if (v == null) { open = false; return; }
+        d += (open ? "L" : "M") + xAt(i) + "," + yAt(v);
+        open = true;
+      });
+      f.svg.appendChild(svgEl("path", {
+        d: d, fill: "none", stroke: s.color, "stroke-width": 2,
+        "stroke-linejoin": "round", "stroke-linecap": "round"
+      }));
+    });
+
+    const dots = opts.series.map(function (s) {
+      const dot = svgEl("circle", {
+        r: 4.5, fill: s.color, stroke: "var(--surface)", "stroke-width": 2, opacity: 0
+      });
+      f.svg.appendChild(dot);
+      return dot;
+    });
+
+    const overlay = svgEl("rect", {
+      x: d.PAD.left, y: d.PAD.top, width: d.PLOT_W, height: d.PLOT_H,
+      fill: "transparent", tabindex: "0"
+    });
+    let cursor = 0;
+    function place(i) {
+      cursor = Math.max(0, Math.min(n - 1, i));
+      const x = xAt(cursor);
+      crosshair.setAttribute("x1", x);
+      crosshair.setAttribute("x2", x);
+      crosshair.setAttribute("opacity", "1");
+      let top = d.PAD.top + d.PLOT_H;
+      opts.series.forEach(function (s, si) {
+        const v = s.values[cursor];
+        if (v == null) { dots[si].setAttribute("opacity", "0"); return; }
+        const y = yAt(v);
+        dots[si].setAttribute("cx", x);
+        dots[si].setAttribute("cy", y);
+        dots[si].setAttribute("opacity", "1");
+        top = Math.min(top, y);
+      });
+      showTip(f.tip, f.holder, d, x, top, opts.labels[cursor], opts.series.map(function (s) {
+        return { color: s.color, name: s.name, value: s.values[cursor] == null ? "—" : opts.fmt(s.values[cursor]) };
+      }));
+    }
+    overlay.addEventListener("pointermove", function (ev) {
+      const rect = f.svg.getBoundingClientRect();
+      const svgX = ((ev.clientX - rect.left) / rect.width) * d.W;
+      place(step ? Math.round((svgX - d.PAD.left) / step) : 0);
+    });
+    overlay.addEventListener("pointerleave", function () {
+      crosshair.setAttribute("opacity", "0");
+      dots.forEach(function (d) { d.setAttribute("opacity", "0"); });
+      hideTip(f.tip);
+    });
+    overlay.addEventListener("focus", function () { place(cursor); });
+    overlay.addEventListener("keydown", function (ev) {
+      if (ev.key === "ArrowRight") { place(cursor + 1); ev.preventDefault(); }
+      if (ev.key === "ArrowLeft") { place(cursor - 1); ev.preventDefault(); }
+    });
+    f.svg.appendChild(overlay);
+
+    opts.labels.forEach(function (label, i) {
+      if (i % (opts.labelEvery || 1) === 0) xLabel(f.svg, d, xAt(i), label);
+    });
+
+    return f.holder;
+  }
+
+  function barChart(opts) {
+    // Horizontal bars, category labels on the left, value at the tip.
+    const rows = opts.rows;
+    const holder = el("div", { class: "chart" });
+    if (!rows.length) { holder.appendChild(el("p", { class: "empty" }, "No orders in this range.")); return holder; }
+
+    const W = opts.compact ? 400 : 760;
+    const rowH = opts.compact ? 24 : 26;
+    const height = rows.length * rowH + 16;
+    const maxChars = opts.compact ? 22 : 34;
+    const left = opts.labelWidth || (opts.compact ? 132 : 230);
+    const right = opts.compact ? 44 : 62;
+    const plotW = W - left - right;
+    const svg = svgEl("svg", { viewBox: "0 0 " + W + " " + height, role: "img" });
+    const tip = el("div", { class: "tip" });
+    const d = { W: W, H: height };
+    const max = Math.max.apply(null, rows.map(function (r) { return r.value; })) || 1;
+    const color = opts.color || "var(--series-1)";
+
+    rows.forEach(function (r, i) {
+      const y = 8 + i * rowH;
+      const barH = opts.compact ? 14 : 16;
+      const w = (r.value / max) * plotW;
+
+      const name = svgEl("text", { x: left - 10, y: y + barH - 3, "text-anchor": "end", class: "axis-text" });
+      // Long menu names get clipped by the card, so truncate here and keep the
+      // full name in the tooltip.
+      name.textContent = r.label.length > maxChars ? r.label.slice(0, maxChars - 1) + "…" : r.label;
+      svg.appendChild(name);
+
+      const path = svgEl("path", { d: barPath(left, y, Math.max(2, w), barH, 4), fill: color });
+      svg.appendChild(path);
+
+      const value = svgEl("text", { x: left + Math.max(2, w) + 8, y: y + barH - 3, class: "value-text" });
+      value.textContent = opts.fmt(r.value);
+      svg.appendChild(value);
+
+      const hit = svgEl("rect", { x: 0, y: y - 4, width: W, height: rowH, fill: "transparent", tabindex: "0" });
+      const focus = function () {
+        path.setAttribute("opacity", "0.78");
+        showTip(tip, holder, d, left + Math.max(2, w) / 2, y + barH, r.label,
+          r.tipRows || [{ value: opts.fmt(r.value), color: color }]);
+      };
+      const blur = function () { path.removeAttribute("opacity"); hideTip(tip); };
+      hit.addEventListener("pointerenter", focus);
+      hit.addEventListener("focus", focus);
+      hit.addEventListener("pointerleave", blur);
+      hit.addEventListener("blur", blur);
+      svg.appendChild(hit);
+    });
+
+    holder.appendChild(svg);
+    holder.appendChild(tip);
+    return holder;
+  }
+
+  /* ---------- new chart forms: matrix, heatmap, forecast band, cohorts, sparklines ---------- */
+
+  // Units × price matrix. One hue; position carries the quadrant. Dot area = revenue.
+  function scatterChart(opts) {
+    // opts: points [{x, y, revenue, label, tipHead, tipRows, outlier}], xMedian, yMedian,
+    //       fmtX, fmtY, quadrantNames: {tr, tl, br, bl}
+    const points = opts.points;
+    const holder = el("div", { class: "chart" });
+    if (!points.length) { holder.appendChild(el("p", { class: "empty" }, "No priced items in this range.")); return holder; }
+
+    const W = 760, H = 434;
+    const PAD = { top: 20, right: 24, bottom: 54, left: 56 };
+    const PLOT_W = W - PAD.left - PAD.right, PLOT_H = H - PAD.top - PAD.bottom;
+    const svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img" });
+    const tip = el("div", { class: "tip" });
+    const d = { W: W, H: H };
+
+    const xMax = niceMax(Math.max.apply(null, points.map(function (p) { return p.x; })));
+    const yMax = niceMax(Math.max.apply(null, points.map(function (p) { return p.y; })));
+    const xAt = function (v) { return PAD.left + (v / xMax) * PLOT_W; };
+    const yAt = function (v) { return PAD.top + PLOT_H - (v / yMax) * PLOT_H; };
+    const xm = xAt(opts.xMedian), ym = yAt(opts.yMedian);
+
+    // Quadrant backgrounds — the names carry meaning so position alone reads.
+    const quads = [
+      { x: PAD.left, w: xm - PAD.left, name: opts.quadrantNames.tl, anchor: "start", ty: PAD.top + 14 },
+      { x: xm, w: PAD.left + PLOT_W - xm, name: opts.quadrantNames.tr, anchor: "end", ty: PAD.top + 14 },
+      { x: PAD.left, w: xm - PAD.left, name: opts.quadrantNames.bl, anchor: "start", ty: PAD.top + PLOT_H - 8 },
+      { x: xm, w: PAD.left + PLOT_W - xm, name: opts.quadrantNames.br, anchor: "end", ty: PAD.top + PLOT_H - 8 }
+    ];
+    quads.forEach(function (q) {
+      const tx = q.anchor === "start" ? q.x + 8 : q.x + q.w - 8;
+      const label = svgEl("text", { x: tx, y: q.ty, "text-anchor": q.anchor, class: "quadrant-label" });
+      label.textContent = q.name;
+      svg.appendChild(label);
+    });
+
+    svg.appendChild(svgEl("line", { x1: PAD.left, x2: PAD.left + PLOT_W, y1: ym, y2: ym, stroke: "var(--grid)", "stroke-width": 1, "stroke-dasharray": "3 3" }));
+    svg.appendChild(svgEl("line", { x1: xm, x2: xm, y1: PAD.top, y2: PAD.top + PLOT_H, stroke: "var(--grid)", "stroke-width": 1, "stroke-dasharray": "3 3" }));
+    svg.appendChild(svgEl("rect", { x: PAD.left, y: PAD.top, width: PLOT_W, height: PLOT_H, fill: "none", stroke: "var(--axis)", "stroke-width": 1 }));
+
+    // axes
+    for (let i = 0; i <= 4; i++) {
+      const v = (yMax / 4) * i, y = yAt(v);
+      const t = svgEl("text", { x: PAD.left - 8, y: y + 4, "text-anchor": "end", class: "axis-text" });
+      t.textContent = opts.fmtY(v);
+      svg.appendChild(t);
+    }
+    for (let i = 0; i <= 4; i++) {
+      const v = (xMax / 4) * i, x = xAt(v);
+      const t = svgEl("text", { x: x, y: PAD.top + PLOT_H + 18, "text-anchor": "middle", class: "axis-text" });
+      t.textContent = opts.fmtX(v);
+      svg.appendChild(t);
+    }
+    // Own y offset, below the tick row (xLabel would land on the same
+    // baseline as the ticks and could collide with a tick like "50").
+    const xTitleNode = svgEl("text", {
+      x: PAD.left + PLOT_W / 2, y: PAD.top + PLOT_H + 36, "text-anchor": "middle", class: "axis-text"
+    });
+    xTitleNode.textContent = opts.xTitle;
+    svg.appendChild(xTitleNode);
+    const yTitle = svgEl("text", {
+      x: 14, y: PAD.top + PLOT_H / 2, "text-anchor": "middle", class: "axis-text",
+      transform: "rotate(-90 14 " + (PAD.top + PLOT_H / 2) + ")"
+    });
+    yTitle.textContent = opts.yTitle;
+    svg.appendChild(yTitle);
+
+    const maxRevenue = Math.max.apply(null, points.map(function (p) { return p.revenue || 0; })) || 1;
+    const rFor = function (rev) {
+      const t = Math.sqrt((rev || 0) / maxRevenue);
+      return 4 + t * 20;
+    };
+
+    const allDots = points.map(function (p) { return { cx: xAt(p.x), cy: yAt(p.y), r: rFor(p.revenue) }; });
+
+    // Biggest first, so a ₹20k bubble never sits on top of a ₹300 one and
+    // swallows it. Order of drawing is the only thing that decides this.
+    const drawOrder = points
+      .map(function (p, i) { return i; })
+      .sort(function (a, b) { return allDots[b].r - allDots[a].r; });
+
+    drawOrder.forEach(function (i) {
+      const p = points[i];
+      const cx = allDots[i].cx, cy = allDots[i].cy, r = allDots[i].r;
+      // Colour carries the quadrant, which the position already carries too --
+      // deliberately doubled, because the four clouds overlap around the median
+      // lines where position alone stops answering "which quadrant is this?".
+      const fill = p.color || "var(--series-1)";
+      const dot = svgEl("circle", {
+        cx: cx, cy: cy, r: r, class: "scatter-dot", fill: fill, opacity: "0.78",
+        // A surface-coloured ring, so two overlapping bubbles read as two.
+        stroke: "var(--surface)", "stroke-width": "2"
+      });
+      svg.appendChild(dot);
+      // Hot items get a ring of their own colour outside the bubble. Never a
+      // colour change: a hot star and a cold star are the same quadrant, and
+      // recoding the hue for recency would say otherwise.
+      if (p.hot) {
+        svg.appendChild(svgEl("circle", {
+          cx: cx, cy: cy, r: r + 4, fill: "none", stroke: fill,
+          "stroke-width": "1.5", "stroke-dasharray": "2.5 2.5", opacity: "0.9"
+        }));
+      }
+      const hit = svgEl("circle", { cx: cx, cy: cy, r: Math.max(r, 10), fill: "transparent", tabindex: "0" });
+      const focus = function () {
+        dot.setAttribute("opacity", "1");
+        dot.setAttribute("stroke", "var(--text-primary)");
+        dot.setAttribute("stroke-width", "2");
+        showTip(tip, holder, d, cx, cy - r, p.tipHead || p.label, p.tipRows);
+      };
+      // Back to the surface-coloured separator ring, not to no stroke at all --
+      // removing it would let hovered-then-left bubbles merge with their
+      // neighbours again.
+      const blur = function () {
+        dot.setAttribute("opacity", "0.78");
+        dot.setAttribute("stroke", "var(--surface)");
+        dot.setAttribute("stroke-width", "2");
+        hideTip(tip);
+      };
+      hit.addEventListener("pointerenter", focus);
+      hit.addEventListener("focus", focus);
+      hit.addEventListener("pointerleave", blur);
+      hit.addEventListener("blur", blur);
+      svg.appendChild(hit);
+    });
+
+    // Labels — a second pass over the outlier subset only, so each label can
+    // be checked against every dot and every label already placed. Try a few
+    // offsets around the dot; if none is clear, place further out and draw a
+    // leader line back to the dot so the label doesn't read as ambiguous.
+    function textRect(cx, baselineY, text) {
+      const w = text.length * 5.6, h = 10;
+      return { x0: cx - w / 2, x1: cx + w / 2, y0: baselineY - h, y1: baselineY + 2 };
+    }
+    function rectsOverlap(a, b) { return !(a.x1 < b.x0 || a.x0 > b.x1 || a.y1 < b.y0 || a.y0 > b.y1); }
+    function circleHitsRect(c, rect) {
+      const nx = Math.max(rect.x0, Math.min(c.cx, rect.x1));
+      const ny = Math.max(rect.y0, Math.min(c.cy, rect.y1));
+      const dx = c.cx - nx, dy = c.cy - ny;
+      return (dx * dx + dy * dy) < (c.r + 2) * (c.r + 2);
+    }
+
+    const outliers = points
+      .map(function (p, i) { return { p: p, dot: allDots[i] }; })
+      .filter(function (e) { return e.p.outlier; })
+      .sort(function (a, b) { return (b.p.revenue || 0) - (a.p.revenue || 0); });
+
+    const placedLabels = [];
+    outliers.forEach(function (e) {
+      const cx = e.dot.cx, cy = e.dot.cy, r = e.dot.r;
+      const tries = [
+        { y: cy - r - 6 }, { y: cy + r + 15 }, { y: cy - r - 22 }, { y: cy + r + 31 }, { y: cy - r - 38 }
+      ];
+      let chosen = null;
+      for (let i = 0; i < tries.length; i++) {
+        const rect = textRect(cx, tries[i].y, e.p.label);
+        const hitsLabel = placedLabels.some(function (pl) { return rectsOverlap(rect, pl); });
+        const hitsDot = allDots.some(function (dc) { return circleHitsRect(dc, rect); });
+        if (!hitsLabel && !hitsDot) { chosen = { y: tries[i].y, rect: rect, leader: i >= 2 }; break; }
+      }
+      if (!chosen) {
+        const y = cy - r - 46;
+        chosen = { y: y, rect: textRect(cx, y, e.p.label), leader: true };
+      }
+      placedLabels.push(chosen.rect);
+      if (chosen.leader) {
+        svg.appendChild(svgEl("line", {
+          x1: cx, y1: cy - r - 1, x2: cx, y2: chosen.y + 2,
+          stroke: "var(--axis)", "stroke-width": 1, "stroke-dasharray": "2 2"
+        }));
+      }
+      const lbl = svgEl("text", { x: cx, y: chosen.y, "text-anchor": "middle", class: "scatter-dot outlier-label" });
+      lbl.textContent = e.p.label;
+      svg.appendChild(lbl);
+    });
+
+    holder.appendChild(svg);
+    holder.appendChild(tip);
+    return holder;
+  }
+
+  // Weekday × hour heatmap. Sequential one-hue ramp; quiet windows get a dashed outline.
+  function heatmapChart(opts) {
+    // opts: cells [{weekday(0-6), hour, value, tipHead, tipRows, quiet}], hours[], fmt, cellSize
+    const cellSize = opts.cellSize || 30;
+    const left = 34, top = 10, bottom = 24;
+    const cols = opts.hours.length;
+    const W = left + cols * cellSize + 8;
+    const H = top + 7 * cellSize + bottom;
+    const svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, role: "img" });
+    const holder = el("div", { class: "chart heatmap-wrap" });
+    const tip = el("div", { class: "tip" });
+    const d = { W: W, H: H };
+
+    if (!opts.cells.length) { holder.appendChild(el("p", { class: "empty" }, "No orders in this range.")); return holder; }
+
+    const byKey = new Map();
+    opts.cells.forEach(function (c) { byKey.set(c.weekday + ":" + c.hour, c); });
+    const max = Math.max.apply(null, opts.cells.map(function (c) { return c.value || 0; })) || 1;
+
+    WEEKDAYS.forEach(function (name, wi) {
+      const t = svgEl("text", { x: left - 6, y: top + wi * cellSize + cellSize / 2 + 4, "text-anchor": "end", class: "hm-label" });
+      t.textContent = name;
+      svg.appendChild(t);
+    });
+    opts.hours.forEach(function (h, hi) {
+      if (hi % 2 !== 0) return;
+      const t = svgEl("text", { x: left + hi * cellSize + cellSize / 2, y: top + 7 * cellSize + 14, "text-anchor": "middle", class: "hm-label" });
+      t.textContent = hourLabel(h);
+      svg.appendChild(t);
+    });
+
+    for (let wi = 0; wi < 7; wi++) {
+      opts.hours.forEach(function (h, hi) {
+        const c = byKey.get(wi + ":" + h);
+        const v = c ? (c.value || 0) : 0;
+        const bucket = Math.min(SEQ_STEPS.length - 1, Math.floor((v / max) * SEQ_STEPS.length));
+        const fill = v > 0 ? "var(" + SEQ_STEPS[bucket] + ")" : "var(--ghost)";
+        const x = left + hi * cellSize, y = top + wi * cellSize;
+        const rect = svgEl("rect", {
+          x: x, y: y, width: cellSize - 2, height: cellSize - 2, rx: 4,
+          fill: fill, class: "hm-cell" + (c && c.quiet ? " quiet-outline" : "")
+        });
+        svg.appendChild(rect);
+        if (c) {
+          const hit = svgEl("rect", { x: x, y: y, width: cellSize - 2, height: cellSize - 2, fill: "transparent", tabindex: "0" });
+          const focus = function () { showTip(tip, holder, d, x + cellSize / 2, y, c.tipHead, c.tipRows); };
+          const blur = function () { hideTip(tip); };
+          hit.addEventListener("pointerenter", focus);
+          hit.addEventListener("focus", focus);
+          hit.addEventListener("pointerleave", blur);
+          hit.addEventListener("blur", blur);
+          svg.appendChild(hit);
+        }
+      });
+    }
+
+    holder.appendChild(svg);
+    holder.appendChild(tip);
+    return holder;
+  }
+
+  // Bar-per-category forecast with a shaded low/high band behind the expected bars.
+  function forecastBandChart(opts) {
+    // opts: rows [{label, expected, low, high, tipHead, tipRows}], fmt
+    const d = dims(opts.compact);
+    const f = chartFrame(d);
+    const rows = opts.rows;
+    if (!rows.length) { f.holder.appendChild(el("p", { class: "empty" }, "No forecast available.")); return f.holder; }
+
+    const max = niceMax(Math.max.apply(null, rows.map(function (r) { return r.high; })));
+    yAxis(f.svg, d, max, opts.fmt);
+
+    const band = d.PLOT_W / rows.length;
+    const width = Math.min(28, Math.max(6, band - Math.max(2, band * 0.3)));
+
+    const yAtV = function (v) { return d.PAD.top + d.PLOT_H - (v / max) * d.PLOT_H; };
+
+    rows.forEach(function (r, i) {
+      const cx = d.PAD.left + band * (i + 0.5);
+      const h = (r.expected / max) * d.PLOT_H;
+      const y = d.PAD.top + d.PLOT_H - h;
+      const path = svgEl("path", { d: columnPath(cx - width / 2, y, width, h, 4), fill: "var(--series-1)" });
+      f.svg.appendChild(path);
+
+      // Interval as a whisker anchored to this column — low/high range with
+      // small caps, muted ink, drawn on top of the bar so it clearly belongs
+      // to this one column rather than reading as a second series.
+      const yLow = yAtV(r.low), yHigh = yAtV(r.high);
+      const capW = Math.min(10, width * 0.5);
+      const whisker = svgEl("g", { stroke: "var(--text-muted)", "stroke-width": 1 });
+      whisker.appendChild(svgEl("line", { x1: cx, x2: cx, y1: yHigh, y2: yLow }));
+      whisker.appendChild(svgEl("line", { x1: cx - capW / 2, x2: cx + capW / 2, y1: yHigh, y2: yHigh }));
+      whisker.appendChild(svgEl("line", { x1: cx - capW / 2, x2: cx + capW / 2, y1: yLow, y2: yLow }));
+      f.svg.appendChild(whisker);
+
+      const hit = svgEl("rect", { x: d.PAD.left + band * i, y: d.PAD.top, width: band, height: d.PLOT_H, fill: "transparent", tabindex: "0" });
+      const focus = function () {
+        path.setAttribute("opacity", "0.78");
+        showTip(f.tip, f.holder, d, cx, yAtV(r.high), r.tipHead || r.label, r.tipRows);
+      };
+      const blur = function () { path.removeAttribute("opacity"); hideTip(f.tip); };
+      hit.addEventListener("pointerenter", focus);
+      hit.addEventListener("focus", focus);
+      hit.addEventListener("pointerleave", blur);
+      hit.addEventListener("blur", blur);
+      f.svg.appendChild(hit);
+
+      xLabel(f.svg, d, cx, r.label);
+    });
+
+    return f.holder;
+  }
+
+  // Small inline sparkline for a table row.
+  function sparkline(values) {
+    const clean = values.map(function (v) { return v == null ? 0 : v; });
+    const W = 64, H = 20;
+    const svg = svgEl("svg", { viewBox: "0 0 " + W + " " + H, class: "spark", width: W, height: H });
+    if (!clean.length) return svg;
+    const max = Math.max.apply(null, clean, 1);
+    const step = clean.length > 1 ? W / (clean.length - 1) : 0;
+    let path = "";
+    clean.forEach(function (v, i) {
+      const x = clean.length > 1 ? i * step : W / 2;
+      const y = H - 2 - (v / (max || 1)) * (H - 4);
+      path += (i === 0 ? "M" : "L") + x + "," + y;
+    });
+    svg.appendChild(svgEl("path", { d: path, class: "line" }));
+    const lastX = clean.length > 1 ? (clean.length - 1) * step : W / 2;
+    const lastY = H - 2 - (clean[clean.length - 1] / (max || 1)) * (H - 4);
+    svg.appendChild(svgEl("circle", { cx: lastX, cy: lastY, r: 2 }));
+    return svg;
+  }
+
+  // Cohort retention grid — sequential fill by repeat share.
+  function cohortGrid(cohorts) {
+    if (!cohorts.length) return el("p", { class: "empty" }, "No cohorts to show.");
+    const scroll = el("div", { class: "scroll" });
+    const table = el("table", { class: "cohort-grid" });
+    const head = el("tr");
+    ["Cohort", "Customers", "Repeat @30d", "Repeat @60d", "Repeat @90d"].forEach(function (h) {
+      head.appendChild(el("th", null, h));
+    });
+    table.appendChild(el("thead")).appendChild(head);
+    const tbody = el("tbody");
+    cohorts.forEach(function (c) {
+      const tr = el("tr");
+      tr.appendChild(el("td", { style: "text-align:left" }, c.cohort_month));
+      tr.appendChild(el("td", null, String(c.customers)));
+      [["repeat_30", c.repeat_30], ["repeat_60", c.repeat_60], ["repeat_90", c.repeat_90]].forEach(function (pair) {
+        const share = c.customers ? pair[1] / c.customers : 0;
+        const bucket = Math.min(SEQ_STEPS.length - 1, Math.floor(share * SEQ_STEPS.length));
+        const td = el("td", null);
+        const cell = el("div", { class: "cohort-cell" }, pct(share, 0));
+        cell.style.background = "var(" + SEQ_STEPS[bucket] + ")";
+        if (bucket >= 4) cell.style.color = "#ffffff";
+        td.appendChild(cell);
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    scroll.appendChild(table);
+    return scroll;
+  }
+
+  // Compact scale key for a heatmap's sequential ramp — names the measure
+  // currently shown, since it changes under a toggle (orders/revenue/prep time).
+  function heatmapLegend(measureLabel, maxValue, fmt) {
+    const wrap = el("div", { class: "legend hm-legend" });
+    wrap.appendChild(el("span", null, measureLabel + ":"));
+    const ramp = el("span", { class: "ramp" });
+    SEQ_STEPS.forEach(function (step) {
+      const sw = el("span", null);
+      sw.style.background = "var(" + step + ")";
+      ramp.appendChild(sw);
+    });
+    wrap.appendChild(ramp);
+    wrap.appendChild(el("span", { class: "range" }, "low → " + fmt(maxValue)));
+    return wrap;
+  }
+
+  function quietNote(text) {
+    return el("p", { class: "quiet-note" },
+      text || ("Full order history, " + shortDate(FIRST_DAY) + " – " + shortDate(LAST_DAY) + " — not scoped to the filters above."));
+  }
+
+  // Category filter chips — reads/writes the given state key, re-renders on change.
+  function categoryChips(categories, stateKey) {
+    if (!categories.length) return null;
+    const row = el("div", { class: "weekday-picker", style: "margin: 2px 0 16px" });
+    const all = el("button", { class: "chip", type: "button" }, "All categories");
+    all.setAttribute("aria-pressed", String(state[stateKey] === "all"));
+    all.addEventListener("click", function () { state[stateKey] = "all"; render(); });
+    row.appendChild(all);
+    categories.forEach(function (c) {
+      const b = el("button", { class: "chip", type: "button" }, c);
+      b.setAttribute("aria-pressed", String(state[stateKey] === c));
+      b.addEventListener("click", function () { state[stateKey] = c; render(); });
+      row.appendChild(b);
+    });
+    return row;
+  }
+
+  function priceSourceLine() {
+    if (!A || !A.price_source) return null;
+    const label = A.price_source === "gold.item_prices" ? "warehouse price table" : "inferred from order totals";
+    return el("p", { class: "quiet-note" }, "Prices: " + label + ".");
+  }
+
+  // Trust panel — surfaces analytics.py's own data-quality checks (e.g. the
+  // missing week) before a reader trusts a trend line built on top of them.
+  function dqRow(c) {
+    const row = el("div", { class: "dq-row" });
+    row.appendChild(el("span", { class: "status-text " + (c.status === "ok" ? "good" : c.status === "warn" ? "warning" : "critical") },
+      c.status === "ok" ? "ok" : c.status));
+    row.appendChild(el("span", { class: "dq-name" }, c.check_name));
+    row.appendChild(el("span", { class: "dq-detail-text" }, c.detail + (c.value != null ? " (" + c.value + ")" : "")));
+    return row;
+  }
+
+  // Trust panel — surfaces analytics.py's own data-quality checks (e.g. the
+  // missing week) before a reader trusts a trend line built on top of them.
+  // Failing/warning checks print inline, one line each; passing checks sit
+  // behind a closed disclosure so the caveat never outweighs the forecast
+  // that follows it.
+  function dataQualityPanel() {
+    const checks = A && A.data_quality;
+    if (!checks || !checks.length) return null;
+    const bad = checks.filter(function (c) { return c.status !== "ok"; });
+    const good = checks.filter(function (c) { return c.status === "ok"; });
+    const box = el("div", { class: "dq-panel" });
+
+    if (!bad.length) {
+      box.appendChild(dqRow({ status: "ok", check_name: "All " + checks.length + " data checks passed", detail: "" }));
+      return box;
+    }
+
+    bad.forEach(function (c) { box.appendChild(dqRow(c)); });
+
+    if (good.length) {
+      const details = el("details", { class: "dq-good-details" });
+      details.appendChild(el("summary", null, good.length + " other check" + (good.length === 1 ? "" : "s") + " passed"));
+      good.forEach(function (c) { details.appendChild(dqRow(c)); });
+      box.appendChild(details);
+    }
+    return box;
+  }
+
+  function confidenceChip(level) {
+    return el("span", { class: "chip-confidence " + (level || "low") }, (level || "unknown") + " confidence");
+  }
+
+  function actionCard(a) {
+    const box = el("div", { class: "action-card" });
+    box.appendChild(el("div", { class: "kind" }, (a.kind || "").replace("_", " ")));
+    box.appendChild(el("div", { class: "headline" }, a.headline));
+    if (a.impact_value != null) {
+      // impact_period may not exist in older payloads yet — default to the
+      // existing monthly behaviour rather than assume one_time.
+      const suffix = a.impact_period === "one_time" ? " one-time" : "/mo";
+      box.appendChild(el("div", { class: "impact" }, moneyExact(a.impact_value) + suffix));
+    }
+    if (a.impact_basis) box.appendChild(el("div", { class: "impact-basis" }, a.impact_basis));
+    if (a.evidence) box.appendChild(el("div", { class: "evidence" }, a.evidence));
+    const foot = el("div", { class: "foot" });
+    foot.appendChild(confidenceChip(a.confidence));
+    box.appendChild(foot);
+    return box;
+  }
+
+  /**
+   * Phase 8 (backend PRD §11 row 8) — direct D1 orders next to Zomato,
+   * from analytics.direct_vs_zomato (built by analytics.py's
+   * compute_direct_vs_zomato from gold.combined_weekly_sales). null on an
+   * older build or one where the direct pull hasn't run yet — this reads
+   * over the full history, same as the other Plan-view analyses that show
+   * a quiet note instead of responding to the date filter above.
+   */
+  function directVsZomatoCard() {
+    const dvz = A && A.direct_vs_zomato;
+    if (!dvz) return null;
+    const box = card("Direct vs Zomato", "All-time confirmed orders by channel — kept side by side, not merged into one customer identity (the two systems key customers differently). Computed over the full history.", "full");
+    const totals = dvz.totals || [];
+    if (!totals.length || totals.every(function (t) { return t.orders === 0; })) {
+      box.appendChild(el("p", { class: "empty" }, "No confirmed orders on either channel yet."));
+      return box;
+    }
+    const table = el("table");
+    const head = el("tr");
+    ["Channel", "Orders", "Revenue"].forEach(function (h) { head.appendChild(el("th", null, h)); });
+    table.appendChild(el("thead")).appendChild(head);
+    const tbody = el("tbody");
+    totals.forEach(function (t) {
+      const tr = el("tr");
+      tr.appendChild(el("td", { style: "text-align:left" }, t.source));
+      tr.appendChild(el("td", null, num(t.orders, 0)));
+      tr.appendChild(el("td", null, moneyExact(t.revenue)));
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    const scroll = el("div", { class: "scroll" });
+    scroll.appendChild(table);
+    box.appendChild(scroll);
+    const direct = totals.find(function (t) { return t.source === "direct"; });
+    if (!direct || direct.orders === 0) {
+      box.appendChild(el("p", { class: "empty" }, "Direct channel has no confirmed orders yet — the kitchen only just relaunched and order capture is brand new; this fills in as real orders are confirmed."));
+    }
+    return box;
+  }
+
+  function emptyCard(title, note) {
+    const box = card(title, note);
+    box.appendChild(el("p", { class: "empty" }, "Not in this build yet — analytics.py has not produced this section."));
+    return box;
+  }
+
+  function closureOptionsTable(allOptions, scope) {
+    const options = (allOptions || []).filter(function (o) { return o.scope === scope; });
+    if (!options.length) return el("p", { class: "empty" }, "No closure candidates for this scope.");
+    const scroll = el("div", { class: "scroll" });
+    const table = el("table");
+    const head = el("tr");
+    ["Window", "Orders lost/mo", "Revenue at risk/mo", "Share of revenue", "Verdict"].forEach(function (h) {
+      head.appendChild(el("th", null, h));
+    });
+    table.appendChild(el("thead")).appendChild(head);
+    const tbody = el("tbody");
+    options.forEach(function (o) {
+      const tr = el("tr");
+      tr.appendChild(el("td", { style: "text-align:left" }, o.label));
+      tr.appendChild(el("td", null, num(o.orders_lost_per_month, 1)));
+      tr.appendChild(el("td", null, moneyExact(o.revenue_at_risk_per_month)));
+      tr.appendChild(el("td", null, pct(o.share_of_revenue, 1)));
+      tr.appendChild(el("td", { style: "text-align:left; white-space: normal;" }, o.verdict));
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    scroll.appendChild(table);
+    return scroll;
+  }
+
+  /* ---------- aggregations ---------- */
+
+  function weeks(rows) {
+    const map = new Map();
+    rows.forEach(function (o) {
+      const key = o.week.getTime();
+      if (!map.has(key)) map.set(key, { start: o.week, rows: [] });
+      map.get(key).rows.push(o);
+    });
+    // Keep empty weeks so gaps in trading read as gaps, not as continuity.
+    const out = [];
+    if (!map.size) return out;
+    const keys = Array.from(map.keys()).sort(function (a, b) { return a - b; });
+    for (let t = keys[0]; t <= keys[keys.length - 1]; t += 7 * DAY_MS) {
+      out.push(map.get(t) || { start: new Date(t), rows: [] });
+    }
+    return out;
+  }
+
+  function metrics(rows) {
+    const delivered = rows.filter(function (o) { return o.delivered; });
+    const revenue = sum(delivered.map(function (o) { return o.total; }));
+    const customers = new Set(rows.map(function (o) { return o.customer_id; }));
+    const counts = new Map();
+    rows.forEach(function (o) { counts.set(o.customer_id, (counts.get(o.customer_id) || 0) + 1); });
+    let repeat = 0;
+    counts.forEach(function (c) { if (c > 1) repeat++; });
+    const rated = rows.filter(function (o) { return o.rating != null; });
+    return {
+      orders: rows.length,
+      delivered: delivered.length,
+      revenue: revenue,
+      aov: delivered.length ? revenue / delivered.length : null,
+      fulfilment: rows.length ? delivered.length / rows.length : null,
+      rating: mean(rated.map(function (o) { return o.rating; })),
+      ratedCount: rated.length,
+      kpt: mean(rows.map(function (o) { return o.kpt_duration_min; })),
+      riderWait: mean(rows.map(function (o) { return o.rider_wait_min; })),
+      discount: sum(rows.map(function (o) { return o.discount; })),
+      customers: customers.size,
+      repeatRate: customers.size ? repeat / customers.size : null,
+      itemsPerOrder: rows.length
+        ? sum(rows.map(function (o) { return sum(o.lines.map(function (l) { return l.quantity || 0; })); })) / rows.length
+        : null
+    };
+  }
+
+  function countBy(rows, keyFn) {
+    const map = new Map();
+    rows.forEach(function (o) {
+      const k = keyFn(o);
+      if (k == null) return;
+      map.set(k, (map.get(k) || 0) + 1);
+    });
+    return map;
+  }
+
+  /* ---------- view ---------- */
+
+  function tile(label, value, foot) {
+    const box = el("div", { class: "tile" });
+    box.appendChild(el("div", { class: "label" }, label));
+    box.appendChild(el("div", { class: "value" }, value));
+    box.appendChild(el("div", { class: "foot" }, foot || " "));
+    return box;
+  }
+
+  function heroBlock(label, figure, deltaNode) {
+    const hero = el("div", { class: "hero" });
+    const box = el("div");
+    box.appendChild(el("div", { class: "label" }, label));
+    box.appendChild(el("div", { class: "figure" }, figure));
+    hero.appendChild(box);
+    if (deltaNode) hero.appendChild(deltaNode);
+    return hero;
+  }
+
+  function wdIndex(w) {
+    return typeof w === "number" ? w : WEEKDAYS.indexOf(w);
+  }
+
+  function itemShortName(name) {
+    return name.replace(/\s*\[[^\]]*\]\s*$/, "").trim();
+  }
+
+  // trend_pct arrives already in percent units (-85.71 means -86%), so it is
+  // formatted directly rather than through pct(), which scales by 100.
+  // analytics.py nulls it below a meaningful base (a swing from 3 units to 0
+  // prints as a nonsense percentage); fall back to the raw before/after unit
+  // counts it carries instead. Defensive: those fields may not be in the
+  // payload yet.
+  function trendCellText(mrow) {
+    if (!mrow) return "—";
+    if (mrow.trend_pct != null) {
+      const v = Math.round(mrow.trend_pct);
+      return (v > 0 ? "+" : "") + v + "%";
+    }
+    if (mrow.trend_units_prior != null && mrow.trend_units_recent != null) {
+      return mrow.trend_units_prior + " → " + mrow.trend_units_recent + " units";
+    }
+    return "—";
+  }
+
+  /* ---------- Plan ---------- */
+
+  function renderPlan(body, rows) {
+    if (!A) {
+      body.appendChild(heroBlock("Next week's forecast", "—"));
+      body.appendChild(emptyCard("Plan", "Forecast, actions, prep plan and closure options."));
+      return;
+    }
+    const dq = dataQualityPanel();
+    if (dq) body.appendChild(dq);
+
+    const dvzCard = directVsZomatoCard();
+    if (dvzCard) body.appendChild(dvzCard);
+
+    const f = A.forecast || {};
+    body.appendChild(heroBlock(
+      "Forecast for the week of " + (f.week_start ? shortDate(new Date(f.week_start)) : "—"),
+      moneyExact(f.revenue_expected),
+      el("div", { class: "delta" },
+        num(f.orders_expected, 1) + " orders expected (" + num(f.orders_low, 0) + "–" + num(f.orders_high, 0) + ") · " + (f.method || ""))
+    ));
+    body.appendChild(quietNote());
+
+    const grid = el("div", { class: "grid" });
+    body.appendChild(grid);
+
+    const wk = weeks(rows);
+    const wkEvery = Math.max(1, Math.ceil(wk.length / 8));
+    const historyCard = card("Where we've been", "Delivered revenue by week — scoped to the filters above.", "full");
+    historyCard.appendChild(columnChart({
+      rows: wk.map(function (w) {
+        const wm = metrics(w.rows);
+        return {
+          label: shortDate(w.start), value: wm.revenue, tipHead: "Week of " + longDate(w.start),
+          tipRows: [
+            { value: moneyExact(wm.revenue), name: "revenue", color: "var(--series-1)" },
+            { value: String(wm.orders), name: "orders" }
+          ]
+        };
+      }),
+      fmt: money, labelEvery: wkEvery
+    }));
+    grid.appendChild(historyCard);
+
+    const fcCard = card("Forecast by weekday", "Recency-weighted mean of the last 4 same weekdays; the whisker on each column is its ±1 standard deviation range.", "full");
+    fcCard.appendChild(forecastBandChart({
+      rows: (f.by_weekday || []).map(function (w) {
+        return {
+          label: w.weekday, expected: w.orders_expected, low: w.orders_low, high: w.orders_high,
+          tipHead: w.weekday,
+          tipRows: [
+            { value: num(w.orders_expected, 1) + " orders", color: "var(--series-1)" },
+            { value: num(w.orders_low, 1) + "–" + num(w.orders_high, 1), name: "range" },
+            { value: moneyExact(w.revenue_expected), name: "revenue" }
+          ]
+        };
+      }),
+      fmt: function (v) { return num(v, 0); }
+    }));
+    grid.appendChild(fcCard);
+
+    const actionsCard = card("Ranked actions", "Impact is a monthly rupee estimate; confidence reflects sample size honestly.", "full");
+    const list = el("div", { class: "actions-list" });
+    (A.actions || []).forEach(function (a) { list.appendChild(actionCard(a)); });
+    if (!(A.actions || []).length) actionsCard.appendChild(el("p", { class: "empty" }, "No ranked actions in this build."));
+    actionsCard.appendChild(list);
+    grid.appendChild(actionsCard);
+
+    const prep = A.demand && A.demand.prep_plan || [];
+    const prepHours = Array.from(new Set(prep.map(function (p) { return p.hour; }))).sort(function (a, b) { return a - b; });
+    const prepCard = card("Prep-hour plan", "Expected orders by weekday and hour — staff to this shape, not to the daily average.", "full");
+    const prepMax = prep.length ? Math.max.apply(null, prep.map(function (p) { return p.orders_expected || 0; })) : 0;
+    prepCard.appendChild(heatmapLegend("Orders expected", prepMax, function (v) { return num(v, 1); }));
+    prepCard.appendChild(heatmapChart({
+      cells: prep.map(function (p) {
+        const wi = wdIndex(p.weekday);
+        return {
+          weekday: wi, hour: p.hour, value: p.orders_expected,
+          tipHead: WEEKDAYS[wi] + " " + hourLabel(p.hour),
+          tipRows: [{ value: num(p.orders_expected, 1) + " orders expected", color: "var(--series-1)" }]
+        };
+      }),
+      hours: prepHours
+    }));
+    grid.appendChild(prepCard);
+
+    const closure = A.demand && A.demand.closure_options || [];
+    const closureCard = card("Kitchen-closure options", "When you can shut the kitchen for maintenance without losing meaningful revenue. Five best per scope; a weekday carrying a peak window is never recommended.", "full");
+    ["weekly", "weekday", "monthly"].forEach(function (scope) {
+      closureCard.appendChild(el("p", { class: "eyebrow", style: "margin-top:14px" }, scope));
+      closureCard.appendChild(closureOptionsTable(closure, scope));
+    });
+    grid.appendChild(closureCard);
+  }
+
+  /* ---------- Menu ---------- */
+
+  function renderMenu(body, rows) {
+    if (!A) { body.appendChild(emptyCard("Menu", "Item matrix, table, price and drop candidates.")); return; }
+    const menuAll = A.menu || [];
+    const priceByName = new Map((A.prices || []).map(function (p) { return [p.item_name, p]; }));
+    const menuByName = new Map(menuAll.map(function (m) { return [m.item_name, m]; }));
+    // A "dog" is never a drop candidate if it appears in a pair with n >= 3 — computed
+    // from the pairs list rather than trusting a precomputed field on the menu row.
+    const frequentAttachment = new Set();
+    (A.pairs || []).forEach(function (p) { if (p.n >= 3) { frequentAttachment.add(p.a); frequentAttachment.add(p.b); } });
+
+    const categories = Array.from(new Set(menuAll.map(function (m) { return m.category; }).filter(Boolean))).sort();
+    const menu = state.menuCategory === "all" ? menuAll : menuAll.filter(function (m) { return m.category === state.menuCategory; });
+
+    const topRev = menuAll.slice().sort(function (a, b) { return b.revenue - a.revenue; })[0];
+    body.appendChild(heroBlock(
+      "Revenue concentration",
+      topRev ? pct(topRev.revenue_share, 0) : "—",
+      el("div", { class: "delta" }, topRev ? itemShortName(topRev.item_name) + " alone is " + pct(topRev.revenue_share, 0) + " of item revenue" : "")
+    ));
+    body.appendChild(quietNote());
+    const psl = priceSourceLine();
+    if (psl) body.appendChild(psl);
+    const catChips = categoryChips(categories, "menuCategory");
+    if (catChips) body.appendChild(catChips);
+
+    const grid = el("div", { class: "grid" });
+    body.appendChild(grid);
+
+    const priced = menu.filter(function (m) { return m.unit_price != null; });
+    const unitsMedian = median(priced.map(function (m) { return m.units; }));
+    const priceMedian = median(priced.map(function (m) { return m.unit_price; }));
+    // "True outliers" — items genuinely far from the pack in the matrix
+    // (normalized distance from the median on both axes), not simply the
+    // highest-revenue dots, which cluster together and collide as labels.
+    const maxUnits = Math.max.apply(null, priced.map(function (m) { return m.units; })) || 1;
+    const maxPrice = Math.max.apply(null, priced.map(function (m) { return m.unit_price; })) || 1;
+    const extremity = function (m) {
+      return Math.abs(m.units - unitsMedian) / maxUnits + Math.abs(m.unit_price - priceMedian) / maxPrice;
+    };
+    const outlierNames = new Set(
+      priced.slice()
+        .sort(function (a, b) { return extremity(b) - extremity(a); })
+        .filter(function (m) { return extremity(m) > 0.25; })
+        .slice(0, 6)
+        .map(function (m) { return m.item_name; })
+    );
+
+    // "Hot" is recency, not size: sold inside the last fortnight AND selling at
+    // or above the median. A big cold bubble is an item that used to work, and
+    // that is a different problem from one that is working now -- so it gets a
+    // ring rather than a colour, which would have overwritten the quadrant.
+    const HOT_DAYS = 14;
+    const isHot = function (m) { return m.days_dormant != null && m.days_dormant <= HOT_DAYS && m.units >= unitsMedian; };
+    const QUAD_COLOR = {
+      star: "var(--quad-star)",
+      plowhorse: "var(--quad-plowhorse)",
+      puzzle: "var(--quad-puzzle)",
+      dog: "var(--quad-dog)"
+    };
+    const QUAD_MEANING = {
+      star: "sells a lot, priced above median",
+      plowhorse: "sells a lot, priced below median",
+      puzzle: "priced above median, barely sells",
+      dog: "below median on both"
+    };
+    const hotCount = priced.filter(isHot).length;
+
+    const matrixCard = card("Menu matrix", "Units × price. Bubble area is revenue, colour is the quadrant, and a dashed ring means the item sold inside the last " + HOT_DAYS + " days. No cost data exists, so this is price, never margin.", "full");
+    matrixCard.appendChild(legend(
+      ["star", "plowhorse", "puzzle", "dog"].map(function (q) {
+        const n = priced.filter(function (m) { return m.quadrant === q; }).length;
+        return { color: QUAD_COLOR[q], name: q + " · " + n + " — " + QUAD_MEANING[q] };
+      })
+    ));
+    matrixCard.appendChild(el("p", { class: "forecast-method" },
+      "Bubble area is revenue — the biggest bubble is " + (topRev ? itemShortName(topRev.item_name) + " at " + moneyExact(topRev.revenue) : "—") + ". " +
+      (hotCount ? hotCount + " item" + (hotCount === 1 ? " has" : "s have") + " a dashed ring: sold in the last " + HOT_DAYS + " days and at or above median units."
+                : "No item is currently hot — nothing sold inside the last " + HOT_DAYS + " days at or above median units.")));
+    matrixCard.appendChild(scatterChart({
+      points: priced.map(function (m) {
+        return {
+          x: m.units, y: m.unit_price, revenue: m.revenue, label: itemShortName(m.item_name),
+          outlier: outlierNames.has(m.item_name),
+          color: QUAD_COLOR[m.quadrant] || "var(--text-muted)",
+          hot: isHot(m),
+          tipHead: itemShortName(m.item_name),
+          tipRows: [
+            { value: m.units + " units", color: QUAD_COLOR[m.quadrant] || "var(--series-1)" },
+            { value: moneyExact(m.unit_price), name: "unit price (" + m.price_confidence + ")" },
+            { value: moneyExact(m.revenue), name: "revenue" },
+            { value: m.quadrant + (isHot(m) ? " · hot" : ""), name: "quadrant" },
+            { value: m.days_dormant != null ? m.days_dormant + " days" : "—", name: "since last sale" }
+          ]
+        };
+      }),
+      xMedian: unitsMedian, yMedian: priceMedian,
+      xTitle: "units sold", yTitle: "unit price (₹)",
+      fmtX: function (v) { return num(v, 0); }, fmtY: money,
+      quadrantNames: { tr: "star", tl: "puzzle", br: "plowhorse", bl: "dog" }
+    }));
+    grid.appendChild(matrixCard);
+
+    const priceUp = menu.filter(function (m) { return m.quadrant === "plowhorse"; }).sort(function (a, b) { return b.units - a.units; }).slice(0, 8);
+    const priceCard = card("Price-rise candidates", "High demand, priced below the median — plowhorses.");
+    priceCard.appendChild(priceUp.length
+      ? barChart({
+          rows: priceUp.map(function (m) { return { label: itemShortName(m.item_name), value: m.units, tipRows: [
+            { value: m.units + " units", color: "var(--series-1)" },
+            { value: moneyExact(m.unit_price), name: "current price" }
+          ] }; }),
+          fmt: function (v) { return num(v); }, compact: true
+        })
+      : el("p", { class: "empty" }, "No plowhorse items in range."));
+    grid.appendChild(priceCard);
+
+    const drop = menu.filter(function (m) { return m.quadrant === "dog" && !frequentAttachment.has(m.item_name); }).sort(function (a, b) { return b.days_dormant - a.days_dormant; }).slice(0, 8);
+    const dropCard = card("Drop candidates", "Low demand, low price, ranked by days since last sale. Items that attach to a pair (n ≥ 3) are exempted here — see why in the item table.");
+    dropCard.appendChild(drop.length
+      ? barChart({
+          rows: drop.map(function (m) { return { label: itemShortName(m.item_name), value: m.days_dormant, tipRows: [
+            { value: m.days_dormant + " days dormant", color: "var(--series-2)" },
+            { value: m.units + " units lifetime", name: "" }
+          ] }; }),
+          fmt: function (v) { return num(v) + "d"; }, color: "var(--series-2)", compact: true
+        })
+      : el("p", { class: "empty" }, "No drop candidates in range."));
+    grid.appendChild(dropCard);
+
+    const dormant = (A.dormant || []).slice(0, 12);
+    const dormantCard = card("Dormant / revive", "Sold steadily once, then stopped — check listing status before writing these off.", "full");
+    if (dormant.length) {
+      const scroll = el("div", { class: "scroll" });
+      const table = el("table");
+      const head = el("tr");
+      ["Item", "Units lifetime", "Last sold", "Days dormant", "Weekly rate when active", "Est. lost revenue"].forEach(function (h) { head.appendChild(el("th", null, h)); });
+      table.appendChild(el("thead")).appendChild(head);
+      const tbody = el("tbody");
+      dormant.forEach(function (d) {
+        const tr = el("tr");
+        tr.appendChild(el("td", { style: "text-align:left" }, itemShortName(d.item_name)));
+        tr.appendChild(el("td", null, String(d.units_lifetime)));
+        tr.appendChild(el("td", null, shortDate(new Date(d.last_sold))));
+        tr.appendChild(el("td", null, String(d.days_dormant)));
+        tr.appendChild(el("td", null, num(d.weekly_rate_when_active, 2)));
+        tr.appendChild(el("td", null, moneyExact(d.estimated_lost_revenue)));
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      scroll.appendChild(table);
+      dormantCard.appendChild(scroll);
+    } else {
+      dormantCard.appendChild(el("p", { class: "empty" }, "Nothing dormant in this build."));
+    }
+    grid.appendChild(dormantCard);
+
+    /* item table — units/orders/revenue scoped to the filters; quadrant/trend/sparkline are full history */
+    const itemQty = new Map(), itemOrders = new Map();
+    rows.forEach(function (o) {
+      o.lines.forEach(function (l) {
+        itemQty.set(l.item_name, (itemQty.get(l.item_name) || 0) + (l.quantity || 0));
+        itemOrders.set(l.item_name, (itemOrders.get(l.item_name) || 0) + 1);
+      });
+    });
+    const itemNames = Array.from(itemQty.keys())
+      .filter(function (n) { return state.menuCategory === "all" || (menuByName.get(n) && menuByName.get(n).category === state.menuCategory); })
+      .sort(function (a, b) { return (itemQty.get(b) || 0) - (itemQty.get(a) || 0); });
+    const itemsDetails = el("details", { class: "table-view", open: itemNames.length ? undefined : null });
+    itemsDetails.appendChild(el("summary", null, "Item table — units/orders/revenue scoped to filters; quadrant, trend and 12-week sparkline are full history"));
+    const iscroll = el("div", { class: "scroll" });
+    const itable = el("table");
+    const ihead = el("tr");
+    const cols = categories.length ? ["Item", "Category", "Units", "Orders", "Revenue", "Price", "Quadrant", "Trend", "12wk"]
+      : ["Item", "Units", "Orders", "Revenue", "Price", "Quadrant", "Trend", "12wk"];
+    cols.forEach(function (h) { ihead.appendChild(el("th", null, h)); });
+    itable.appendChild(el("thead")).appendChild(ihead);
+    const itbody = el("tbody");
+    itemNames.forEach(function (name) {
+      const price = priceByName.get(name);
+      const mrow = menuByName.get(name);
+      const units = itemQty.get(name) || 0;
+      const orders = itemOrders.get(name) || 0;
+      const revenue = price && price.unit_price != null ? price.unit_price * units : null;
+      const tr = el("tr");
+      tr.appendChild(el("td", { style: "text-align:left" }, itemShortName(name)));
+      if (categories.length) tr.appendChild(el("td", null, (mrow && mrow.category) || "—"));
+      tr.appendChild(el("td", null, String(units)));
+      tr.appendChild(el("td", null, String(orders)));
+      tr.appendChild(el("td", null, revenue == null ? "price unknown" : moneyExact(revenue)));
+      tr.appendChild(el("td", null, price && price.unit_price != null ? moneyExact(price.unit_price) : "—"));
+      tr.appendChild(el("td", null, mrow ? mrow.quadrant : "—"));
+      tr.appendChild(el("td", null, trendCellText(mrow)));
+      const sparkTd = el("td");
+      sparkTd.appendChild(sparkline(mrow ? mrow.weekly_units : []));
+      tr.appendChild(sparkTd);
+      itbody.appendChild(tr);
+    });
+    itable.appendChild(itbody);
+    iscroll.appendChild(itable);
+    itemsDetails.appendChild(iscroll);
+    body.appendChild(itemsDetails);
+  }
+
+  /* ---------- Combos ---------- */
+
+  function renderCombos(body) {
+    if (!A) { body.appendChild(emptyCard("Combos", "Pairs, attach rates and suggested bundles.")); return; }
+    const menuByName = new Map((A.menu || []).map(function (m) { return [m.item_name, m]; }));
+    const categoryOf = function (name) { const m = menuByName.get(name); return m && m.category; };
+    const categories = Array.from(new Set((A.menu || []).map(function (m) { return m.category; }).filter(Boolean))).sort();
+    const inCategory = function (name) { return state.comboCategory === "all" || categoryOf(name) === state.comboCategory; };
+
+    const pairs = (A.pairs || []).filter(function (p) { return inCategory(p.a) || inCategory(p.b); });
+    const attach = (A.attach || []).filter(function (a) { return inCategory(a.main_item); });
+    const gapTotal = sum(attach.map(function (a) { return a.gap_value || 0; }));
+    body.appendChild(heroBlock("Attach-rate opportunity left on the table", moneyExact(gapTotal),
+      el("div", { class: "delta" }, attach.length + " mains tracked · basket data is thin (51 of 273 orders carry more than one item)")));
+    body.appendChild(quietNote());
+    const psl = priceSourceLine();
+    if (psl) body.appendChild(psl);
+    const catChips = categoryChips(categories, "comboCategory");
+    if (catChips) body.appendChild(catChips);
+
+    const grid = el("div", { class: "grid" });
+    body.appendChild(grid);
+
+    const pairCard = card("Item pairs", "n < 5 is indicative, never rendered without its count.", "full");
+    if (pairs.length) {
+      const scroll = el("div", { class: "scroll" });
+      const table = el("table");
+      const head = el("tr");
+      ["Pair", "n", "Lift", "Strength", "Combined price", "Suggested combo"].forEach(function (h) { head.appendChild(el("th", null, h)); });
+      table.appendChild(el("thead")).appendChild(head);
+      const tbody = el("tbody");
+      pairs.slice(0, 15).forEach(function (p) {
+        const tr = el("tr");
+        tr.appendChild(el("td", { style: "text-align:left" }, itemShortName(p.a) + " + " + itemShortName(p.b)));
+        tr.appendChild(el("td", null, String(p.n)));
+        const liftTd = el("td");
+        if (p.lift != null) {
+          liftTd.appendChild(document.createTextNode(num(p.lift, 2) + "×"));
+          // reads_as may not exist yet in older payloads — code defensively.
+          if (p.lift < 1 && p.reads_as) {
+            liftTd.appendChild(el("span", { class: "reads-as" }, p.reads_as));
+          }
+        } else {
+          liftTd.textContent = "—";
+        }
+        tr.appendChild(liftTd);
+        const stTd = el("td");
+        stTd.appendChild(el("span", { class: "strength-chip " + p.strength }, p.strength));
+        tr.appendChild(stTd);
+        tr.appendChild(el("td", null, p.combined_value != null ? moneyExact(p.combined_value) : "—"));
+        tr.appendChild(el("td", null, p.suggested_combo_price != null ? moneyExact(p.suggested_combo_price) : "—"));
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      scroll.appendChild(table);
+      pairCard.appendChild(scroll);
+    } else {
+      pairCard.appendChild(el("p", { class: "empty" }, "No pairs with n ≥ 2 in this build."));
+    }
+    grid.appendChild(pairCard);
+
+    const attachSorted = attach.slice().sort(function (a, b) { return (b.gap_value || 0) - (a.gap_value || 0); });
+    const attachCard = card("Attach rate per main", "Share of a main's orders that also carry a side — ranked by opportunity value, not rate, so a thin-sample item can't outrank the main that matters. Order count in parentheses.");
+    attachCard.appendChild(attachSorted.length
+      ? barChart({
+          rows: attachSorted.map(function (a) { return {
+            label: itemShortName(a.main_item) + " (" + a.orders + ")", value: a.attach_rate,
+            tipRows: [
+              { value: pct(a.attach_rate, 1), color: "var(--series-3)" },
+              { value: a.orders + " orders", name: "" },
+              { value: moneyExact(a.gap_value), name: "opportunity/mo" }
+            ]
+          }; }),
+          fmt: function (v) { return pct(v, 0); }, color: "var(--series-3)", compact: true
+        })
+      : el("p", { class: "empty" }, "No mains tracked."));
+    grid.appendChild(attachCard);
+
+    const comboCard = card("Suggested combos", "Priced at 0.9× the sum of the two items, rounded to the nearest ₹10.");
+    const comboList = el("div", { class: "actions-list" });
+    pairs.filter(function (p) { return p.suggested_combo_price != null; }).slice(0, 6).forEach(function (p) {
+      const box = el("div", { class: "action-card" });
+      box.appendChild(el("div", { class: "kind" }, "combo"));
+      box.appendChild(el("div", { class: "headline" }, itemShortName(p.a) + " + " + itemShortName(p.b)));
+      box.appendChild(el("div", { class: "impact" }, moneyExact(p.suggested_combo_price)));
+      box.appendChild(el("div", { class: "evidence" }, "n=" + p.n + " co-orders, " + p.strength));
+      const foot = el("div", { class: "foot" });
+      foot.appendChild(el("span", { class: "strength-chip " + p.strength }, p.strength));
+      box.appendChild(foot);
+      comboList.appendChild(box);
+    });
+    if (!comboList.children.length) comboCard.appendChild(el("p", { class: "empty" }, "No priced pairs to combo yet."));
+    comboCard.appendChild(comboList);
+    grid.appendChild(comboCard);
+
+    const discounts = A.discounts || [];
+    const discCard = card("Which offers pay for themselves", "Net revenue after the discount the restaurant funded.", "full");
+    if (discounts.length) {
+      const scroll = el("div", { class: "scroll" });
+      const table = el("table");
+      const head = el("tr");
+      ["Offer", "Orders", "Avg order", "Discount funded", "Net revenue", "Repeat rate", "Verdict"].forEach(function (h) { head.appendChild(el("th", null, h)); });
+      table.appendChild(el("thead")).appendChild(head);
+      const tbody = el("tbody");
+      discounts.slice(0, 10).forEach(function (d) {
+        const tr = el("tr");
+        tr.appendChild(el("td", { style: "text-align:left" }, d.construct || "—"));
+        tr.appendChild(el("td", null, String(d.orders)));
+        tr.appendChild(el("td", null, moneyExact(d.aov)));
+        tr.appendChild(el("td", null, moneyExact(d.discount_funded)));
+        tr.appendChild(el("td", null, moneyExact(d.net_revenue)));
+        tr.appendChild(el("td", null, pct(d.repeat_rate, 0)));
+        tr.appendChild(el("td", { style: "text-align:left; white-space: normal;" }, d.verdict || "—"));
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      scroll.appendChild(table);
+      discCard.appendChild(scroll);
+    } else {
+      discCard.appendChild(el("p", { class: "empty" }, "No discount constructs recorded."));
+    }
+    grid.appendChild(discCard);
+  }
+
+  /* ---------- Customers ---------- */
+
+  function renderCustomers(body, rows) {
+    if (!A) { body.appendChild(emptyCard("Customers", "RFM, cohorts, win-back list.")); return; }
+    const c = A.customers || {};
+    const trend = c.repeat_rate_trend || [];
+    const lastShare = trend.length ? trend[trend.length - 1].repeat_share : null;
+    body.appendChild(heroBlock("Repeat order rate, most recent active week", pct(lastShare, 0),
+      el("div", { class: "delta" }, "overall repeat rate has run around 14% across the full history")));
+    body.appendChild(quietNote());
+
+    const grid = el("div", { class: "grid" });
+    body.appendChild(grid);
+
+    const rfmCard = card("RFM segments", "champion ≥3 orders/≤30d · loyal ≥2/≤60d · promising 1/≤30d · at_risk ≥2/61-120d · lost >120d.");
+    rfmCard.appendChild((c.rfm || []).length
+      ? barChart({
+          rows: (c.rfm || []).map(function (s) { return { label: s.segment, value: s.customers, tipRows: [
+            { value: s.customers + " customers", color: "var(--series-1)" },
+            { value: moneyExact(s.revenue), name: "revenue" },
+            { value: num(s.avg_orders, 1), name: "avg orders" }
+          ] }; }),
+          fmt: function (v) { return num(v); }, compact: true
+        })
+      : el("p", { class: "empty" }, "No RFM segments in this build."));
+    grid.appendChild(rfmCard);
+
+    const cohortCard = card("Cohort retention", "Share of each signup month's customers who came back within 30/60/90 days.");
+    cohortCard.appendChild(cohortGrid(c.cohorts || []));
+    grid.appendChild(cohortCard);
+
+    const splitCard = card("New vs returning revenue, by week", "Delivered revenue split by whether the customer had ordered before.", "full");
+    const split = c.weekly_split || [];
+    splitCard.appendChild(legend([
+      { name: "New customers", color: "var(--series-1)" },
+      { name: "Returning customers", color: "var(--series-3)" }
+    ]));
+    splitCard.appendChild(stackedColumnChart({
+      labels: split.map(function (w) { return shortDate(new Date(w.week_start)); }),
+      series: [
+        { name: "New", color: "var(--series-1)", values: split.map(function (w) { return w.new_revenue; }) },
+        { name: "Returning", color: "var(--series-3)", values: split.map(function (w) { return w.returning_revenue; }) }
+      ],
+      fmt: money, labelEvery: Math.max(1, Math.ceil(split.length / 8))
+    }));
+    grid.appendChild(splitCard);
+
+    const trendCard = card("Repeat-rate trend", "Share of each week's orders placed by a returning customer.", "full");
+    trendCard.appendChild(lineChart({
+      // niceMax assumes display-scale values (see its integer-step rule), so feed it
+      // percentage points (0-100) rather than the raw 0-1 fraction.
+      labels: trend.map(function (w) { return shortDate(new Date(w.week_start)); }),
+      series: [{ name: "repeat share", color: "var(--series-1)", values: trend.map(function (w) { return w.repeat_share == null ? null : w.repeat_share * 100; }) }],
+      fmt: function (v) { return Math.round(v) + "%"; }, labelEvery: Math.max(1, Math.ceil(trend.length / 8))
+    }));
+    grid.appendChild(trendCard);
+
+    const perCustomer = new Map();
+    rows.forEach(function (o) { perCustomer.set(o.customer_id, (perCustomer.get(o.customer_id) || 0) + 1); });
+    const buckets = [
+      { label: "1 order", test: function (n) { return n === 1; } },
+      { label: "2 orders", test: function (n) { return n === 2; } },
+      { label: "3–4", test: function (n) { return n >= 3 && n <= 4; } },
+      { label: "5+", test: function (n) { return n >= 5; } }
+    ];
+    const loyaltyCard = card("Order frequency in this range", perCustomer.size + " unique customers — scoped to the filters above, not the full history.");
+    loyaltyCard.appendChild(columnChart({
+      rows: buckets.map(function (b) {
+        let count = 0;
+        perCustomer.forEach(function (n) { if (b.test(n)) count++; });
+        return { label: b.label, value: count, tipHead: b.label, tipRows: [{ value: count + " customers", color: "var(--series-1)" }] };
+      }),
+      fmt: function (v) { return num(v); }, valueLabels: true, compact: true
+    }));
+    grid.appendChild(loyaltyCard);
+
+    const wbCard = card("Win-back list", "≥2 orders, last order 45+ days ago, ranked by lifetime spend.", "full");
+    const winback = c.winback || [];
+    if (winback.length) {
+      const scroll = el("div", { class: "scroll" });
+      const table = el("table");
+      const head = el("tr");
+      ["Customer", "Orders", "Spend", "Last order", "Days since", "Favourite item"].forEach(function (h) { head.appendChild(el("th", null, h)); });
+      table.appendChild(el("thead")).appendChild(head);
+      const tbody = el("tbody");
+      winback.slice(0, 20).forEach(function (w) {
+        const tr = el("tr");
+        tr.appendChild(el("td", { style: "text-align:left" }, w.customer_id.slice(0, 10) + "…"));
+        tr.appendChild(el("td", null, String(w.orders)));
+        tr.appendChild(el("td", null, moneyExact(w.spend)));
+        tr.appendChild(el("td", null, shortDate(new Date(w.last_order_at))));
+        tr.appendChild(el("td", null, String(w.days_since)));
+        tr.appendChild(el("td", { style: "text-align:left" }, w.favourite_item ? itemShortName(w.favourite_item) : "—"));
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      scroll.appendChild(table);
+      wbCard.appendChild(scroll);
+    } else {
+      wbCard.appendChild(el("p", { class: "empty" }, "No lapsed repeat customers in this build."));
+    }
+    grid.appendChild(wbCard);
+  }
+
+  /* ---------- Quality ---------- */
+
+  function renderQuality(body, rows) {
+    const q = A && A.quality || null;
+    const drivers = q && q.rating_drivers || [];
+    const slowDriver = drivers.find(function (d) { return d.bucket && d.bucket.indexOf(">25") !== -1; });
+    const fastDriver = drivers.find(function (d) { return d.bucket && d.bucket.indexOf("<=25") !== -1; });
+    const delta = slowDriver && fastDriver && slowDriver.avg_rating != null && fastDriver.avg_rating != null
+      ? slowDriver.avg_rating - fastDriver.avg_rating : null;
+    body.appendChild(heroBlock(
+      "Rating penalty for prep over 25 minutes",
+      delta != null ? num(delta, 2) + "★" : "—",
+      el("div", { class: "delta" },
+        slowDriver ? num(slowDriver.avg_rating, 2) + "★ across " + slowDriver.n + " slow orders vs " + num(fastDriver.avg_rating, 2) + "★ across " + fastDriver.n + " fast ones" : "")
+    ));
+
+    const grid = el("div", { class: "grid" });
+    body.appendChild(grid);
+
+    if (q) {
+      body.insertBefore(quietNote("Funnel, drivers, slow-order and loss-reason cards below cover the full history, not the filters above."), grid);
+
+      const funnelCard = card("Fulfilment funnel", "");
+      funnelCard.appendChild(columnChart({
+        rows: (q.funnel || []).map(function (s) { return { label: s.stage, value: s.orders, tipHead: s.stage, tipRows: [
+          { value: s.orders + " orders", color: "var(--series-1)" }, { value: pct(s.pct, 0), name: "of placed" }
+        ] }; }),
+        fmt: function (v) { return num(v); }, valueLabels: true, compact: true
+      }));
+      grid.appendChild(funnelCard);
+
+      const driverCard = card("Rating drivers", "Prep time is the single biggest driver of low ratings in this data. Grouped by factor; n is the order count behind each bar — a bar built on n=1 is a data point, not a finding.");
+      if (drivers.length) {
+        // factor may not exist in older payloads — fall back to one group so
+        // this degrades to the previous flat-list rendering instead of breaking.
+        const grouped = new Map();
+        drivers.forEach(function (d) {
+          const key = d.factor || "prep time";
+          if (!grouped.has(key)) grouped.set(key, []);
+          grouped.get(key).push(d);
+        });
+        grouped.forEach(function (list, factor) {
+          // factor arrives as a snake_case key ("rider_wait"); read it as words.
+          driverCard.appendChild(el("p", { class: "eyebrow", style: "margin-top:14px" },
+            factor.replace(/_/g, " ")));
+          driverCard.appendChild(barChart({
+            rows: list.map(function (d) { return { label: d.bucket + " · n=" + d.n, value: d.avg_rating || 0, tipRows: [
+              { value: num(d.avg_rating, 2) + "★", color: "var(--series-2)" }, { value: d.n + " orders", name: "" }
+            ] }; }),
+            fmt: function (v) { return num(v, 2); }, color: "var(--series-2)", compact: true
+          }));
+        });
+      } else {
+        driverCard.appendChild(el("p", { class: "empty" }, "No rating driver data."));
+      }
+      grid.appendChild(driverCard);
+
+      const slow = q.slow_orders || {};
+      const slowCard = card("Slow-order items", "Items most often present in orders over " + (slow.threshold_min || 25) + " minutes prep.", "full");
+      slowCard.appendChild((slow.items || []).length
+        ? barChart({
+            rows: slow.items.map(function (i) { return { label: itemShortName(i.item_name), value: i.n, tipRows: [
+              { value: i.n + " slow orders", color: "var(--series-2)" }, { value: num(i.avg_kpt, 1) + " min avg", name: "" }
+            ] }; }),
+            fmt: function (v) { return num(v); }, color: "var(--series-2)"
+          })
+        : el("p", { class: "empty" }, "No slow-order item data."));
+      grid.appendChild(slowCard);
+
+      const lossCard = card("Loss reasons", "Value of orders lost by reason.");
+      lossCard.appendChild((q.loss_reasons || []).length
+        ? barChart({
+            rows: q.loss_reasons.map(function (l) { return { label: l.reason, value: l.lost_value, tipRows: [
+              { value: moneyExact(l.lost_value), color: "var(--series-2)" }, { value: l.n + " orders", name: "" }
+            ] }; }),
+            fmt: money, color: "var(--series-2)", compact: true
+          })
+        : el("p", { class: "empty" }, "No lost orders in this build."));
+      grid.appendChild(lossCard);
+    } else {
+      grid.appendChild(emptyCard("Fulfilment funnel", ""));
+      grid.appendChild(emptyCard("Rating driver: prep time", ""));
+    }
+
+    const wk = weeks(rows);
+    const wkLabels = wk.map(function (w) { return shortDate(w.start); });
+    const wkEvery = Math.max(1, Math.ceil(wk.length / 8));
+
+    const opsCard = card("Kitchen prep time and rider wait, by week", "Scoped to the filters above. Both in minutes.", "full");
+    opsCard.appendChild(legend([
+      { name: "Kitchen prep time", color: "var(--series-1)", line: true },
+      { name: "Rider wait", color: "var(--series-2)", line: true }
+    ]));
+    opsCard.appendChild(lineChart({
+      labels: wkLabels,
+      series: [
+        { name: "prep", color: "var(--series-1)", values: wk.map(function (w) { return mean(w.rows.map(function (o) { return o.kpt_duration_min; })); }) },
+        { name: "rider wait", color: "var(--series-2)", values: wk.map(function (w) { return mean(w.rows.map(function (o) { return o.rider_wait_min; })); }) }
+      ],
+      fmt: function (v) { return num(v, 1) + "m"; }, labelEvery: wkEvery
+    }));
+    grid.appendChild(opsCard);
+
+    const rated = rows.filter(function (o) { return o.rating != null; });
+    const ratingCard = card("Ratings given", rated.length + " of " + rows.length + " orders rated in this range.");
+    const ratingCounts = countBy(rated, function (o) { return Math.round(o.rating); });
+    ratingCard.appendChild(columnChart({
+      rows: [1, 2, 3, 4, 5].map(function (r) { return {
+        label: r + "★", value: ratingCounts.get(r) || 0, tipHead: r + " star",
+        tipRows: [{ value: (ratingCounts.get(r) || 0) + " orders", color: "var(--series-1)" }]
+      }; }),
+      fmt: function (v) { return num(v); }, valueLabels: true, compact: true
+    }));
+    grid.appendChild(ratingCard);
+
+    const lost = rows.filter(function (o) { return !o.delivered; });
+    const lossLiveCard = card("Why orders were lost, in this range", lost.length + " of " + rows.length + " orders did not reach the customer.");
+    const lossCounts = countBy(lost, function (o) { return o.cancellation_reason || o.order_status; });
+    const lossRows = Array.from(lossCounts.entries()).sort(function (a, b) { return b[1] - a[1]; });
+    lossLiveCard.appendChild(lossRows.length
+      ? barChart({
+          rows: lossRows.map(function (e) { return { label: e[0], value: e[1] }; }),
+          fmt: function (v) { return num(v); }, color: "var(--series-2)", compact: true
+        })
+      : el("p", { class: "empty" }, "No lost orders in this range."));
+    grid.appendChild(lossLiveCard);
+  }
+
+  /* ---------- Demand ---------- */
+
+  function renderDemand(body, rows, m) {
+    const prev = previousWindow(rows);
+    let deltaNode = null;
+    if (prev && prev.rows.length) {
+      const before = metrics(prev.rows).orders;
+      const change = before ? (m.orders - before) / before : null;
+      deltaNode = el("div", { class: "delta" });
+      if (change != null) {
+        const arrow = el("strong", { class: change >= 0 ? "up" : "down" }, (change >= 0 ? "↑ " : "↓ ") + pct(Math.abs(change)));
+        deltaNode.appendChild(arrow);
+        deltaNode.appendChild(document.createTextNode(" vs prior period"));
+      }
+    }
+    body.appendChild(heroBlock("Orders in range", m.orders.toLocaleString("en-IN"), deltaNode));
+
+    const grid = el("div", { class: "grid" });
+    body.appendChild(grid);
+
+    /* live weekday × hour heatmap, switchable measure */
+    const heatCells = [];
+    const cellMap = new Map();
+    rows.forEach(function (o) {
+      const key = o.weekday + ":" + o.hour;
+      if (!cellMap.has(key)) cellMap.set(key, { weekday: o.weekday, hour: o.hour, orders: 0, revenue: 0, kpts: [] });
+      const c = cellMap.get(key);
+      c.orders += 1;
+      if (o.delivered) c.revenue += o.total || 0;
+      if (o.kpt_duration_min != null) c.kpts.push(o.kpt_duration_min);
+    });
+    cellMap.forEach(function (c) { heatCells.push(c); });
+    const hours = Array.from(new Set(heatCells.map(function (c) { return c.hour; }))).sort(function (a, b) { return a - b; });
+    const quietSet = new Set();
+    if (A && A.demand && A.demand.quiet_windows) {
+      A.demand.quiet_windows.forEach(function (q) {
+        const wi = wdIndex(q.weekday);
+        for (let h = q.hour_start; h < q.hour_end; h++) quietSet.add(wi + ":" + h);
+      });
+    }
+
+    const heatCard = card("When orders come in", "Scoped to the filters above. Dashed outline marks maintenance-window candidates from the full history.", "full");
+    const controls = el("div", { class: "heatmap-controls" });
+    const measures = [
+      { key: "orders", label: "Orders", fmt: function (v) { return num(v); } },
+      { key: "revenue", label: "Revenue", fmt: money },
+      { key: "kpt", label: "Avg prep time", fmt: function (v) { return num(v, 1) + "m"; } }
+    ];
+    let activeMeasure = "orders";
+    const heatBody = el("div");
+    function paintHeat() {
+      heatBody.textContent = "";
+      const spec = measures.find(function (x) { return x.key === activeMeasure; });
+      const values = heatCells.map(function (c) {
+        const avgKpt = c.kpts.length ? mean(c.kpts) : null;
+        return activeMeasure === "orders" ? c.orders : activeMeasure === "revenue" ? c.revenue : (avgKpt || 0);
+      });
+      const maxValue = values.length ? Math.max.apply(null, values) : 0;
+      heatBody.appendChild(heatmapLegend(spec.label, maxValue, spec.fmt));
+      heatBody.appendChild(heatmapChart({
+        cells: heatCells.map(function (c) {
+          const avgKpt = c.kpts.length ? mean(c.kpts) : null;
+          const value = activeMeasure === "orders" ? c.orders : activeMeasure === "revenue" ? c.revenue : (avgKpt || 0);
+          return {
+            weekday: c.weekday, hour: c.hour, value: value,
+            quiet: quietSet.has(c.weekday + ":" + c.hour),
+            tipHead: WEEKDAYS[c.weekday] + " " + hourLabel(c.hour),
+            tipRows: [
+              { value: c.orders + " orders", color: "var(--series-1)" },
+              { value: moneyExact(c.revenue), name: "revenue" },
+              { value: avgKpt == null ? "—" : num(avgKpt, 1) + "m", name: "avg prep" }
+            ]
+          };
+        }),
+        hours: hours
+      }));
+    }
+    measures.forEach(function (spec) {
+      const b = el("button", { class: "chip", type: "button" }, spec.label);
+      b.setAttribute("aria-pressed", String(spec.key === activeMeasure));
+      b.addEventListener("click", function () {
+        activeMeasure = spec.key;
+        Array.prototype.forEach.call(controls.children, function (btn, i) { btn.setAttribute("aria-pressed", String(measures[i].key === activeMeasure)); });
+        paintHeat();
+      });
+      controls.appendChild(b);
+    });
+    heatCard.appendChild(controls);
+    heatCard.appendChild(heatBody);
+    paintHeat();
+    grid.appendChild(heatCard);
+
+    if (A && A.demand) {
+      body.insertBefore(quietNote("Peak/quiet windows and closure options below cover the full history, not the filters above."), grid);
+
+      const peakCard = card("Peak windows", "Contiguous top-quartile hour runs, per weekday.");
+      const peaks = A.demand.peak_windows || [];
+      peakCard.appendChild(peaks.length
+        ? barChart({
+            rows: peaks.map(function (p) { return { label: p.weekday + " " + hourLabel(p.hour_start) + "–" + hourLabel(p.hour_end), value: p.orders, tipRows: [
+              { value: p.orders + " orders", color: "var(--series-1)" }, { value: pct(p.share, 0), name: "of that weekday" }
+            ] }; }),
+            fmt: function (v) { return num(v); }, compact: true
+          })
+        : el("p", { class: "empty" }, "No peak windows in this build."));
+      grid.appendChild(peakCard);
+
+      const quietCard = card("Quiet windows", "Maintenance-window candidates — bottom-decile, ≥2 contiguous hours.");
+      const quiets = A.demand.quiet_windows || [];
+      quietCard.appendChild(quiets.length
+        ? barChart({
+            rows: quiets.map(function (q) { return { label: q.weekday + " " + hourLabel(q.hour_start) + "–" + hourLabel(q.hour_end), value: q.monthly_revenue_at_risk, tipRows: [
+              { value: moneyExact(q.monthly_revenue_at_risk) + "/mo at risk", color: "var(--series-3)" }, { value: q.orders + " orders historically", name: "" }
+            ] }; }),
+            fmt: money, color: "var(--series-3)", compact: true
+          })
+        : el("p", { class: "empty" }, "No quiet windows in this build."));
+      grid.appendChild(quietCard);
+
+      const closureCard = card("Kitchen-closure options", "", "full");
+      ["weekly", "weekday", "monthly"].forEach(function (scope) {
+        closureCard.appendChild(el("p", { class: "eyebrow", style: "margin-top:14px" }, scope));
+        closureCard.appendChild(closureOptionsTable(A.demand.closure_options, scope));
+      });
+      grid.appendChild(closureCard);
+    }
+  }
+
+  /* ---------- tab dispatch ---------- */
+
+  // Which tabs answer the filters, and which are built once over the whole
+  // history at build time. Stated here rather than discovered by clicking.
+  const TAB_SCOPE = {
+    plan:      "The weekly history chart and the range figures follow the filters. The forecast and the channel split are whole-history by design.",
+    menu:      "Units, orders and revenue in the item table follow the filters. The matrix, quadrants and trends are whole-history.",
+    combos:    "Whole-history only — pair strength needs every order, and a 7-day window has too few pairs to mean anything.",
+    customers: "Order frequency in this range follows the filters. Segments and lifetime values are whole-history.",
+    // Corrected after reading the page: the Quality hero is the full-history
+    // prep-time penalty, and every card under it says so in its own note.
+    quality:   "Whole-history — the funnel, rating drivers, slow-order items and loss reasons all need the full record.",
+    demand:    "The heatmap and the range figures follow the filters. Quiet windows and closure options are whole-history."
+  };
+
+  function renderSelectionBar(rows, m) {
+    const bar = document.getElementById("selection-bar");
+    bar.textContent = "";
+    const add = function (label, value, cls) {
+      const wrap = el("span", null);
+      wrap.appendChild(el("span", { class: "figure" + (cls ? " " + cls : "") }, value));
+      wrap.appendChild(document.createTextNode(" " + label));
+      bar.appendChild(wrap);
+    };
+    add("Zomato orders selected", num(m.orders, 0));
+    add("delivered revenue", moneyExact(m.revenue));
+    if (m.aov != null) add("average order", moneyExact(m.aov));
+    bar.appendChild(el("span", null, shortDate(state.from) + " – " + shortDate(state.to)
+      + (state.weekdays.length < 7 ? " · " + state.weekdays.map(function (d) { return WEEKDAYS[d]; }).join(" ") : "")
+      + (state.status !== "all" ? " · " + (state.status === "Delivered" ? "delivered only" : "not delivered") : "")));
+    const scope = TAB_SCOPE[state.tab];
+    if (scope) bar.appendChild(el("span", { class: "scope-warn" }, scope));
+  }
+
+  function render() {
+    const rows = selection();
+    const m = metrics(rows);
+    renderSelectionBar(rows, m);
+    const body = document.getElementById("body");
+    body.textContent = "";
+
+    if (state.tab === "plan") renderPlan(body, rows);
+    else if (state.tab === "menu") renderMenu(body, rows);
+    else if (state.tab === "combos") renderCombos(body);
+    else if (state.tab === "customers") renderCustomers(body, rows);
+    else if (state.tab === "quality") renderQuality(body, rows);
+    else if (state.tab === "demand") renderDemand(body, rows, m);
+
+    if (!rows.length) {
+      const note = el("p", { class: "empty" }, "No orders match the current filters.");
+      body.insertBefore(note, body.firstChild);
+    }
+
+    /* filter chrome state */
+    Array.prototype.forEach.call(document.querySelectorAll("#range-presets button"), function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.key === state.preset));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("#weekday-picker button"), function (b) {
+      b.setAttribute("aria-pressed", String(state.weekdays.indexOf(Number(b.dataset.day)) !== -1));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("#tabs button"), function (b) {
+      b.setAttribute("aria-selected", String(b.dataset.tab === state.tab));
+    });
+    document.getElementById("from").value = isoDate(state.from);
+    document.getElementById("to").value = isoDate(state.to);
+  }
+
+  /* ---------- boot ---------- */
+
+  const meta = DATA.meta;
+  document.getElementById("title").textContent = meta.restaurant_name || "Restaurant";
+  document.getElementById("subtitle").textContent =
+    [meta.subzone, meta.city].filter(Boolean).join(", ") +
+    // "302 orders" read as the whole business. Every chart here is built from
+    // silver.orders, which is the Zomato export alone -- direct orders appear
+    // only in the Direct vs Zomato card, which says so.
+    " · " + meta.order_count + " Zomato orders · " +
+    longDate(FIRST_DAY) + " – " + longDate(LAST_DAY);
+  document.getElementById("footer").textContent =
+    "Built from the bronze → silver → gold DuckDB warehouse. Data generated " +
+    new Date(DATA.generated_at).toLocaleString("en-GB") + ".";
+
+  const presetRow = document.getElementById("range-presets");
+  PRESETS.forEach(function (p) {
+    const b = el("button", { class: "chip", type: "button" }, p.label);
+    b.dataset.key = p.key;
+    b.addEventListener("click", function () { applyPreset(p.key); render(); });
+    presetRow.appendChild(b);
+  });
+
+  const weekdayRow = document.getElementById("weekday-picker");
+  WEEKDAYS.forEach(function (name, i) {
+    const b = el("button", { class: "chip", type: "button" }, name);
+    b.dataset.day = String(i);
+    b.setAttribute("aria-pressed", "true");
+    b.addEventListener("click", function () {
+      const idx = state.weekdays.indexOf(i);
+      if (idx === -1) {
+        state.weekdays.push(i);
+      } else if (state.weekdays.length > 1) {
+        state.weekdays.splice(idx, 1);
+      }
+      render();
+    });
+    weekdayRow.appendChild(b);
+  });
+
+  const tabsRow = document.getElementById("tabs");
+  TABS.forEach(function (t) {
+    const b = el("button", { type: "button", role: "tab" }, t.label);
+    b.dataset.tab = t.key;
+    b.addEventListener("click", function () { state.tab = t.key; render(); });
+    tabsRow.appendChild(b);
+  });
+
+  document.getElementById("from").addEventListener("change", function (ev) {
+    if (!ev.target.value) return;
+    state.from = new Date(ev.target.value + "T00:00:00");
+    state.preset = "custom";
+    render();
+  });
+  document.getElementById("to").addEventListener("change", function (ev) {
+    if (!ev.target.value) return;
+    state.to = new Date(ev.target.value + "T00:00:00");
+    state.preset = "custom";
+    render();
+  });
+  document.getElementById("status").addEventListener("change", function (ev) {
+    state.status = ev.target.value;
+    render();
+  });
+
+  applyPreset("all");
+  render();
+  window.addEventListener("resize", function () {
+    Array.prototype.forEach.call(document.querySelectorAll(".tip"), function (t) { t.style.opacity = "0"; });
+  });
+})();
+</script>
