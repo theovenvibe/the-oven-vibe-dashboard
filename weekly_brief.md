@@ -1,6 +1,6 @@
 # Weekly brief - The Oven Vibe
 
-Generated 2026-08-31T19:39:43 from 302 orders (2026-03-01T21:44:00 to 2026-08-30T23:43:00).
+Generated 2026-09-01T01:23:34 from 302 orders (2026-03-01T21:44:00 to 2026-08-30T23:43:00).
 
 _No cost data loaded (`data/item_costs.csv` absent) - the menu matrix and any margin-flavoured numbers below are revenue, not profit. Fill in `data/item_costs.csv` from the `.example` file to upgrade this._
 
