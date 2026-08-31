@@ -608,7 +608,10 @@
     "Kitchen prep time and rider wait, by week": 1,
     "Ratings given": 1,
     "Why orders were lost, in this range": 1,
-    "When orders come in": 1
+    "When orders come in": 1,
+    "Menu matrix": 1,
+    "Price-rise candidates": 1,
+    "Drop candidates": 1
   };
 
   function card(title, note, extraClass) {
@@ -1734,9 +1737,115 @@
 
   /* ---------- Menu ---------- */
 
+  /**
+   * Per-item units, price and revenue for the orders currently selected.
+   *
+   * Two problems with the build-time version this replaces. It was computed
+   * once over the whole history, so the matrix never moved when the date range
+   * did. And its revenue was units x list price -- what the menu says, not what
+   * anybody paid. Through July that was nearly the same number; from August it
+   * is not, because the offers went live: a 45% discount on a Rs 409 basket
+   * means Rs 224.95 arrived, and the matrix was still drawing Rs 409.
+   *
+   * So each order's real receipts are shared across its own lines in proportion
+   * to list price. `bill_subtotal` is the list value of the food,
+   * `total - packaging_charges` is what the customer actually paid for it, and
+   * the ratio of the two is that order's discount. Pro-rata by list price is an
+   * assumption -- a cart-wide discount does fall proportionally, an item-level
+   * flat price does not -- but it is the only split the export supports, and it
+   * is far closer than pretending nothing was discounted.
+   *
+   * Packaging is excluded on purpose: it is charged per order, not per dish,
+   * and folding it into item prices would inflate whatever happened to be in a
+   * small basket.
+   */
+  function menuFromRows(rows) {
+    const listPrice = new Map((A && A.prices || []).map(function (p) { return [p.item_name, p.unit_price]; }));
+    const acc = new Map();
+    let missingPrice = 0;
+
+    rows.forEach(function (o) {
+      if (!o.delivered) return;              // a cancelled order sold nothing
+      const lines = o.lines || [];
+      if (!lines.length) return;
+
+      let listValue = 0;
+      lines.forEach(function (l) {
+        const up = listPrice.get(l.item_name);
+        if (up != null) listValue += up * (l.quantity || 0);
+      });
+
+      const paidForFood = (o.total || 0) - (o.packaging_charges || 0);
+      // No usable list value means no way to split -- count the units, leave
+      // the money out, and say so rather than inventing a share.
+      const factor = listValue > 0 ? paidForFood / listValue : null;
+      if (factor === null) missingPrice += lines.length;
+
+      lines.forEach(function (l) {
+        const up = listPrice.get(l.item_name);
+        const qty = l.quantity || 0;
+        if (!acc.has(l.item_name)) {
+          acc.set(l.item_name, { item_name: l.item_name, units: 0, orders: 0, revenue: 0, list_revenue: 0, priced_units: 0 });
+        }
+        const r = acc.get(l.item_name);
+        r.units += qty;
+        r.orders += 1;
+        if (up != null && factor !== null) {
+          r.revenue += up * qty * factor;
+          r.list_revenue += up * qty;
+          r.priced_units += qty;
+        }
+      });
+    });
+
+    const byName = new Map((A && A.menu || []).map(function (m) { return [m.item_name, m]; }));
+    const out = [];
+    acc.forEach(function (r) {
+      const base = byName.get(r.item_name) || {};
+      // The price a customer really paid, per unit, in this window.
+      const unitPrice = r.priced_units > 0 ? r.revenue / r.priced_units : null;
+      out.push(Object.assign({}, base, {
+        item_name: r.item_name,
+        units: r.units,
+        orders: r.orders,
+        revenue: Math.round(r.revenue * 100) / 100,
+        list_revenue: Math.round(r.list_revenue * 100) / 100,
+        unit_price: unitPrice == null ? null : Math.round(unitPrice * 100) / 100,
+        list_unit_price: listPrice.get(r.item_name) != null ? listPrice.get(r.item_name) : null,
+        category: base.category,
+        days_dormant: base.days_dormant,
+        price_confidence: base.price_confidence,
+        _is_frequent_attachment: base._is_frequent_attachment
+      }));
+    });
+
+    // Quadrants, recomputed on this window -- the medians of the whole history
+    // would put every item in a 7-day view below the line.
+    const priced = out.filter(function (m) { return m.unit_price != null; });
+    const mu = median(priced.map(function (m) { return m.units; }));
+    const mp = median(priced.map(function (m) { return m.unit_price; }));
+    out.forEach(function (m) {
+      if (m.unit_price == null) { m.quadrant = null; return; }
+      const hiUnits = m.units >= mu, hiPrice = m.unit_price >= mp;
+      m.quadrant = hiUnits && hiPrice ? "star" : hiUnits ? "plowhorse" : hiPrice ? "puzzle" : "dog";
+    });
+
+    const totalList = out.reduce(function (a, m) { return a + m.list_revenue; }, 0);
+    const totalPaid = out.reduce(function (a, m) { return a + m.revenue; }, 0);
+    const revTotal = totalPaid || 1;
+    out.forEach(function (m) { m.revenue_share = m.revenue / revTotal; });
+
+    return { rows: out, unitsMedian: mu, priceMedian: mp, totalList: totalList, totalPaid: totalPaid, missingPrice: missingPrice };
+  }
+
   function renderMenu(body, rows) {
     if (!A) { body.appendChild(emptyCard("Menu", "Item matrix, table, price and drop candidates.")); return; }
-    const menuAll = A.menu || [];
+    // Everything on the matrix is now derived from the selected orders at the
+    // prices actually paid. A.menu stays as the source of the fields that are
+    // meaningless in a short window -- days dormant, trend, price confidence --
+    // and is joined on by name inside menuFromRows.
+    const scoped = menuFromRows(rows);
+    const menuAll = scoped.rows;
     const priceByName = new Map((A.prices || []).map(function (p) { return [p.item_name, p]; }));
     const menuByName = new Map(menuAll.map(function (m) { return [m.item_name, m]; }));
     // A "dog" is never a drop candidate if it appears in a pair with n >= 3 — computed
@@ -1753,7 +1862,9 @@
       topRev ? pct(topRev.revenue_share, 0) : "—",
       el("div", { class: "delta" }, topRev ? itemShortName(topRev.item_name) + " alone is " + pct(topRev.revenue_share, 0) + " of item revenue" : "")
     ));
-    body.appendChild(quietNote());
+    // This hero is computed from the selected orders now, so the blanket
+    // "full order history" note that used to sit here was simply false.
+    body.appendChild(quietNote("Item figures on this tab cover the selected orders, at the prices customers paid. Dormancy, trend and price confidence are whole-history."));
     const psl = priceSourceLine();
     if (psl) body.appendChild(psl);
     const catChips = categoryChips(categories, "menuCategory");
@@ -1765,6 +1876,11 @@
     const priced = menu.filter(function (m) { return m.unit_price != null; });
     const unitsMedian = median(priced.map(function (m) { return m.units; }));
     const priceMedian = median(priced.map(function (m) { return m.unit_price; }));
+    // How much of the list price actually arrived, over the selected orders.
+    // Through July this is ~100%; from August the offers make it visibly less,
+    // and the difference is the whole reason this card is no longer drawn at
+    // list price.
+    const realised = scoped.totalList > 0 ? scoped.totalPaid / scoped.totalList : null;
     // "True outliers" — items genuinely far from the pack in the matrix
     // (normalized distance from the median on both axes), not simply the
     // highest-revenue dots, which cluster together and collide as labels.
@@ -1801,7 +1917,13 @@
     };
     const hotCount = priced.filter(isHot).length;
 
-    const matrixCard = card("Menu matrix", "Units × price. Bubble area is revenue, colour is the quadrant, and a dashed ring means the item sold inside the last " + HOT_DAYS + " days. No cost data exists, so this is price, never margin.", "full");
+    const matrixCard = card("Menu matrix",
+      "Units × the price customers actually paid, over the selected orders. Bubble area is revenue received, colour is the quadrant, and a dashed ring means the item sold inside the last " + HOT_DAYS + " days. Still price, never margin — no cost data is loaded.", "full");
+    if (realised != null && realised < 0.995) {
+      matrixCard.appendChild(el("p", { class: "forecast-method" },
+        "Discounts in this window: customers paid " + moneyExact(scoped.totalPaid) + " of " + moneyExact(scoped.totalList)
+        + " at list — " + pct(1 - realised, 0) + " off. Each order's receipts are shared across its own items in proportion to list price."));
+    }
     matrixCard.appendChild(legend(
       ["star", "plowhorse", "puzzle", "dog"].map(function (q) {
         const n = priced.filter(function (m) { return m.quadrant === q; }).length;
@@ -2426,7 +2548,7 @@
   // history at build time. Stated here rather than discovered by clicking.
   const TAB_SCOPE = {
     plan:      "The weekly history chart and the range figures follow the filters. The forecast and the channel split are whole-history by design.",
-    menu:      "Units, orders and revenue in the item table follow the filters. The matrix, quadrants and trends are whole-history.",
+    menu:      "The matrix, its quadrants and the item table follow the filters, at the prices actually paid. Dormancy and trend are whole-history.",
     combos:    "Whole-history only — pair strength needs every order, and a 7-day window has too few pairs to mean anything.",
     customers: "Order frequency in this range follows the filters. Segments and lifetime values are whole-history.",
     // Corrected after reading the page: the Quality hero is the full-history
