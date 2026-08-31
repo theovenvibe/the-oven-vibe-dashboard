@@ -1763,6 +1763,7 @@
     const listPrice = new Map((A && A.prices || []).map(function (p) { return [p.item_name, p.unit_price]; }));
     const acc = new Map();
     let missingPrice = 0;
+    let listedAtTime = 0;
 
     rows.forEach(function (o) {
       if (!o.delivered) return;              // a cancelled order sold nothing
@@ -1776,6 +1777,13 @@
       });
 
       const paidForFood = (o.total || 0) - (o.packaging_charges || 0);
+      // The bill's own subtotal is the list value at the time of the order.
+      // The price table holds today's list price, which for several items is
+      // not what it was in March -- Paneer Makhni was billed at Rs 309 until
+      // July and Rs 409 in August. Prices from the table are therefore used
+      // only as weights for splitting one bill between its own lines, never to
+      // total up "what this would have cost at list".
+      listedAtTime += (o.bill_subtotal || 0);
       // No usable list value means no way to split -- count the units, leave
       // the money out, and say so rather than inventing a share.
       const factor = listValue > 0 ? paidForFood / listValue : null;
@@ -1830,7 +1838,7 @@
       m.quadrant = hiUnits && hiPrice ? "star" : hiUnits ? "plowhorse" : hiPrice ? "puzzle" : "dog";
     });
 
-    const totalList = out.reduce(function (a, m) { return a + m.list_revenue; }, 0);
+    const totalList = listedAtTime;
     const totalPaid = out.reduce(function (a, m) { return a + m.revenue; }, 0);
     const revTotal = totalPaid || 1;
     out.forEach(function (m) { m.revenue_share = m.revenue / revTotal; });

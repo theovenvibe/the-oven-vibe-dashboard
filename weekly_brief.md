@@ -1,6 +1,6 @@
 # Weekly brief - The Oven Vibe
 
-Generated 2026-08-31T19:27:18 from 302 orders (2026-03-01T21:44:00 to 2026-08-30T23:43:00).
+Generated 2026-08-31T19:39:43 from 302 orders (2026-03-01T21:44:00 to 2026-08-30T23:43:00).
 
 _No cost data loaded (`data/item_costs.csv` absent) - the menu matrix and any margin-flavoured numbers below are revenue, not profit. Fill in `data/item_costs.csv` from the `.example` file to upgrade this._
 
@@ -68,19 +68,19 @@ Orders with prep time over 25 minutes average 2.17★ across 6 rated slow orders
 
 Dormant 33 days (last sold 2026-07-28) after selling 15 units lifetime across 9 active weeks, 0.59 units/week when active.
 
-- Expected impact: ₹508 - 0.59 units/week x ₹199 x 4.33 weeks/month, if revived, capped at best observed 4-week revenue
+- Expected impact: ₹713 - 0.59 units/week x ₹279 x 4.33 weeks/month, if revived, capped at best observed 4-week revenue
 - Evidence: units_lifetime=15, active_weeks=9, days_dormant=33
 
 ### 4. Revive or retire Fiery Cheese Chilli Sandwich [2 slices] (revive, confidence: low)
 
 Dormant 49 days (last sold 2026-07-12) after selling 13 units lifetime across 8 active weeks, 0.62 units/week when active.
 
-- Expected impact: ₹454 - 0.62 units/week x ₹169 x 4.33 weeks/month, if revived, capped at best observed 4-week revenue
+- Expected impact: ₹695 - 0.62 units/week x ₹259 x 4.33 weeks/month, if revived, capped at best observed 4-week revenue
 - Evidence: units_lifetime=13, active_weeks=8, days_dormant=49
 
 ### 5. Create a combo: ⭐ Ultimate Cheese Delight Pizza [Regular, 7 inches] + 🔥 Most Ordered Classic French Fries (combo, confidence: low)
 
-Ordered together 3 times (indicative); combo price ~₹280.
+Ordered together 3 times (indicative); combo price ~₹360.
 
 - Expected impact: ₹183 - 0.52 occurrences/month (n=3 historically) x ₹352 avg combined bill
 - Evidence: n=3, lift=2.04, strength=indicative
@@ -89,66 +89,66 @@ Ordered together 3 times (indicative); combo price ~₹280.
 
 Only 4% of its 45 orders include a side, below the best-observed attach rate.
 
-- Expected impact: ₹84 - attach-rate gap x orders/month x median side price
+- Expected impact: ₹71 - attach-rate gap x orders/month x median side price
 - Evidence: orders=45, with_side=2
 
-### 7. Raise Street Style Korean Spicy Veg Maggi by ~₹20 (price_up, confidence: high)
+### 7. Create a combo: Crunchy Capsicum Pizza [Regular, 7 inches] + Spicy Peri Peri French Fries (combo, confidence: low)
 
-High demand (15 units, price confidence observed) at a below-median price of ₹199. Low discount dependence (23% of its orders).
+Ordered together 2 times (indicative); price unknown for one item, no combo price suggested.
 
-- Expected impact: ₹52 - 2.6 units/month x ₹20 rise
-- Evidence: units=15, price_confidence=observed (price sample n=8)
+- Expected impact: ₹131 - 0.35 occurrences/month (n=2 historically) x ₹378 avg combined bill
+- Evidence: n=2, lift=7.19, strength=indicative
 
-### 8. Raise Fiery Cheese Chilli Sandwich [2 slices] by ~₹20 (price_up, confidence: high)
+### 8. Raise Street Style Korean Spicy Veg Maggi by ~₹30 (price_up, confidence: low)
 
-High demand (13 units, price confidence observed) at a below-median price of ₹169. Low discount dependence (25% of its orders).
+High demand (15 units, price confidence sheet) at a below-median price of ₹279. Low discount dependence (23% of its orders).
 
-- Expected impact: ₹45 - 2.25 units/month x ₹20 rise
-- Evidence: units=13, price_confidence=observed (price sample n=6)
+- Expected impact: ₹78 - 2.6 units/month x ₹30 rise
+- Evidence: units=15, price_confidence=sheet (price sample n=0)
 
 ## Appendix: menu
 
 | Item | Units | Revenue | Price | Confidence | Quadrant | Trend |
 |---|---:|---:|---:|---|---|---:|
-| 🔥 Herb Paneer Delight Pizza [Regular, 7 inches] | 83 | ₹23,120 | ₹289 | observed | star | -14% |
-| Paneer Makhni Royale Pizza [Regular, 7 inches] | 46 | ₹14,214 | ₹309 | observed | star | -17% |
-| Golden Corn Classic Pizza [Regular, 7 inches] | 51 | ₹11,221 | ₹229 | observed | star | +0% |
-| ⭐ Ultimate Cheese Delight Pizza [Regular, 7 inches] | 37 | ₹6,897 | ₹209 | observed | plowhorse | -91% |
-| 🌙 Midnight Pizza Box Combo (7” Pizza + Small Fries) | 14 | ₹3,497 | ₹269 | observed | star | -40% |
-| Fiesta Pizza Combo | 7 | ₹3,493 | ₹499 | observed | star | n/a |
-| Herb Paneer Delight Pizza [Regular, 7 inches] | 7 | ₹2,723 | ₹389 | observed | star | n/a |
-| Street Style Korean Spicy Veg Maggi | 15 | ₹2,587 | ₹199 | observed | plowhorse | n/a |
-| Fiery Cheese Chilli Sandwich [2 slices] | 13 | ₹2,028 | ₹169 | observed | plowhorse | n/a |
-| Creamy Alfredo Pasta (Fusilli) | 8 | ₹1,752 | ₹219 | observed | plowhorse | n/a |
-| Crunchy Capsicum Pizza [Regular, 7 inches] | 7 | ₹1,743 | ₹249 | observed | star | n/a |
-| Zesty Onion Feast Pizza [Regular, 7 inches] | 9 | ₹1,512 | ₹189 | observed | plowhorse | n/a |
-| Midnight Pizza Box Combo | 2 | ₹1,334 | ₹667 | observed | puzzle | n/a |
-| Spicy Peri Peri French Fries | 12 | ₹1,309 | ₹119 | derived | plowhorse | n/a |
-| Ultimate Cheese Delight Pizza [Regular, 7 inches] | 4 | ₹1,196 | ₹299 | observed | star | n/a |
+| 🔥 Herb Paneer Delight Pizza [Regular, 7 inches] | 83 | ₹31,120 | ₹389 | sheet | star | -14% |
+| Paneer Makhni Royale Pizza [Regular, 7 inches] | 46 | ₹18,814 | ₹409 | sheet | star | -17% |
+| Golden Corn Classic Pizza [Regular, 7 inches] | 51 | ₹14,651 | ₹299 | sheet | star | +0% |
+| ⭐ Ultimate Cheese Delight Pizza [Regular, 7 inches] | 37 | ₹9,867 | ₹299 | sheet | star | -91% |
+| 🌙 Midnight Pizza Box Combo (7” Pizza + Small Fries) | 14 | ₹5,057 | ₹389 | sheet | star | -40% |
+| Fiesta Pizza Combo | 7 | ₹4,613 | ₹659 | sheet | star | n/a |
+| Street Style Korean Spicy Veg Maggi | 15 | ₹3,627 | ₹279 | sheet | plowhorse | n/a |
+| Fiery Cheese Chilli Sandwich [2 slices] | 13 | ₹3,108 | ₹259 | sheet | plowhorse | n/a |
+| Creamy Alfredo Pasta (Fusilli) | 8 | ₹2,952 | ₹369 | sheet | star | n/a |
+| Herb Paneer Delight Pizza [Regular, 7 inches] | 7 | ₹2,723 | ₹389 | sheet | star | n/a |
+| Zesty Onion Feast Pizza [Regular, 7 inches] | 9 | ₹2,392 | ₹299 | sheet | star | n/a |
+| Crunchy Capsicum Pizza [Regular, 7 inches] | 7 | ₹2,373 | ₹339 | sheet | star | n/a |
+| Vegie Onion Capsicum Pizza [Regular, 7 inches] | 5 | ₹1,556 | ₹389 | sheet | star | n/a |
+| Ultimate Cheese Delight Pizza [Regular, 7 inches] | 4 | ₹1,196 | ₹299 | sheet | star | n/a |
 | 🔥 Most Ordered Classic French Fries | 12 | ₹1,188 | ₹99 | observed | plowhorse | n/a |
-| Vegie Onion Capsicum Pizza [Regular, 7 inches] | 5 | ₹1,156 | ₹289 | observed | star | n/a |
+| Classic Red Sauce Pasta (Penne) | 3 | ₹987 | ₹329 | sheet | puzzle | n/a |
 | Mixed Treasure Fried Rice | 3 | ₹897 | ₹299 | observed | puzzle | n/a |
-| Ultimate Cheese Delight Pizza | 2 | ₹598 | ₹299 | observed | puzzle | n/a |
+| Midnight Pizza Box Combo | 2 | ₹778 | ₹389 | sheet | puzzle | n/a |
+| Paneer Tikka Grilled Sandwich [2 slices] | 5 | ₹678 | ₹339 | sheet | star | n/a |
+| Ultimate Cheese Delight Pizza | 2 | ₹598 | ₹299 | sheet | puzzle | n/a |
 | Bestseller Veg Fried Rice | 3 | ₹567 | ₹189 | observed | dog | n/a |
-| Spicy Schezwan Special Fried Rice | 2 | ₹556 | ₹278 | observed | puzzle | n/a |
-| Paneer Fried Rice | 2 | ₹538 | ₹269 | observed | puzzle | n/a |
-| Classic Red Sauce Pasta (Penne) | 3 | ₹537 | ₹179 | observed | dog | n/a |
-| Chilli Garlic Potato Pops | 3 | ₹474 | ₹158 | derived | dog | n/a |
-| Paneer Tikka Grilled Sandwich [2 slices] | 5 | ₹458 | ₹229 | derived | star | n/a |
+| Spicy Schezwan Special Fried Rice | 2 | ₹556 | ₹278 | observed | dog | n/a |
+| Paneer Fried Rice | 2 | ₹538 | ₹269 | observed | dog | n/a |
 | Creamy Cheese Maggi | 2 | ₹438 | ₹219 | observed | dog | n/a |
-| Herb Paneer Delight Pizza | 1 | ₹389 | ₹389 | derived | puzzle | n/a |
+| Tangy Green Chutney Sandwich [2 slices] | 2 | ₹418 | ₹209 | sheet | dog | n/a |
+| Herb Paneer Delight Pizza | 1 | ₹389 | ₹389 | sheet | puzzle | n/a |
 | Sandwich Meal Box Combo | 1 | ₹389 | ₹389 | observed | puzzle | n/a |
+| Spicy Peri Peri French Fries | 12 | ₹319 | ₹29 | derived | plowhorse | n/a |
 
 ## Appendix: pairs
 
 | A | B | n | strength | lift | combo price |
 |---|---|---:|---|---:|---:|
 | Crunchy Capsicum Pizza [Regular, 7 inches] | Spicy Peri Peri French Fries | 2 | indicative | 7.19 | n/a |
-| ⭐ Ultimate Cheese Delight Pizza [Regular, 7 inches] | 🔥 Most Ordered Classic French Fries | 3 | indicative | 2.04 | ₹280 |
+| ⭐ Ultimate Cheese Delight Pizza [Regular, 7 inches] | 🔥 Most Ordered Classic French Fries | 3 | indicative | 2.04 | ₹360 |
 | Paneer Tikka Grilled Sandwich [2 slices] | 🔥 Herb Paneer Delight Pizza [Regular, 7 inches] | 2 | indicative | 1.86 | n/a |
-| Golden Corn Classic Pizza [Regular, 7 inches] | Spicy Peri Peri French Fries | 3 | indicative | 1.48 | ₹310 |
+| Golden Corn Classic Pizza [Regular, 7 inches] | Spicy Peri Peri French Fries | 3 | indicative | 1.48 | ₹300 |
 | Spicy Peri Peri French Fries | ⭐ Ultimate Cheese Delight Pizza [Regular, 7 inches] | 2 | indicative | 1.36 | n/a |
-| 🔥 Herb Paneer Delight Pizza [Regular, 7 inches] | 🔥 Most Ordered Classic French Fries | 4 | indicative | 1.24 | ₹350 |
+| 🔥 Herb Paneer Delight Pizza [Regular, 7 inches] | 🔥 Most Ordered Classic French Fries | 4 | indicative | 1.24 | ₹440 |
 | Paneer Makhni Royale Pizza [Regular, 7 inches] | 🔥 Most Ordered Classic French Fries | 2 | indicative | 1.12 | n/a |
 | Fiery Cheese Chilli Sandwich [2 slices] | Paneer Makhni Royale Pizza [Regular, 7 inches] | 2 | indicative | 1.12 | n/a |
 | Creamy Alfredo Pasta (Fusilli) | 🔥 Herb Paneer Delight Pizza [Regular, 7 inches] | 2 | indicative | 1.07 | n/a |
