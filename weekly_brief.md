@@ -1,6 +1,6 @@
 # Weekly brief - The Oven Vibe
 
-Generated 2026-08-31T15:37:51 from 302 orders (2026-03-01T21:44:00 to 2026-08-30T23:43:00).
+Generated 2026-08-31T19:10:11 from 302 orders (2026-03-01T21:44:00 to 2026-08-30T23:43:00).
 
 _No cost data loaded (`data/item_costs.csv` absent) - the menu matrix and any margin-flavoured numbers below are revenue, not profit. Fill in `data/item_costs.csv` from the `.example` file to upgrade this._
 
@@ -29,7 +29,7 @@ All-time confirmed orders, by channel:
 | Source | Orders | Revenue |
 |---|---:|---:|
 | zomato | 288 | ₹90,049 |
-| direct | 7 | ₹2,708 |
+| direct | 10 | ₹3,617 |
 
 ## Data you can and cannot trust
 

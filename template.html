@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>The Oven Vibe</title>
 <style>
   :root {
@@ -13,6 +14,15 @@
     --series-1:       #2a78d6;
     --series-2:       #eb6834;
     --series-3:       #1baf7a;
+    /* Menu-matrix quadrants. A four-hue categorical set, validated for
+       colourblind separation and for contrast against the card surface
+       rather than picked by eye. Identity is never colour alone here --
+       the quadrant is also position on the plot, a legend entry and a
+       tooltip row. */
+    --quad-star:      #12855f;
+    --quad-plowhorse: #2a78d6;
+    --quad-puzzle:    #b4600f;
+    --quad-dog:       #8257c4;
     --good:           #0ca30c;
     --warning:        #fab219;
     --serious:        #ec835a;
@@ -47,6 +57,12 @@
       --series-1:       #3987e5;
       --series-2:       #d95926;
       --series-3:       #199e70;
+      /* Re-stepped for the dark surface, not flipped: the light values
+         fall outside the readable lightness band on #1a1a19. */
+      --quad-star:      #22a97c;
+      --quad-plowhorse: #3d84dc;
+      --quad-puzzle:    #c87c2c;
+      --quad-dog:       #9680d4;
       --good:           #0ca30c;
       --warning:        #fab219;
       --serious:        #ec835a;
@@ -80,6 +96,12 @@
     --series-1:       #3987e5;
     --series-2:       #d95926;
     --series-3:       #199e70;
+    /* Re-stepped for the dark surface, not flipped: the light values
+       fall outside the readable lightness band on #1a1a19. */
+    --quad-star:      #22a97c;
+    --quad-plowhorse: #3d84dc;
+    --quad-puzzle:    #c87c2c;
+    --quad-dog:       #9680d4;
     --good:           #0ca30c;
     --warning:        #fab219;
     --serious:        #ec835a;
@@ -174,6 +196,23 @@
     font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--text-muted); margin: 0 0 4px;
   }
+
+  .card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .scope-chip {
+    flex: none; font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+    padding: 2px 7px; border-radius: 999px;
+    color: var(--text-muted); background: var(--ghost); border: 1px solid var(--border);
+  }
+  .scope-chip.scoped { color: var(--series-1); border-color: color-mix(in srgb, var(--series-1) 40%, transparent); }
+
+  .selection-bar {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px;
+    margin: 2px 0 14px; padding: 9px 12px;
+    background: var(--ghost); border: 1px solid var(--border); border-radius: 8px;
+    font-size: 13px; color: var(--text-secondary);
+  }
+  .selection-bar .figure { color: var(--text-primary); font-weight: 650; font-variant-numeric: tabular-nums; }
+  .selection-bar .scope-warn { color: var(--warning); }
 
   .quiet-note {
     font-size: 12px; color: var(--text-muted); margin: -8px 0 20px;
@@ -294,7 +333,9 @@
 
   /* Menu matrix scatter */
   .quadrant-label { fill: var(--text-muted); font-size: 11px; font-weight: 650; letter-spacing: 0.03em; text-transform: uppercase; }
-  .scatter-dot { fill: var(--series-1); }
+  /* No default fill here: a CSS rule beats a presentation attribute, so a
+     `.scatter-dot { fill: ... }` silently overrode the per-quadrant colour set
+     on each circle. The colour is set on the element instead. */
   .scatter-dot.outlier-label { fill: var(--text-secondary); font-size: 10px; font-weight: 600; }
 
   /* Forecast band */
@@ -380,6 +421,12 @@
       </select>
     </label>
   </div>
+
+  <!-- What the filters currently select. It sits with the filters rather than
+       inside a tab, because the complaint it answers is "I changed a filter and
+       nothing moved" -- and on tabs whose cards are built from the full history
+       at build time, nothing visible did. -->
+  <div class="selection-bar" id="selection-bar"></div>
 
   <div class="tabs" id="tabs" role="tablist" aria-label="Dashboard views"></div>
 
@@ -550,9 +597,27 @@
     for (const k in attrs || {}) node.setAttribute(k, attrs[k]);
     return node;
   }
+  // Which cards actually answer the filter bar. Established by rendering every
+  // tab twice -- once at "All time", once at "Last 7 days" -- and diffing the
+  // text of each card, not by reading the code and hoping. Everything not in
+  // here is built once at build time over the whole history, and now says so on
+  // its own face rather than in a note somebody has to scroll past.
+  const SCOPED_CARDS = {
+    "Where we've been": 1,
+    "Order frequency in this range": 1,
+    "Kitchen prep time and rider wait, by week": 1,
+    "Ratings given": 1,
+    "Why orders were lost, in this range": 1,
+    "When orders come in": 1
+  };
+
   function card(title, note, extraClass) {
     const box = el("section", { class: "card" + (extraClass ? " " + extraClass : "") });
-    box.appendChild(el("h2", null, title));
+    const head = el("div", { class: "card-head" });
+    head.appendChild(el("h2", null, title));
+    head.appendChild(el("span", { class: "scope-chip" + (SCOPED_CARDS[title] ? " scoped" : "") },
+      SCOPED_CARDS[title] ? "this range" : "whole history"));
+    box.appendChild(head);
     if (note) box.appendChild(el("p", { class: "note" }, note));
     return box;
   }
@@ -1021,18 +1086,50 @@
 
     const allDots = points.map(function (p) { return { cx: xAt(p.x), cy: yAt(p.y), r: rFor(p.revenue) }; });
 
-    points.forEach(function (p, i) {
+    // Biggest first, so a ₹20k bubble never sits on top of a ₹300 one and
+    // swallows it. Order of drawing is the only thing that decides this.
+    const drawOrder = points
+      .map(function (p, i) { return i; })
+      .sort(function (a, b) { return allDots[b].r - allDots[a].r; });
+
+    drawOrder.forEach(function (i) {
+      const p = points[i];
       const cx = allDots[i].cx, cy = allDots[i].cy, r = allDots[i].r;
-      const dot = svgEl("circle", { cx: cx, cy: cy, r: r, class: "scatter-dot", opacity: "0.82" });
+      // Colour carries the quadrant, which the position already carries too --
+      // deliberately doubled, because the four clouds overlap around the median
+      // lines where position alone stops answering "which quadrant is this?".
+      const fill = p.color || "var(--series-1)";
+      const dot = svgEl("circle", {
+        cx: cx, cy: cy, r: r, class: "scatter-dot", fill: fill, opacity: "0.78",
+        // A surface-coloured ring, so two overlapping bubbles read as two.
+        stroke: "var(--surface)", "stroke-width": "2"
+      });
       svg.appendChild(dot);
+      // Hot items get a ring of their own colour outside the bubble. Never a
+      // colour change: a hot star and a cold star are the same quadrant, and
+      // recoding the hue for recency would say otherwise.
+      if (p.hot) {
+        svg.appendChild(svgEl("circle", {
+          cx: cx, cy: cy, r: r + 4, fill: "none", stroke: fill,
+          "stroke-width": "1.5", "stroke-dasharray": "2.5 2.5", opacity: "0.9"
+        }));
+      }
       const hit = svgEl("circle", { cx: cx, cy: cy, r: Math.max(r, 10), fill: "transparent", tabindex: "0" });
       const focus = function () {
         dot.setAttribute("opacity", "1");
         dot.setAttribute("stroke", "var(--text-primary)");
-        dot.setAttribute("stroke-width", "1.5");
+        dot.setAttribute("stroke-width", "2");
         showTip(tip, holder, d, cx, cy - r, p.tipHead || p.label, p.tipRows);
       };
-      const blur = function () { dot.setAttribute("opacity", "0.82"); dot.removeAttribute("stroke"); hideTip(tip); };
+      // Back to the surface-coloured separator ring, not to no stroke at all --
+      // removing it would let hovered-then-left bubbles merge with their
+      // neighbours again.
+      const blur = function () {
+        dot.setAttribute("opacity", "0.78");
+        dot.setAttribute("stroke", "var(--surface)");
+        dot.setAttribute("stroke-width", "2");
+        hideTip(tip);
+      };
       hit.addEventListener("pointerenter", focus);
       hit.addEventListener("focus", focus);
       hit.addEventListener("pointerleave", blur);
@@ -1684,18 +1781,51 @@
         .map(function (m) { return m.item_name; })
     );
 
-    const matrixCard = card("Menu matrix", "Units × price. Dot area is revenue. No cost data exists, so this is price, never margin.", "full");
+    // "Hot" is recency, not size: sold inside the last fortnight AND selling at
+    // or above the median. A big cold bubble is an item that used to work, and
+    // that is a different problem from one that is working now -- so it gets a
+    // ring rather than a colour, which would have overwritten the quadrant.
+    const HOT_DAYS = 14;
+    const isHot = function (m) { return m.days_dormant != null && m.days_dormant <= HOT_DAYS && m.units >= unitsMedian; };
+    const QUAD_COLOR = {
+      star: "var(--quad-star)",
+      plowhorse: "var(--quad-plowhorse)",
+      puzzle: "var(--quad-puzzle)",
+      dog: "var(--quad-dog)"
+    };
+    const QUAD_MEANING = {
+      star: "sells a lot, priced above median",
+      plowhorse: "sells a lot, priced below median",
+      puzzle: "priced above median, barely sells",
+      dog: "below median on both"
+    };
+    const hotCount = priced.filter(isHot).length;
+
+    const matrixCard = card("Menu matrix", "Units × price. Bubble area is revenue, colour is the quadrant, and a dashed ring means the item sold inside the last " + HOT_DAYS + " days. No cost data exists, so this is price, never margin.", "full");
+    matrixCard.appendChild(legend(
+      ["star", "plowhorse", "puzzle", "dog"].map(function (q) {
+        const n = priced.filter(function (m) { return m.quadrant === q; }).length;
+        return { color: QUAD_COLOR[q], name: q + " · " + n + " — " + QUAD_MEANING[q] };
+      })
+    ));
+    matrixCard.appendChild(el("p", { class: "forecast-method" },
+      "Bubble area is revenue — the biggest bubble is " + (topRev ? itemShortName(topRev.item_name) + " at " + moneyExact(topRev.revenue) : "—") + ". " +
+      (hotCount ? hotCount + " item" + (hotCount === 1 ? " has" : "s have") + " a dashed ring: sold in the last " + HOT_DAYS + " days and at or above median units."
+                : "No item is currently hot — nothing sold inside the last " + HOT_DAYS + " days at or above median units.")));
     matrixCard.appendChild(scatterChart({
       points: priced.map(function (m) {
         return {
           x: m.units, y: m.unit_price, revenue: m.revenue, label: itemShortName(m.item_name),
           outlier: outlierNames.has(m.item_name),
+          color: QUAD_COLOR[m.quadrant] || "var(--text-muted)",
+          hot: isHot(m),
           tipHead: itemShortName(m.item_name),
           tipRows: [
-            { value: m.units + " units", color: "var(--series-1)" },
+            { value: m.units + " units", color: QUAD_COLOR[m.quadrant] || "var(--series-1)" },
             { value: moneyExact(m.unit_price), name: "unit price (" + m.price_confidence + ")" },
             { value: moneyExact(m.revenue), name: "revenue" },
-            { value: m.quadrant, name: "quadrant" }
+            { value: m.quadrant + (isHot(m) ? " · hot" : ""), name: "quadrant" },
+            { value: m.days_dormant != null ? m.days_dormant + " days" : "—", name: "since last sale" }
           ]
         };
       }),
@@ -2292,9 +2422,42 @@
 
   /* ---------- tab dispatch ---------- */
 
+  // Which tabs answer the filters, and which are built once over the whole
+  // history at build time. Stated here rather than discovered by clicking.
+  const TAB_SCOPE = {
+    plan:      "The weekly history chart and the range figures follow the filters. The forecast and the channel split are whole-history by design.",
+    menu:      "Units, orders and revenue in the item table follow the filters. The matrix, quadrants and trends are whole-history.",
+    combos:    "Whole-history only — pair strength needs every order, and a 7-day window has too few pairs to mean anything.",
+    customers: "Order frequency in this range follows the filters. Segments and lifetime values are whole-history.",
+    // Corrected after reading the page: the Quality hero is the full-history
+    // prep-time penalty, and every card under it says so in its own note.
+    quality:   "Whole-history — the funnel, rating drivers, slow-order items and loss reasons all need the full record.",
+    demand:    "The heatmap and the range figures follow the filters. Quiet windows and closure options are whole-history."
+  };
+
+  function renderSelectionBar(rows, m) {
+    const bar = document.getElementById("selection-bar");
+    bar.textContent = "";
+    const add = function (label, value, cls) {
+      const wrap = el("span", null);
+      wrap.appendChild(el("span", { class: "figure" + (cls ? " " + cls : "") }, value));
+      wrap.appendChild(document.createTextNode(" " + label));
+      bar.appendChild(wrap);
+    };
+    add("Zomato orders selected", num(m.orders, 0));
+    add("delivered revenue", moneyExact(m.revenue));
+    if (m.aov != null) add("average order", moneyExact(m.aov));
+    bar.appendChild(el("span", null, shortDate(state.from) + " – " + shortDate(state.to)
+      + (state.weekdays.length < 7 ? " · " + state.weekdays.map(function (d) { return WEEKDAYS[d]; }).join(" ") : "")
+      + (state.status !== "all" ? " · " + (state.status === "Delivered" ? "delivered only" : "not delivered") : "")));
+    const scope = TAB_SCOPE[state.tab];
+    if (scope) bar.appendChild(el("span", { class: "scope-warn" }, scope));
+  }
+
   function render() {
     const rows = selection();
     const m = metrics(rows);
+    renderSelectionBar(rows, m);
     const body = document.getElementById("body");
     body.textContent = "";
 
@@ -2330,7 +2493,10 @@
   document.getElementById("title").textContent = meta.restaurant_name || "Restaurant";
   document.getElementById("subtitle").textContent =
     [meta.subzone, meta.city].filter(Boolean).join(", ") +
-    " · " + meta.order_count + " orders · " +
+    // "302 orders" read as the whole business. Every chart here is built from
+    // silver.orders, which is the Zomato export alone -- direct orders appear
+    // only in the Direct vs Zomato card, which says so.
+    " · " + meta.order_count + " Zomato orders · " +
     longDate(FIRST_DAY) + " – " + longDate(LAST_DAY);
   document.getElementById("footer").textContent =
     "Built from the bronze → silver → gold DuckDB warehouse. Data generated " +
