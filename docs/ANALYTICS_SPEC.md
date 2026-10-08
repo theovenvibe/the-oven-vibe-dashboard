@@ -1,3 +1,12 @@
+## 9 October 2026 — stock retirement
+
+The live kitchen console no longer counts ingredients. Historical stock
+snapshots from the pipeline cannot describe current stock, sales-channel totals
+or ongoing waste. Use actual direct and platform order data for sales, and
+retain dish costing/margins. Manual menu availability remains in the console.
+See [current policy](https://github.com/theovenvibe/the-oven-vibe-backend/blob/develop/docs/STOCK_RETIREMENT.md) and [release evidence](https://github.com/theovenvibe/the-oven-vibe-backend/blob/develop/docs/STOCK_RETIREMENT_RELEASE.md).
+No generated dashboard, warehouse or business figures were changed here.
+
 # Analytics spec — The Oven Vibe decision dashboard
 
 This is the contract between `analytics.py` (produces the payload) and
